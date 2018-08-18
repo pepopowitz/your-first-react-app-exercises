@@ -58,7 +58,6 @@
     "start-module-1": "cross-env APP_MODULE=module-1 node ./_not_important/scripts/start.js",
     "start-module-2": "cross-env APP_MODULE=module-2 node ./_not_important/scripts/start.js"
   },
- 
   "babel": {
     "presets": [
       "react-app"
@@ -66,5 +65,8 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
   }
 }
