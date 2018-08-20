@@ -1,11 +1,10 @@
 module.exports = {
   rootDir: '../',
-  runInBand: true,
-  collectCoverageFrom: ['<rootDir>/module-1/**/*.{js,jsx,mjs}'],
+  collectCoverageFrom: ['<rootDir>/module-0/**/*.{js,jsx,mjs}'],
   setupFiles: ['<rootDir>/_not_important/config/polyfills.js'],
   testMatch: [
-    '<rootDir>/module-1/**/__tests__/**/*.{js,jsx,mjs}',
-    '<rootDir>/module-1/**/?(*.)(spec|test).{js,jsx,mjs}',
+    '<rootDir>/module-0/**/__tests__/**/*.{js,jsx,mjs}',
+    '<rootDir>/module-0/**/?(*.)(spec|test).{js,jsx,mjs}',
   ],
   testEnvironment: 'node',
   testURL: 'http://localhost',
