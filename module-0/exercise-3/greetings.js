@@ -5,7 +5,7 @@ export function buildGreeting(name) {
 export function choosePartingWord(language) {
 }
 
-export function choosePartingWordDestructured({name, language}) {
+export function choosePartingWordFromObject(data) {
 }
 
 export function mapPartingWords(languages) {
