@@ -14,6 +14,8 @@ import/export
   import named // D
   export named // E
 	import npm dependencies // F
+
+  
 class syntax (extends REact.component)
   class definition // G
   usage of a class // H
@@ -21,6 +23,8 @@ class syntax (extends REact.component)
   class properties // J
 	instance methods // K
   class props - event handlers // L
+
+
 working with variables
   template literals // M
   ternary // N
