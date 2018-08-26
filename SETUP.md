@@ -1,6 +1,6 @@
-# Module 0: Setup
+# Setup
 
-This module will help you set up your local environment!
+This document will help you set up your local environment!
 
 ## Requirements
 
