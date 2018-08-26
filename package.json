@@ -53,6 +53,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
+    "verify": "node ./verify",
     "test-module-0": "jest --config ./module-0/jest.config.js --watch",
     "test-module-1": "cross-env APP_MODULE=module-1 node ./_not_important/scripts/test.js --env=jsdom --config ./module-1/jest.config.js",
     "test-module-2": "cross-env APP_MODULE=module-2 node ./_not_important/scripts/test.js --env=jsdom --config ./module-2/jest.config.js",
