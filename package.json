@@ -54,11 +54,12 @@
   },
   "scripts": {
     "verify": "node ./verify",
-    "test-module-0": "jest --config ./module-0/jest.config.js --watch",
-    "test-module-1": "cross-env APP_MODULE=module-1 node ./_not_important/scripts/test.js --env=jsdom --config ./module-1/jest.config.js",
-    "test-module-2": "cross-env APP_MODULE=module-2 node ./_not_important/scripts/test.js --env=jsdom --config ./module-2/jest.config.js",
-    "start-module-1": "cross-env APP_MODULE=module-1 node ./_not_important/scripts/start.js",
-    "start-module-2": "cross-env APP_MODULE=module-2 node ./_not_important/scripts/start.js"
+    "test-exercise-0": "jest --config ./exercise-0/jest.config.js --watch",
+    "test-exercise-1": "jest --config ./exercise-1/jest.config.js --watch",
+    "test-exercise-2": "cross-env APP_EXERCISE=exercise-2 node ./_not_important/scripts/test.js --env=jsdom --config ./exercise-2/jest.config.js",
+    "start-exercise-2": "cross-env APP_EXERCISE=exercise-2 node ./_not_important/scripts/start.js",
+    "test-exercise-3": "jest --config ./exercise-3/jest.config.js --watch",
+    "test-exercise-4": "jest --config ./exercise-4/jest.config.js --watch"
   },
   "babel": {
     "presets": [

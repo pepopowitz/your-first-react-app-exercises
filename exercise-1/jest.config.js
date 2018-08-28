@@ -1,10 +1,12 @@
+const exercise = 'exercise-1';
+
 module.exports = {
   rootDir: '../',
-  collectCoverageFrom: ['<rootDir>/module-2/**/*.{js,jsx,mjs}'],
+  collectCoverageFrom: [`<rootDir>/${exercise}/**/*.{js,jsx,mjs}`],
   setupFiles: ['<rootDir>/_not_important/config/polyfills.js'],
   testMatch: [
-    '<rootDir>/module-2/**/__tests__/**/*.{js,jsx,mjs}',
-    '<rootDir>/module-2/**/?(*.)(spec|test).{js,jsx,mjs}',
+    `<rootDir>/${exercise}/**/__tests__/**/*.{js,jsx,mjs}`,
+    `<rootDir>/${exercise}/**/?(*.)(spec|test).{js,jsx,mjs}`,
   ],
   testEnvironment: 'node',
   testURL: 'http://localhost',

@@ -1,7 +1,7 @@
 'use strict';
 
-// Anything in this file regarding APP_MODULE is custom. 
-//  The user specifies the module as an env, and we swap out the source folder based on the requested module.
+// Anything in this file regarding APP_EXERCISE is custom. 
+//  The user specifies the exercise as an env, and we swap out the source folder based on the requested exercise.
 
 const path = require('path');
 const fs = require('fs');
@@ -12,7 +12,7 @@ const url = require('url');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-const resolveModule = relativePath => path.resolve(appDirectory, process.env.APP_MODULE, relativePath);
+const resolveExercise = relativePath => path.resolve(appDirectory, process.env.APP_EXERCISE, relativePath);
 
 const envPublicUrl = process.env.PUBLIC_URL;
 
@@ -49,11 +49,11 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('_not_important/public'),
   appHtml: resolveApp('_not_important/public/index.html'),
-  appIndexJs: resolveModule('index.js'),
+  appIndexJs: resolveExercise('index.js'),
   appPackageJson: resolveApp('package.json'),
-  appSrc: resolveModule(''),
+  appSrc: resolveExercise(''),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveModule('setupTests.js'),
+  testsSetup: resolveExercise('setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
