@@ -59,7 +59,22 @@
     "test-exercise-2": "cross-env APP_EXERCISE=exercise-2 node ./_not_important/scripts/test.js --env=jsdom --config ./exercise-2/jest.config.js",
     "start-exercise-2": "cross-env APP_EXERCISE=exercise-2 node ./_not_important/scripts/start.js",
     "test-exercise-3": "jest --config ./exercise-3/jest.config.js --watch",
-    "test-exercise-4": "jest --config ./exercise-4/jest.config.js --watch"
+    "test-exercise-4": "jest --config ./exercise-4/jest.config.js --watch",
+    "start-exercise-5": "cross-env APP_EXERCISE=exercise-5 node ./_not_important/scripts/start.js",
+    "start-exercise-6": "cross-env APP_EXERCISE=exercise-6 node ./_not_important/scripts/start.js",
+    "start-exercise-7": "cross-env APP_EXERCISE=exercise-7 node ./_not_important/scripts/start.js",
+    "start-exercise-8": "cross-env APP_EXERCISE=exercise-8 node ./_not_important/scripts/start.js",
+    "start-exercise-9": "cross-env APP_EXERCISE=exercise-9 node ./_not_important/scripts/start.js",
+    "start-exercise-10": "cross-env APP_EXERCISE=exercise-10 node ./_not_important/scripts/start.js",
+    "start-exercise-11": "cross-env APP_EXERCISE=exercise-11 APP_USE_CSS_MODULES=true node ./_not_important/scripts/start.js",
+    "start-exercise-12": "cross-env APP_EXERCISE=exercise-12 node ./_not_important/scripts/start.js",
+    "start-exercise-13": "cross-env APP_EXERCISE=exercise-13 node ./_not_important/scripts/start.js",
+    "test-exercise-14": "jest --config ./exercise-14/jest.config.js --watch",
+    "start-exercise-15": "cross-env APP_EXERCISE=exercise-15 node ./_not_important/scripts/start.js",
+    "start-exercise-16": "cross-env APP_EXERCISE=exercise-16 node ./_not_important/scripts/start.js",
+    "start-exercise-17": "cross-env APP_EXERCISE=exercise-17 node ./_not_important/scripts/start.js",
+    "start-exercise-18": "cross-env APP_EXERCISE=exercise-18 node ./_not_important/scripts/start.js",
+    "start-exercise-19": "cross-env APP_EXERCISE=exercise-19 node ./_not_important/scripts/start.js"
   },
   "babel": {
     "presets": [

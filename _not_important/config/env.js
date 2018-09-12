@@ -87,7 +87,9 @@ function getClientEnvironment(publicUrl) {
     }, {}),
   };
 
-  return { raw, stringified };
+  const useCssModules = process.env.APP_USE_CSS_MODULES === 'true';
+
+  return { raw, stringified, useCssModules };
 }
 
 module.exports = getClientEnvironment;

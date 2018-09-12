@@ -162,9 +162,7 @@ module.exports = {
               require.resolve('style-loader'),
               {
                 loader: require.resolve('css-loader'),
-                options: {
-                  importLoaders: 1,
-                },
+                options: getStyleLoaderOptions()
               },
               {
                 loader: require.resolve('postcss-loader'),
@@ -260,3 +258,17 @@ module.exports = {
     hints: false,
   },
 };
+
+function getStyleLoaderOptions() {
+  if (env.useCssModules) {
+    return {
+      importLoaders: 1,
+      modules: true,
+      localIdentName: "[name]__[local]___[hash:base64:5]"  
+    }; 
+  }
+
+  return {
+    importLoaders: 1
+  };
+}
