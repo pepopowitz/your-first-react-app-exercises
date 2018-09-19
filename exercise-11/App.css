@@ -8,14 +8,15 @@
 }
 
 .appHeader {
-  background-color: green;
-  height: 150px;
+  background-color: blueviolet;
+  height: 180px;
   padding: 20px;
   color: white;
 }
 
 .appTitle {
-  font-size: 1.5em;
+  font-family: 'Pacifico', cursive;
+  line-height: 0.5em;
 }
 
 .appIntro {
@@ -23,6 +24,10 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
