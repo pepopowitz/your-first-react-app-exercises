@@ -2,7 +2,9 @@ import React from 'react';
 
 export default class Friends extends React.Component {
   render() {
-    return <div />;
+    return myFriends.map(friend => (
+      <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
+    ));
   }
 }
 
