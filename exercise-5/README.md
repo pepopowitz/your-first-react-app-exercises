@@ -11,6 +11,10 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 
 All of your work for this exercise will take place in Exercise.js.
 
+### Background
+
+JSX is a powerful hybrid of JavaScript and XML. This exercise will get you comfortable writing JSX.
+
 ### Static HTML
 
 JSX can be used to render static HTML. Currently, Exercise.js is rendering a single `div` element. 
