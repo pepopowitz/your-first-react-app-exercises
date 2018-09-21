@@ -21,7 +21,7 @@ In this exercise, we have two components in `Exercise.js` - `Friends` and `Frien
 
 When converting to a stateless functional component, there are three things that need to be done:
 
-1. Convert the class to a function of the same name
+#### 1. Convert the class to a function of the same name
 
 For example, 
 
@@ -39,7 +39,7 @@ function FriendProfile(props) {
 }
 ```
 
-2. Remove the render() method
+#### 2. Remove the render() method
 
 For example,
 
@@ -59,7 +59,7 @@ function FriendProfile(props) {
 }
 ```
 
-3. Convert `this.props` references to `props`.
+#### 3. Convert `this.props` references to `props`.
 
 For example,
 
