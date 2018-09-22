@@ -15,11 +15,15 @@ function Page({ children }) {
 ## Friends With Page
 
 ```jsx
-export default function Friends() {
+export default function Friends({friends}) {
   return (
     <Page>
-      {myFriends.map(friend => (
-        <FriendProfile name={friend.name} image={friend.image} />
+      {friends.map(friend => (
+        <FriendProfile
+          key={friend.id}
+          name={friend.name}
+          image={friend.image}
+        />
       ))}
     </Page>
   );

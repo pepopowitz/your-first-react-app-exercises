@@ -1,7 +1,11 @@
 import React from 'react';
 
-export default function Friends() {
-  return myFriends.map(friend => (
+export default function Exercise() {
+  return <Friends friends={myFriends} />
+}
+
+function Friends({friends}) {
+  return friends.map(friend => (
     <FriendProfile key={friend.id} name={friend.name} image={friend.image} />
   ));
 }

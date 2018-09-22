@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 export default function Exercise() {
   return <Friends friends={myFriends} />;
 }
@@ -40,6 +42,7 @@ function FriendProfile({ name, image }) {
     </Card>
   );
 }
+
 
 const myFriends = [
   {

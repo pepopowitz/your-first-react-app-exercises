@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 export default function Exercise() {
   return <Friends friends={myFriends} />;
 }
@@ -17,6 +19,15 @@ function Friends({ friends }) {
     </Page>
   );
 }
+Friends.propTypes = {
+  friends: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 function Page({ children }) {
   return (
@@ -40,6 +51,10 @@ function FriendProfile({ name, image }) {
     </Card>
   );
 }
+FriendProfile.propTypes = {
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+};
 
 const myFriends = [
   {
