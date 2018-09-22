@@ -26,11 +26,6 @@
   height: calc(100vh - 140px);
 }
 
-.left-bar {
-  background-color: teal;
-  width: 200px;
-}
-
 .content{
   background-color: white;
   display: flex;

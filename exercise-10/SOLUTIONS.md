@@ -1,9 +1,15 @@
+# Possible Solutions
+
+## Component CSS Files
+
+### App.css
+```css
 .App {
   text-align: center;
 }
 
 .App-header {
-  background-color: blueviolet;
+  background-color: teal;
   height: 100px;
   padding: 20px;
   color: white;
@@ -17,12 +23,39 @@
 .App-intro {
   font-size: large;
 }
+```
 
+### Card.css
+```css
+.card {
+  min-width: 150px;
+  background-color: mintcream;
+  margin: 20px;
+  padding: 30px;
+  box-shadow: 0 1px 2px teal;
+}
+```
+
+### FriendProfile.css
+```css
+.friend-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friend-profile h3 {
+  margin-bottom: 0;
+}
+```
+
+### Page.css
+```css
 .page {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background: repeating-linear-gradient(to top, mintcream, blueviolet);
+  background: repeating-linear-gradient(to top, mintcream, teal);
   height: calc(100vh - 140px);
 }
 
@@ -35,21 +68,4 @@
   height: calc(100vh - 140px);
   width: 1000px;
 }
-
-.card {
-  min-width: 150px;
-  background-color: ghostwhite;
-  margin: 20px;
-  padding: 30px;
-  box-shadow: 0 1px 2px blueviolet;
-}
-
-.friend-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.friend-profile h3 {
-  margin-bottom: 0;
-}
+```
