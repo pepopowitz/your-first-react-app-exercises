@@ -3,7 +3,7 @@
 
 &#128073; Start the app for Exercise 10
 
-In a console window, pointed at the root of this project, run `npm run start-exercise-8`.
+In a console window, pointed at the root of this project, run `npm run start-exercise-10`.
 
 This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 10: Component CSS Files", and our three adorable kitten friends. If it doesn't, ask your neighbor for assistance or raise your hand.
 

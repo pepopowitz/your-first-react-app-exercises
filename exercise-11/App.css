@@ -2,32 +2,18 @@
   text-align: center;
 }
 
-.appLogo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .appHeader {
   background-color: blueviolet;
-  height: 180px;
+  height: 100px;
   padding: 20px;
   color: white;
+}
+
+.emphasize {
+  text-decoration: underline;
 }
 
 .appTitle {
   font-family: 'Pacifico', cursive;
   line-height: 0.5em;
-}
-
-.appIntro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

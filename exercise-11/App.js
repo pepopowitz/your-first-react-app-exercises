@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Exercise from './Exercise';
 import styles from './App.css';
 
 class App extends Component {
@@ -7,13 +7,12 @@ class App extends Component {
     return (
       <div className={styles.app}>
         <header className={styles.appHeader}>
-          <img src={logo} className={styles.appLogo} alt="logo" />
-          <h1 className={styles.appTitle}>Welcome to React Exercise 11!!!</h1>
-          <h2>CSS Modules</h2>
+          <h1 className={styles.appTitle}>Exercise 11</h1>
+          <h2 className={styles.subTitle}>CSS Modules</h2>
         </header>
-        <p className={styles.appIntro}>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="styles.exercise">
+          <Exercise />
+        </div>
       </div>
     );
   }

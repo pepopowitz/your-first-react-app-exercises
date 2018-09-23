@@ -34,6 +34,10 @@
   padding: 30px;
   box-shadow: 0 1px 2px teal;
 }
+
+.card:hover {
+  box-shadow: 0 2px 4px teal;
+}
 ```
 
 ### FriendProfile.css

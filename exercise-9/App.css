@@ -44,6 +44,10 @@
   box-shadow: 0 1px 2px blueviolet;
 }
 
+.card:hover {
+  box-shadow: 0 2px 4px blueviolet;
+}
+
 .friend-profile {
   display: flex;
   flex-direction: column;

@@ -1,0 +1,17 @@
+.page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: repeating-linear-gradient(to top, ghostwhite, blueviolet);
+  height: calc(100vh - 140px);
+}
+
+.content{
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  height: calc(100vh - 140px);
+  width: 1000px;
+}
