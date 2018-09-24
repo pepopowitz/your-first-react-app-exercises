@@ -1,6 +1,8 @@
 # Exercise 11
 ## CSS Modules
 
+In this exercise, we'll be converting from component CSS files to CSS Modules. 
+
 &#128073; Start the app for Exercise 11
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-11`.
@@ -9,7 +11,7 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 
 ### Background
 
-In this exercise, we'll be converting from component CSS files to CSS Modules. All of our component-specific CSS files are here, but the only one that seems to be having an effect is the App.css.
+All of our component-specific CSS files are here, but the only one that seems to be having an effect is the App.css.
 
 ### How are CSS Modules different from component CSS files?
 

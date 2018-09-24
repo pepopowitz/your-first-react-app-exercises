@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Friends from './friends/Friends.container';
+import FriendDetail from './friend-detail/FriendDetail.container.finished';
+
 import styles from './App.css';
 
 class App extends Component {
@@ -16,6 +18,7 @@ class App extends Component {
           </header>
           <div className={styles.exercise}>
             <Route path="/" exact component={Friends} />
+            <Route path="/friends/:id" component={FriendDetail} />
           </div>
         </div>
       </BrowserRouter>

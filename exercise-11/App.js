@@ -10,7 +10,7 @@ class App extends Component {
           <h1 className={styles.appTitle}>Exercise 11</h1>
           <h2 className={styles.subTitle}>CSS Modules</h2>
         </header>
-        <div className="styles.exercise">
+        <div className={styles.exercise}>
           <Exercise />
         </div>
       </div>
