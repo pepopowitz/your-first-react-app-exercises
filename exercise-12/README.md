@@ -24,7 +24,7 @@ To set up React-Router, we've already taken a few steps:
 
 * Installed React-Router as a dependency, by running `npm install --save react-router`
 * Wrapped our app in a `<BrowserRouter>` component, in `App.js`
-* Defined a route in `App.js` that matches the path `/` exactly, and renders our `<Friends>` container component.
+* Defined a route in `App.js` that matches the path `/` exactly, and renders our `<Friends>` entry component.
 
 ### Add a new `<Route>`
 
@@ -32,9 +32,9 @@ In the folder `/friend-detail`, we've added a couple components that render a ve
 
 &#128073; Add a new `<Route>` to `App.js`, which will render the new Friend Detail page.
 
-You'll want to import the `<FriendDetail>` component from './friend-detail/FriendDetail.container'.
+You'll want to import the `<FriendDetail>` component from './friend-detail/FriendDetail.entry'.
 
-The route should match the path `friends/:id`.
+The route should match the path `friends/:id`. The token `:id` indicates that this route will have an `id` parameter submitted in the path. 
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetail-route).
 
@@ -52,23 +52,25 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-li
 
 ### Get friend ID from the URL
 
-When you click on one of our kitten friends, you should now navigate to the Friend Detail page!
+When you click on one of our kitten friends, you should navigate to the Friend Detail page!
 
 Unfortunately, regardless of which kitten you click, it always renders the same friend - Turtle.
 
-&#128073; Open `/friend-detail/FriendDetail.container.js`, and see if you can identify why we are always rendering Turtle.
+&#128073; Open `/friend-detail/FriendDetail.entry.js`, and see if you can identify why we are always rendering Turtle.
+
+...(come back when you've figured it out, or you give up)...
 
 As the comment in the component indicates, we aren't getting the active friend ID in this component.
 
 When we use React-Router, our components automatically get access to a prop named `match`. This `match` prop contains a `params` array, which contains all the parameters passed into the current route.
 
-&#128073; Modify `/friend-detail/FriendDetail.container.js` so that it pulls the active friend ID from the `match` prop.
+&#128073; Modify `/friend-detail/FriendDetail.entry.js` so that it pulls the active friend ID from the `match` prop.
 
 Use `console.log` to inspect the props passed into the component if you need to.
 
 You'll want to use `friends.find(...)` to find the friend whose id property matches the ID passed in.
 
-One other trick - the `id` parameter in the `match.params` array is a string; the `id` properties in the `friends` array are integers. You might need `parseInt(...)` to convert between the two types.
+One other trick - the `id` parameter in the `match.params` array is a string; the `id` properties in the `friends` array are integers. You could use `parseInt(...)` to convert between the two types.
 
 When you've completed this task, you should be able to navigate to all three kitten friends' detail pages.
 

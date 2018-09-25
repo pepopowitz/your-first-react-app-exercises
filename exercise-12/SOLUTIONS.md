@@ -4,7 +4,8 @@
 
 ```jsx
 import { BrowserRouter, Route } from 'react-router-dom';
-import FriendDetail from './friend-detail/FriendDetail.container';
+import FriendDetail from './friend-detail/FriendDetail.entry';
+...
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
 
 ```jsx
 import { Link } from 'react-router-dom';
+...
 
 export default function FriendProfile({ id, name, image }) {
   return (

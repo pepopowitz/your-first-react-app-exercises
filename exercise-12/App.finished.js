@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import Friends from './friends/Friends.container';
-import FriendDetail from './friend-detail/FriendDetail.container.finished';
+import Friends from './friends/Friends.entry';
+import FriendDetail from './friend-detail/FriendDetail.entry.finished';
 
 import styles from './App.css';
 

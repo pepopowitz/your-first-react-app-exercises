@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import Friends from './friends/Friends.container';
+import Friends from './friends/Friends.entry';
 import styles from './App.css';
 
 class App extends Component {
