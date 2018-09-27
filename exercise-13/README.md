@@ -64,7 +64,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#initialization).
 
 We need to handle the event that a user "flips" the information card.
 
-Recall that we handle an event in a stateful component with a class instance method that calls `setState`. This looks something like this: 
+Recall that we handle an event in a stateful component with a class property assigned to a fat-arrow method that calls `setState`. This looks something like this: 
 
 ```jsx
 export default class Component extends React.Component {
