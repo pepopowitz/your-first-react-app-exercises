@@ -1,33 +1,22 @@
-.App {
+.app {
   text-align: center;
+
+  --brand-dark: teal;
+  --brand-light: mintcream;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: blueviolet;
-  height: 180px;
+.appHeader {
+  background-color: var(--brand-dark);
+  height: 100px;
   padding: 20px;
   color: white;
 }
 
-.App-title {
+.emphasize {
+  text-decoration: underline;
+}
+
+.appTitle {
   font-family: 'Pacifico', cursive;
   line-height: 0.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

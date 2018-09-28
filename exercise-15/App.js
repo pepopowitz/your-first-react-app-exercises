@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Friends from './friends/Friends.entry';
+import FriendDetail from './friend-detail/FriendDetail.entry';
+
+import styles from './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React Exercise 15!!!</h1>
-          <h2>Loading Data</h2>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <BrowserRouter>
+        <div className={styles.app}>
+          <header className={styles.appHeader}>
+            <h1 className={styles.appTitle}>Exercise 13</h1>
+            <h2 className={styles.subTitle}>Managing Component State</h2>
+          </header>
+          <div className={styles.exercise}>
+            <Route path="/" exact component={Friends} />
+            <Route path="/friends/:id" component={FriendDetail} />
+          </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }

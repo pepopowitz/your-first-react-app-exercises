@@ -1,9 +1,12 @@
 .app {
   text-align: center;
+
+  --brand-dark: teal;
+  --brand-light: mintcream;
 }
 
 .appHeader {
-  background-color: teal;
+  background-color: var(--brand-dark);
   height: 100px;
   padding: 20px;
   color: white;
