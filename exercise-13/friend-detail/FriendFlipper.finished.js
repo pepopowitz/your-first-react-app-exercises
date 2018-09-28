@@ -35,7 +35,7 @@ export default class FriendFlipper extends React.Component {
     const { friend } = this.props;
     return (
       <div className={styles.frontContents}>
-        <img src={friend.image} />
+        <img src={friend.image} alt={friend.image} />
         <button
           type="button"
           className={styles.flipperNav}
@@ -51,7 +51,7 @@ export default class FriendFlipper extends React.Component {
     const { friend } = this.props;
     return (
       <div className={styles.backContents}>
-        <img src={friend.image} />
+        <img src={friend.image} alt={friend.image} />
         <div className={styles.backDetails}>
           <h3>ID:{friend.id}</h3>
           <h3>Colors:</h3>
