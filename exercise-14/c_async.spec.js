@@ -1,4 +1,4 @@
-import { takeCareOfKitten, runOutOfBowls, washBowls }  from './c_async';
+import { takeCareOfKitten, runOutOfBowls, washBowls } from './c_async';
 
 describe('exercise-14', () => {
   describe('c_async', () => {
@@ -21,14 +21,13 @@ describe('exercise-14', () => {
         name: 'Turtle',
       };
 
+      // Test will fail if 1 assertion isn't made
+      expect.assertions(1);
+
       try {
         await takeCareOfKitten(kitten);
-
-        // fails if it gets here.
-        expect(true).toBe(false);
-      }
-      catch (ex) {
-        // passes if it gets here.
+      } catch (ex) {
+        expect(ex).toEqual('oh no we are out of bowls!!!');
       }
     });
   });

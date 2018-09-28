@@ -27,13 +27,15 @@ describe('exercise-14', () => {
         name: 'Turtle',
       };
 
+      // Test will fail if it doesn't make 1 assertion
+      expect.assertions(1);
+
       takeCareOfKitten(kitten)
         .then(() => {
-          expect(true).toBe(false);
           done();
         })
-        .catch(() => {
-          expect(true).toBe(true);
+        .catch((ex) => {
+          expect(ex).toEqual('oh no we are out of bowls!!!');
           done();
         });
     });

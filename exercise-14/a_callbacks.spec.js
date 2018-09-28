@@ -9,9 +9,12 @@ describe('exercise-14', () => {
         name: 'Turtle',
       };
 
+      expect.assertions(1);
+
       const err = jest.fn();
       takeCareOfKitten(kitten, () => {
-        expect(err).not.toHaveBeenCalled();
+        // assertion by the fact that this was called
+        expect(true).toEqual(true);
         done();
       }, err);
 
@@ -24,14 +27,16 @@ describe('exercise-14', () => {
         name: 'Turtle',
       };
 
+      // Test will fail if it doesn't make 1 assertion
+      expect.assertions(1);
+
       const err = (msg) => {
-        //assertion by the fact that this was called
+        // assertion by the fact that this was called
+        expect(true).toEqual(true);
         done();        
       }
 
       takeCareOfKitten(kitten, () => {
-        expect(err).toHaveBeenCalledTimes(1);
-        done();
       }, err);
     });
   });
