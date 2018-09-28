@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Header from './Header';
+
+import Friends from './friends/Friends.entry';
+import FriendDetail from './friend-detail/FriendDetail.entry';
+
+import styles from './App.css';
+
+//finished!
+import ThemeProvider from './theme/Provider';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React Exercise 18!!!</h1>
-          <h2>Testing Component Render</h2>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div> 
+      <BrowserRouter>
+        <ThemeProvider>
+        <div className={styles.app}>
+          <Header />
+          <div className={styles.exercise}>
+            <Route path="/" exact component={Friends} />
+            <Route path="/friends/:id" component={FriendDetail} />
+          </div>
+        </div>
+        </ThemeProvider>
+      </BrowserRouter>
     );
   }
 }

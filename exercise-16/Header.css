@@ -1,0 +1,22 @@
+.appHeader {
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+.appHeader.green {
+  background-color: teal;
+}
+.appHeader.purple {
+  background-color: blueviolet;
+}
+
+.appTitle {
+  font-family: 'Pacifico', cursive;
+  line-height: 0.5em;
+}
+
+.switcherWrapper {
+  position: absolute;
+  top: 80px;
+  right: 20%;
+}

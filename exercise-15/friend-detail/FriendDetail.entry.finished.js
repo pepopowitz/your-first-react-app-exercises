@@ -1,7 +1,5 @@
 import React from 'react';
 
-import friends from '../data/friends';
-
 import FriendDetailFinished from './FriendDetail.finished';
 import getFriendFromApi from './get-friend-from-api';
 

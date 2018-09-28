@@ -1,0 +1,109 @@
+.flipWrapper {
+  perspective: 1000px;
+}
+
+.flipWrapper.flipped .flipper {
+  transform: rotateY(180deg);
+}
+
+.flipWrapper,
+.front,
+.back {
+  width: 150px;
+  height: 150px;
+}
+
+/* flip speed goes here */
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* hide back of pane during swap */
+
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: 0 1px 2px;
+}
+
+/* front pane, placed above back */
+
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.flipperNav {
+  border: none;
+  padding: 5px 10px;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.flipperNav.green {
+  background: teal;
+}
+.flipperNav.purple {
+  background: blueviolet;
+}
+.flipperNav:focus {
+  opacity: 0.8;
+  outline: none;
+}
+.frontContents .flipperNav {
+  position: absolute;
+  bottom: 5px;
+  right: 5px; 
+}
+.backContents {
+  font-size: 0.8rem;
+  color: white;
+  text-align: left;
+  height: calc(100% - 10px);
+  padding: 5px;
+}
+.backContents.green {
+  background: teal;
+}
+.backContents.purple {
+  background: blueviolet;
+}
+.backContents .flipperNav {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+.backContents img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;
+  height: 70px;
+}
+.backContents h3:first-child {
+  margin-top: 0;
+}
+.backContents h3 {
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+.backContents ul {
+  margin: 5px 0;
+  padding-left: 25px;
+}
+.backContents h4 {
+  margin: 5px 0;
+}
