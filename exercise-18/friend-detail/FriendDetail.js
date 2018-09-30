@@ -8,7 +8,7 @@ import styles from './FriendDetail.css';
 
 function renderFriend(friend) {
   if (friend === undefined) {
-    return undefined;
+    return <h1>Loading...</h1>;
   }
 
   return (

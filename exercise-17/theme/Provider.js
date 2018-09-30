@@ -4,7 +4,7 @@ import ThemeContext from './context';
 
 export default class ThemeProvider extends React.Component {
   state = {
-    theme: 'purple',
+    theme: 'green',
   };
 
   handleThemeChange = () => {

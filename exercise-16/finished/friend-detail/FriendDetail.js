@@ -8,9 +8,9 @@ import styles from './FriendDetail.css';
 
 function renderFriend(friend) {
   if (friend === undefined) {
-    return undefined;
+    return <h1>Loading...</h1>;
   }
-
+  
   return (
     <div className={styles.cardContents}>
       <h1>{friend.name}</h1>

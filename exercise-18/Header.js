@@ -12,8 +12,8 @@ export default function Header() {
     <ThemeContext.Consumer>
       {({ theme }) => (
         <header className={classNames(styles.appHeader, styles[theme])}>
-          <h1 className={styles.appTitle}>Exercise 16</h1>
-          <h2 className={styles.subTitle}>React Context</h2>
+          <h1 className={styles.appTitle}>Exercise 18</h1>
+          <h2 className={styles.subTitle}>Testing Component Interaction</h2>
           <div className={styles.switcherWrapper}>
             <ThemeSwitcher />
           </div>
