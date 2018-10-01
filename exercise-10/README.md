@@ -1,6 +1,8 @@
 # Exercise 10
 ## Component CSS Files
 
+When building a React app, it's important to colocate your CSS with your components. In this exercise, you'll move styles from a global CSS file into component-specific CSS files.
+
 &#128073; Start the app for Exercise 10
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-10`.

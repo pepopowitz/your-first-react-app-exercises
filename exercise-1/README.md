@@ -1,7 +1,9 @@
 # Exercise 1
 ## Modern JavaScript: Modules
 
-This exercise introduces you to the module import & export features utilized in modern JavaScript applications.
+This exercise introduces you to the module import & export features utilized in modern JavaScript applications. 
+
+The instructor will lead you through some code examples. Follow along!
 
 ### Setup
 
@@ -26,6 +28,14 @@ Watch Usage
 If you don't see this output, try to investigate the message you see, ask your neighbor, or raise your hand for assistance.
 
 If you do see this output, you're in good shape. The output will change as we modify our code.
+
+### Follow Along
+
+The instructor will help you rewrite unit tests using class syntax. 
+
+
+
+throw away ->
 
 ### Background
 

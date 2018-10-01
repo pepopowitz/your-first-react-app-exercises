@@ -1,6 +1,10 @@
 # Exercise 7
 ## Convert A Component
 
+Components that don't maintain their own state or use React methods other than `render()` can be converted from class syntax components to stateless functional components. This reduces code boilerplate.
+
+In this exercise, you'll convert a component from class syntax to stateless functional. This is an activity that happens often in React development.
+
 &#128073; Start the app for Exercise 7
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-7`.
@@ -12,8 +16,6 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 All of your work for this exercise will take place in Exercise.js.
 
 ### Background
-
-Components that don't maintain their own state or use React methods other than `render()` can be converted from class syntax components to stateless functional components. This reduces code boilerplate. (Note: we'll be talking about the React methods other than `render()` later in the workshop)
 
 In this exercise, we have two components in `Exercise.js` - `Friends` and `FriendProfile`. Neither of these components needs state, and neither needs any React methods other than `render()`. We can convert them both!
 

@@ -1,6 +1,10 @@
 # Exercise 8
 ## Composition & props.children
 
+Every React component receives a special prop named `children`. This prop contains any elements declared inside of the component. 
+
+This exercise will give you experience working with the special `children` prop.
+
 &#128073; Start the app for Exercise 8
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-8`.
@@ -11,11 +15,9 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 
 All of your work for this exercise will take place in Exercise.js.
 
-### Background
+### children Prop
 
-Every React component receives a special prop named `children`. This prop contains any elements declared inside of the component. 
-
-For example, given the following component JSX...
+Given the following component JSX...
 
 ```jsx
 function Friends() {

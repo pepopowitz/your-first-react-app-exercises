@@ -1,6 +1,8 @@
 # Exercise 6
 ## render() Results
 
+The `render()` method of a React component can return any of 6 kinds of objects. This exercise will introduce you to the 5 most frequently returned kinds of objects.
+
 &#128073; Start the app for Exercise 6
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-6`.
@@ -10,12 +12,6 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 &#128073; Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
-
-
-
-### Background
-
-The `render()` method of a React component can return any of 6 kinds of objects. This exercise will give you confidence with the 5 most frequently returned kinds of objects.
 
 ### Elements/React Components
 

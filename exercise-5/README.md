@@ -1,6 +1,10 @@
 # Exercise 5
 ## JSX Fundamentals
 
+This exercise will introduce you to JSX syntax. JSX is a powerful hybrid of JavaScript and XML, used most often in React components.
+
+You'll use JSX to render different types of things to the browser.
+
 &#128073; Start the app for Exercise 5
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-5`.
@@ -10,10 +14,6 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 &#128073; Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
-
-### Background
-
-JSX is a powerful hybrid of JavaScript and XML. This exercise will get you comfortable writing JSX.
 
 ### Static HTML
 

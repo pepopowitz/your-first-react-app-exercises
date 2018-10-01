@@ -1,6 +1,10 @@
 # Exercise 9
 ## Defining PropTypes
 
+PropTypes are a way to validate props passed into a component. If a propType is not met, you'll get a warning in your browser console. This is a nice way to make sure you're passing around the data your components need.
+
+This exercise will introduce you to working with PropTypes. 
+
 &#128073; Start the app for Exercise 9
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-9`.
@@ -11,9 +15,7 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 
 All of your work for this exercise will take place in Exercise.js.
 
-### Background
-
-PropTypes are a way to validate props passed into a component. If a propType is not met, you'll get a warning in your browser console. This is a nice way to make sure you're passing around the data your components need.
+### Defining PropTypes
 
 In this exercise, all of our components are stateless functional components. This means that we need to attach `propTypes` after the function is declared, like below:
 
