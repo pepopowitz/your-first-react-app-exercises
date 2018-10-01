@@ -1,13 +1,15 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render, fireEvent } from 'react-testing-library';
 import { MemoryRouter } from 'react-router-dom';
 import ThemeProvider from '../theme/Provider';
 
 import FriendFlipper from './FriendFlipper';
 
-import styles from './FriendFlipper.css';
-
 describe('./friend-detail/FriendFlipper', () => {
+  // Write your tests here!
+
+  // FINISHED -- 
+  
   it('defaults to the front side', () => {
     const friend = {
       name: 'Mr. Smidgens',
@@ -16,7 +18,7 @@ describe('./friend-detail/FriendFlipper', () => {
         "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
     };
 
-    const wrapper = mount(
+    const { getByTestId, getByText, queryByTestId, queryByText } = render(
       <MemoryRouter>
         <ThemeProvider>
           <FriendFlipper friend={friend} />
@@ -24,23 +26,15 @@ describe('./friend-detail/FriendFlipper', () => {
       </MemoryRouter>
     );
 
-    expect(wrapper.find('.' + styles.flipped).length).toEqual(0);
+    // things from the front side SHOULD be there
+    expect(getByTestId('front')).not.toBeNull();
+    expect(getByText('Details >')).not.toBeNull();
+
+    // things from the back side SHOULD NOT be there
+    expect(queryByTestId('back')).toBeNull();
+    expect(queryByText('Colors:')).toBeNull();
   });
 
-  it('defaults to the front side', () => {
-    const friend = {
-      name: 'Mr. Smidgens',
-      colors: ['brown'],
-      bio:
-        "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
-    };
-
-    const wrapper = shallow(
-      <FriendFlipper friend={friend} />
-    );
-
-    expect(wrapper.find('.' + styles.flipped).length).toEqual(0);
-  });
 
   it('flips to the back side after a button click', () => {
     const friend = {
@@ -50,7 +44,7 @@ describe('./friend-detail/FriendFlipper', () => {
         "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
     };
 
-    const wrapper = mount(
+    const { getByTestId, getByText, queryByTestId, queryByText } = render(
       <MemoryRouter>
         <ThemeProvider>
           <FriendFlipper friend={friend} />
@@ -58,10 +52,14 @@ describe('./friend-detail/FriendFlipper', () => {
       </MemoryRouter>
     );
 
-    const button = wrapper.find('button').first();
+    fireEvent.click(getByText('Details >'));
 
-    button.simulate('click');
+    // things from the front side SHOULD NOT be there
+    expect(queryByTestId('front')).toBeNull();
+    expect(queryByText('Details >')).toBeNull();
 
-    expect(wrapper.find('.' + styles.flipped).length).toEqual(1);
+    // things from the back side SHOULD be there
+    expect(getByTestId('back')).not.toBeNull();
+    expect(getByText('Colors:')).not.toBeNull();
   });
 });

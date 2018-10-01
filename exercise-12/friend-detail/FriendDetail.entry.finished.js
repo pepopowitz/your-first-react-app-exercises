@@ -2,7 +2,7 @@ import React from 'react';
 
 import friends from '../data/friends';
 
-import FriendDetail from './FriendDetail';
+import FriendDetail from './FriendDetail.finished';
 
 export default function({match}) {
   // the match prop is passed in via react.router

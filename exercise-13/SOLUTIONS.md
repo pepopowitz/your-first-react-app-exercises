@@ -28,22 +28,16 @@ export default class FriendFlipper extends React.Component {
 }
 ```
 
-## Toggle Class Name
+## Conditional Render
 ```jsx
-import classNames from 'classnames';
-
 export default class FriendFlipper extends React.Component {
   ...
   render() {
     return (
-      <div
-        className={classNames(styles.flipWrapper, {
-          [styles.flipped]: this.state.flipped,
-        })}
-      >
+      <div className={styles.flipWrapper}>
         <div className={styles.flipper}>
-          <div className={styles.front}>{this.renderFront()}</div>
-          <div className={styles.back}>{this.renderBack()}</div>
+          {this.state.flipped ? null : this.renderFront()}
+          {!this.state.flipped ? null : this.renderBack()}
         </div>
       </div>
     );

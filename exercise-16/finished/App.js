@@ -17,13 +17,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <ThemeProvider>
-        <div className={styles.app}>
-          <Header />
-          <div className={styles.exercise}>
-            <Route path="/" exact component={Friends} />
-            <Route path="/friends/:id" component={FriendDetail} />
+          <div className={styles.app}>
+            <Header />
+            <div className={styles.exercise}>
+              <Route path="/" exact component={Friends} />
+              <Route path="/friends/:id" component={FriendDetail} />
+            </div>
           </div>
-        </div>
         </ThemeProvider>
       </BrowserRouter>
     );

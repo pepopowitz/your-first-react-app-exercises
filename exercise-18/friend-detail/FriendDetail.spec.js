@@ -1,44 +1,23 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render } from 'react-testing-library';
 import { MemoryRouter } from 'react-router-dom';
 import ThemeProvider from '../theme/Provider';
 
 import FriendDetail from './FriendDetail';
 
-
 describe('./friend-detail/FriendDetail', () => {
-  // Write your tests here!
-
-  // FINISHED -
-
   it('renders loading if in a loading state', () => {
     const friend = undefined;
-
-    const wrapper = shallow(<FriendDetail friend={friend} />);
-
-    expect(wrapper.containsMatchingElement(<h1>Loading...</h1>)).toEqual(true);
-  });
-
-  it('renders friend if not in a loading state', () => {
-    const friend = {
-      name: 'Mr. Smidgens',
-      bio:
-        "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
-    };
-
-    const wrapper = shallow(<FriendDetail friend={friend} />);
-
-    expect(wrapper.containsMatchingElement(<h1>Mr. Smidgens</h1>)).toEqual(
-      true
+    
+    const { getByText } = render(
+      <MemoryRouter>
+        <ThemeProvider>
+          <FriendDetail friend={friend} />
+        </ThemeProvider>
+      </MemoryRouter>
     );
-    expect(
-      wrapper.containsMatchingElement(
-        <p>
-          This little guy likes a bowl of milk at bedtime. Scratch his belly and
-          he'll be your best friend.
-        </p>
-      )
-    ).toEqual(true);
+
+    expect(getByText('Loading...')).not.toBeNull();
   });
 
   it('renders friend if not in a loading state', () => {
@@ -49,7 +28,7 @@ describe('./friend-detail/FriendDetail', () => {
         "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
     };
 
-    const wrapper = mount(
+    const { getByText } = render(
       <MemoryRouter>
         <ThemeProvider>
           <FriendDetail friend={friend} />
@@ -57,16 +36,7 @@ describe('./friend-detail/FriendDetail', () => {
       </MemoryRouter>
     );
 
-    expect(wrapper.containsMatchingElement(<h1>Mr. Smidgens</h1>)).toEqual(
-      true
-    );
-    expect(
-      wrapper.containsMatchingElement(
-        <p>
-          This little guy likes a bowl of milk at bedtime. Scratch his belly and
-          he'll be your best friend.
-        </p>
-      )
-    ).toEqual(true);
+    expect(getByText('Mr. Smidgens')).not.toBeNull();
+    expect(getByText('This little guy likes a bowl of milk at bedtime. Scratch his belly and he\'ll be your best friend.')).not.toBeNull();
   });
 });

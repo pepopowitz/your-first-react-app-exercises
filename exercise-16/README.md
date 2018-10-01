@@ -72,7 +72,7 @@ Remember that in our case, we have two properties on the `value` that we are int
 `Header.js` - wrap `<header>` element in a `<ThemeContext.Consumer>` component and function
 
 ```jsx
-import ThemeContext from './theme/context.finished';
+import ThemeContext from './theme/context';
 
 export default function Header() {
   return (

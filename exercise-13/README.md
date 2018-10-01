@@ -100,37 +100,15 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#event-handler).
 
 Once our event handler changes the state, we'll need our `render` function to flip the card based on the `flipped` state property.
 
-We can do this by conditionally adding the `styles.flipped` style to the `styles.flipWrapper` element in our `render` function.
+We can do this by conditionally calling `renderFront()` or `renderBack()` in our `render` function.
 
-If you want, you can manually concatenate the styles - `styles.flipWrapper` and `styles.flipped`, based on the condition that `this.state.flipped` is true.
+&#128073; Conditionally call `renderFront()` or `renderBack()` in `friend-detail/FriendFlipper.js`, based on the value of `this.state.flipped`. 
 
-If you prefer, you can use the `classnames` module that was previously mentioned to conditionally build the styles.
+If `this.state.flipped` is true, `renderBack()` should be called. If `this.state.flipped` is false, `renderFront()` should be called.
 
-Imagine you had a property named `myProperty`, a style imported from `styles.css` named `styles.myPropertyClass`, and another style named `styles.constantClass` which is always applied. Using `classnames` to build conditional styles would look something like this:
+You can use ternaries to call the appropriate `render___()` function, or call a function that uses an if/else. 
 
-```jsx
-import classNames from 'classnames';
-
-class MyComponent extends React.Component {
-  render() {
-    const appliedStyles = classNames(
-      styles.constantStyle, // this class will always be applied.
-      {
-        [styles.myPropertyClass]: myProperty
-        // this class will only be applied if myProperty is true.
-      }
-    );
-  }
-}
-```
-
-The second argument to `classNames()` is an object that contains keys that refer to the conditionally applied style names, and values that return booleans indicating if the styles should be applied.
-
-&#128073; Conditionally append the `styles.flipped` class to the `styles.flipWrapper` element in `friend-detail/FriendFlipper.js`, based on the value of `this.state.flipped`. 
-
-If `this.state.flipped` is true, the `styles.flipped` class should be applied. If it is false, the `styles.flipped` class should not be applied.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#toggle-class-name).
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#conditional-render).
 
 ### Tying it all together - connecting the buttons to the event handler
 

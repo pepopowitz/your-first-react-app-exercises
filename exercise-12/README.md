@@ -75,3 +75,11 @@ One other trick - the `id` parameter in the `match.params` array is a string; th
 When you've completed this task, you should be able to navigate to all three kitten friends' detail pages.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#active-friend-id).
+
+### Return to Home
+
+We can use the browser navigation to go back to the Home page, but it'd be really helpful if we could add a link to the "Home" page on the Friend Detail page.
+
+&#128073; Add a Link to `/friend-detail/FriendDetail.js` that takes us back to the Home page.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#home-link).
