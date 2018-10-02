@@ -20,8 +20,8 @@ class App extends Component {
             <h2 className={styles.subTitle}>Loading Data</h2>
           </header>
           <div className={styles.exercise}>
-            <Route path="/" exact component={FriendsFinished} />
-            <Route path="/friends/:id" component={FriendDetailFinished} />
+            <Route path="/" exact component={Friends} />
+            <Route path="/friends/:id" component={FriendDetail} />
           </div>
         </div>
       </BrowserRouter>

@@ -22,9 +22,52 @@ export default React.createContext();
 
 #### initialize state
 
+```jsx
+export default class ThemeProvider extends React.Component {
+  state = {
+    theme: 'purple',
+  };
+
+  // ...
+}
+```
+
 #### handleThemeChange()
 
+```jsx
+export default class ThemeProvider extends React.Component {
+  // ...
+
+  handleThemeChange = () => {
+    this.setState(prevState => ({
+      theme: prevState.theme === 'green' ? 'purple' : 'green',
+    }));
+  };
+
+  // ...
+}
+```
+
 #### render()
+
+```jsx
+export default class ThemeProvider extends React.Component {
+  // ...
+
+  render() {
+    const data = {
+      theme: this.state.theme,
+      onThemeChanged: this.handleThemeChange,
+    };
+
+    return (
+      <ThemeContext.Provider value={data}>
+        {this.props.children}
+      </ThemeContext.Provider>
+    );
+  }
+}
+```
 
 
 
@@ -32,6 +75,8 @@ export default React.createContext();
 
 
 App.js: wrap app in `<ThemeProvider>` component
+
+Solution: App: ThemeProvider
 
 ### Adding ThemeContext.Consumers
 
@@ -62,33 +107,35 @@ Remember that in our case, we have two properties on the `value` that we are int
 
 #### wrap in `<ThemeContext.Consumer>`
 
+Solution: Switcher: ThemeContext.Consumer
+
 #### connect button onClick to onThemeChanged
 
-
+Solution: Switcher: onThemeChanged
 
 ### Make the Header a Consumer
 
 
-`Header.js` - wrap `<header>` element in a `<ThemeContext.Consumer>` component and function
+`Header.js` - wrap `<header>` element in a `<ThemeContext.Consumer>` component.
 
-```jsx
-import ThemeContext from './theme/context';
+Use the theme argument passed into the rendering function. Get rid of static theme.
 
-export default function Header() {
-  return (
-    <ThemeContext.Consumer>
-      {({ theme }) => (
-        <header ... >
-          ...
-        </header
-      )}
-    </ThemeContext.Consumer>
-  );
-}
-```
+Solution: Header: Consumer
+
+### Test it out
 
 At this point you should see the header color change when you click the button.
 
-### Make shared components (Page and Card) Consumers
+### Make the Page shared component a consumer
+
+Solution: Page: Consumer
+
+### Make the Card shared component a consumer
+
+Solution: Card: Consumer
 
 ### Make the FriendFlipper a Consumer
+
+renderFront() and renderBack()
+
+Solution: FriendFlipper: Consumer

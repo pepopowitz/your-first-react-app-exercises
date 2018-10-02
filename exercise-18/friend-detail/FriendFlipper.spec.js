@@ -18,7 +18,7 @@ describe('./friend-detail/FriendFlipper', () => {
         "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
     };
 
-    const { getByTestId, getByText, queryByTestId, queryByText } = render(
+    const context = render(
       <MemoryRouter>
         <ThemeProvider>
           <FriendFlipper friend={friend} />
@@ -27,12 +27,12 @@ describe('./friend-detail/FriendFlipper', () => {
     );
 
     // things from the front side SHOULD be there
-    expect(getByTestId('front')).not.toBeNull();
-    expect(getByText('Details >')).not.toBeNull();
+    expect(context.getByTestId('front')).not.toBeNull();
+    expect(context.getByText('Details >')).not.toBeNull();
 
     // things from the back side SHOULD NOT be there
-    expect(queryByTestId('back')).toBeNull();
-    expect(queryByText('Colors:')).toBeNull();
+    expect(context.queryByTestId('back')).toBeNull();
+    expect(context.queryByText('Colors:')).toBeNull();
   });
 
 
@@ -44,7 +44,7 @@ describe('./friend-detail/FriendFlipper', () => {
         "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
     };
 
-    const { getByTestId, getByText, queryByTestId, queryByText } = render(
+    const context = render(
       <MemoryRouter>
         <ThemeProvider>
           <FriendFlipper friend={friend} />
@@ -52,14 +52,14 @@ describe('./friend-detail/FriendFlipper', () => {
       </MemoryRouter>
     );
 
-    fireEvent.click(getByText('Details >'));
+    fireEvent.click(context.getByText('Details >'));
 
     // things from the front side SHOULD NOT be there
-    expect(queryByTestId('front')).toBeNull();
-    expect(queryByText('Details >')).toBeNull();
+    expect(context.queryByTestId('front')).toBeNull();
+    expect(context.queryByText('Details >')).toBeNull();
 
     // things from the back side SHOULD be there
-    expect(getByTestId('back')).not.toBeNull();
-    expect(getByText('Colors:')).not.toBeNull();
+    expect(context.getByTestId('back')).not.toBeNull();
+    expect(context.getByText('Colors:')).not.toBeNull();
   });
 });

@@ -6,6 +6,19 @@ import FriendFlipper from './FriendFlipper';
 
 import styles from './FriendDetail.css';
 
+export default function({ friend }) {
+  return (
+    <Page>
+      <div className={styles.friendDetail}>
+        <div className={styles.toolbar}>
+          <Link to="/">&lt; Home</Link>
+        </div>
+        <Card>{renderFriend(friend)}</Card>
+      </div>
+    </Page>
+  );
+}
+
 function renderFriend(friend) {
   if (friend === undefined) {
     return <h1>Loading...</h1>;
@@ -17,17 +30,5 @@ function renderFriend(friend) {
       <FriendFlipper friend={friend} />
       <p>{friend.bio}</p>
     </div>
-  );
-}
-export default function({ friend }) {
-  return (
-    <Page>
-      <div className={styles.friendDetail}>
-        <div className={styles.toolbar}>
-          <Link to="/">&lt; Home</Link>
-        </div>
-        <Card>{renderFriend(friend)}</Card>
-      </div>
-    </Page>
   );
 }
