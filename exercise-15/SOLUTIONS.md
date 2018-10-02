@@ -1,5 +1,19 @@
 # Possible Solutions
 
+## Friends: Import API
+```js
+import getFriendsFromApi from './get-friends-from-api';
+```
+
+## Friends: Stateful
+```jsx
+export default class FriendsEntry extends React.Component {
+  render() {
+    return <Friends friends={myFriends} />
+  }
+}
+```
+
 ## Friends: Initialize
 
 ```jsx
@@ -67,31 +81,16 @@ function renderFriend(friend) {
 }
 ```
 
-## FriendDetailEntry: Initialize
+## FriendDetailEntry
 ```jsx
 export default class FriendDetailEntry extends React.Component {
   state = {
     friend: undefined,
   };
 
-  // ...
-```
-
-## FriendDetail: render
-```jsx
-export default class FriendDetailEntry extends React.Component {
-  // ...
-
   render() {
     return <FriendDetailFinished friend={this.state.friend} />;
   }
-}
-```
-
-## FriendDetail: componentDidMount
-```jsx
-export default class FriendDetailEntry extends React.Component {
-  // ...
 
   async componentDidMount() {
     // the match prop is passed in via react.router

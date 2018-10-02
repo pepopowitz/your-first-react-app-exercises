@@ -4,7 +4,7 @@ import myFriends from '../data/friends';
 
 import Friends from './Friends';
 
-export default function Exercise() {
+export default function FriendsEntry() {
   return <Friends friends={myFriends} />
 }
 
