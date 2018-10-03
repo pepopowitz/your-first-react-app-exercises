@@ -1,41 +1,192 @@
 # Exercise 17
 ## Testing Component Render
 
-&#128073;
+In this exercise we'll look at testing our React components, and verifying that they are rendering properly. 
 
-### ThemeProvider
+### Setup
 
-### Faking a Router
+&#128073; Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-17`.
 
-MemoryRouter
+You should see the following output:
 
-### render (from react-testing-library)
+```
+No tests found related to files changed since last commit.
+Press `a` to run all tests, or run Jest with `--watchAll`.
 
-### getByText
+Watch Usage
+ › Press a to run all tests.
+ › Press p to filter by a filename regex pattern.
+ › Press t to filter by a test name regex pattern.
+ › Press q to quit watch mode.
+ › Press Enter to trigger a test run.
+```
 
-### Write a test verifying that the loading state gets rendered
+If you don't see this output, try to investigate the message you see, ask your neighbor, or raise your hand for assistance.
 
-Arrange: declare a `friend`, but leave it set to `undefined`
+If you do see this output, you're in good shape. The output will change as we modify our code.
 
-Act: `render()` the `<FriendDetail>` component (and the necessary context wrappers - `MemoryRouter` and `ThemeProvider`). Receive a `context` variable in return.
+### Automated Tests
 
-Assert: Verify that the context contains the text `Loading...`.
+If you're unfamiliar with writing automated tests, or you're unfamiliar with Jest as a test framework, read [this short guide](./TESTING.md).
 
-Solution: Loading State
+We're going to write tests against our `friend-detail/FriendDetail.js` component. We've created a test file at `friend-detail/FriendDetail.spec.js` - our tests will go there.
 
-### Write a test verifying that the hydrated state gets rendered
+&#128073; Open the `friend-detail/FriendDetail.spec.js` file.
 
-Arrange: declare a `friend`. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
+### Importing Testing Dependencies
 
-Act: `render()` the `<FriendDetail>` component (and the necessary context wrappers - `MemoryRouter` and `ThemeProvider`). Receive a `context` variable in return.
+To facilitate writing tests against the `FriendDetail` component, we've imported several interesting dependencies into the spec file:
 
-Assert: 
+1. import { MemoryRouter } from 'react-router-dom';
 
-1. Verify that the context contains text matching the name you provided.
-2. Verify that the context contains text matching the bio you provided.
+In our running application, we use a `BrowserRouter` from React Router to handle routing. Any time we render a `<Link>` component in our app, it depends on being placed inside of a router.
 
-Solution: Hydrated State
+When we're writing tests, we don't have a `BrowserRouter` wrapping our component tree. It depends on being run in actual browser, and we don't have that while running our tests. They run in Node, and get rendered to a fake DOM that simulates a browser.
 
-### Make sure the tests are passing
+Instead, we use a `MemoryRouter` to render our component tree. This serves the purpose of wrapping the tree in a router, so `<Link>` elements are happy, without requiring an actual browser.
 
-If they aren't, investigate the error in the console, and see if you can figure out why. If you get stuck, raise your hand, or ask your neighbor.
+2. import ThemeProvider from '../theme/Provider';
+
+Similarly, when our application is running, the entire component tree is wrapped in a `<ThemeProvider>` element. We built this in a previous exercise. 
+
+When we render our component, we're going to need to wrap it in a `<ThemeProvider>` element, so that the ThemeContext consumers don't fail.
+
+3. import { render } from 'react-testing-library';
+
+We'll use `react-testing-library` to render our components into a fake DOM, and then make assertions against them. The main helper function is called [`render`](https://github.com/kentcdodds/react-testing-library#render).
+
+#### import FriendDetail from './FriendDetail';
+
+This is the component we're testing. Sometimes people refer to this as the "system under test". We need to import it, so that we can render it in our tests.
+
+### Writing a test to verify the "Loading" state
+
+We've stubbed out some placeholders for writing your tests. 
+
+The first test you'll write is named 'it renders loading if friend isn`t loaded yet'.
+
+#### Arrange: Set up an empty friend
+
+&#128073; In the first test, define a `friend` variable. Set it to `undefined`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#loading-arrange).
+
+#### Act: Render the `<FriendDetail>` component. 
+
+The [`render()` function](https://github.com/kentcdodds/react-testing-library#render) from react-testing-library takes one argument - a JSX element for the component you wish to render.
+
+The return value from `render()` is an object that contains methods which can be used to inspect the rendered output.
+
+&#128073; In the first test, render a `<FriendDetail>` component.
+
+* Use the `render()` function from react-testing-library.
+* Store the result in a variable named `context`.
+* Pass the `friend` variable as a prop named `friend`.
+* Recall that we'll need to wrap the `<FriendDetail>` component in `<MemoryRouter>` and `<ThemeProvider>` elements, because components down the tree depend on them.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#loading-act).
+
+#### Assert: Verify that the context contains the text `Loading...`.
+
+##### `queryByText()`
+
+One of the methods on the `context` object returned by a call to `render()` is named `queryByText()`. This method looks for an element in the rendered output that matches exactly the text passed in. If it finds one, that element is returned. If it doesn't, the value `null` is returned.
+
+For example, if the following output was rendered by a component:
+
+```jsx
+<div>
+  <h1>Hello!</h1>
+</div>
+```
+
+Calling `queryByText()` against it would give the following results:
+
+```jsx
+context.queryByText('Hello!'); // returns the <h1> element
+context.queryByText('Hello'); // returns null
+context.queryByText('asdfadsfd'); // returns null
+```
+
+&#128073; In the first test, assert that the `Loading...` text is appearing in the rendered output.
+
+* Use `context.queryByText()` to find the element.
+* Use the `expect()` function to compare the result of `context.queryByText()`.
+* The matcher for asserting that an item is not null is `.not.toBeNull()`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#loading-assert).
+
+### Verify that your test is passing.
+
+&#128073; Check your console. You should see output that indicates your test is passing:
+
+```
+PASS  exercise-17/friend-detail/FriendDetail.spec.js
+  ./friend-detail/FriendDetail
+    ✓ renders loading if friend isn`t loaded yet (7ms)
+    ✓ renders a friend if friend is loaded (6ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        0.087s, estimated 1s
+Ran all test suites.
+
+Watch Usage: Press w to show more.
+```
+
+[The complete test can be seen here.](./SOLUTIONS.md#loading-complete-test)
+
+### Writing a test verifying that the hydrated state gets rendered
+
+The second test you'll write is a test that "it renders loading if friend isn`t loaded yet".
+
+#### Arrange: Set up a hydrated friend
+
+&#128073; In the second test, define a `friend` variable. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-arrange).
+
+#### Act: Render the `<FriendDetail>` component.
+
+&#128073; In the second test, render a `<FriendDetail>` component.
+
+* Use the `render()` function from react-testing-library.
+* Store the result in a variable named `context`.
+* Pass the `friend` variable as a prop named `friend`.
+* Recall that we'll need to wrap the `<FriendDetail>` component in `<MemoryRouter>` and `<ThemeProvider>` elements, because components down the tree depend on them.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-act).
+
+#### Assert: Verify that the context contains text matching the rendered friend.
+
+&#128073; In the second test, assert that text from the hydrated friend appears in the rendered output.
+
+* Verify that the friend's name is present.
+* Verify that the friend's bio is present.
+* Use `context.queryByText()` to find the text elements.
+* Use the `expect()` function to compare the results of `context.queryByText()`.
+* The matcher for asserting that an item is not null is `.not.toBeNull()`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-assert).
+
+### Verify that your test is passing.
+
+&#128073; Check your console. You should see output that indicates your test is passing:
+
+```
+PASS  exercise-17/friend-detail/FriendDetail.spec.js
+  ./friend-detail/FriendDetail
+    ✓ renders loading if friend isn`t loaded yet (7ms)
+    ✓ renders a friend if friend is loaded (6ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        0.087s, estimated 1s
+Ran all test suites.
+
+Watch Usage: Press w to show more.
+```
+
+[The complete test can be seen here.](./SOLUTIONS.md#hydrated-complete-test)
