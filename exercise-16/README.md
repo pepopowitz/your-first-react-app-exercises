@@ -5,7 +5,7 @@ In this exercise, we'll use React Context to manage application-level state. Tha
 
 Throughout the workshop, you've seen the app alternate between green and purple themes. We're going to automate that, with a "theme switcher" button.
 
-&#128073; Start the app for Exercise 15
+👉 Start the app for Exercise 15
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-15`.
 
@@ -15,7 +15,7 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 
 We've modified the CSS Modules coming into this exercise, so that they render based on a static theme. The static theme is defined in `./theme/static/index.js`. If you change the static theme, the UI will reflect it.
 
-&#128073; Change the exported value in `./theme/static/index.js` from `purple` to `green`.
+👉 Change the exported value in `./theme/static/index.js` from `purple` to `green`.
 
 In your browser, you should see the theme change from purple to green.
 
@@ -33,7 +33,7 @@ The Context defines that we will use a specific type of context in our app.
 
 For this exercise, we've already created the Context. It is named `ThemeContext`, and is located at `theme/context.js`.
 
-&#128073; Open the `theme/context.js` file.
+👉 Open the `theme/context.js` file.
 
 You should see this: 
 
@@ -51,7 +51,7 @@ A Provider handles the state management for a Context.
 
 For this exercise, we've already created the Provider. It is named `ThemeProvider`, and it's located at `theme/Provider.js`.
 
-&#128073; Open the `theme/Provider.js` file.
+👉 Open the `theme/Provider.js` file.
 
 You should see a component that looks similar to other stateful components. It includes several pieces we've seen in previous exercises.
 
@@ -122,7 +122,7 @@ Inside the `<ThemeContext.Provider>` is rendered the children passed into the pr
 
 Having created a `ThemeProvider`, we need to wrap our component tree within it, so that it may pass the state throughout the app.
 
-&#128073; Wrap the app in a `<ThemeProvider>` component, within `App.js`.
+👉 Wrap the app in a `<ThemeProvider>` component, within `App.js`.
 
 We want our entire app to have access to the ThemeContext, so we'll wrap the entire app in the `ThemeProvider`.
 
@@ -174,13 +174,13 @@ export default function MyComponent() {
 
 The `Switcher` component is located at `theme/Switcher.js`. It is the button that toggles the theme from `green` to `purple`. In the context of our ThemeContext, that means it is a Consumer that needs to call the `onThemeChanged` handler.
 
-&#128073; Wrap the `Switcher` component in `<ThemeContext.Consumer>`
+👉 Wrap the `Switcher` component in `<ThemeContext.Consumer>`
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-themecontext.consumer).
 
 Wrapping in `<ThemeContext.Consumer>` gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes an `onThemeChanged` handler. We need to connect our button to that handler.
 
-&#128073; Within the `Switcher` component, connect the button `click` event to the `onThemeChanged` handler passed into the rendering function.
+👉 Within the `Switcher` component, connect the button `click` event to the `onThemeChanged` handler passed into the rendering function.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-onthemechanged).
 
@@ -188,7 +188,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-ontheme
 
 We've hooked up the Consumer that modifies the application-level state; now we need to connect the Consumers that read the application-level state. This starts with the `Header` component, located at `Header.js`.
 
-&#128073; Wrap the `Header` component's `<header>` element in a `<ThemeContext.Consumer>` component.
+👉 Wrap the `Header` component's `<header>` element in a `<ThemeContext.Consumer>` component.
 
 Wrapping in `<ThemeContext.Consumer>` gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes a `theme` property. We need to connect our header to that property.
 
@@ -206,7 +206,7 @@ If you don't, re-read the instructions above thoroughly. If you can't figure out
 
 The `Page` component, located at `shared/Page.js`, needs to also utilize the `theme` property from the ThemeContext.
 
-&#128073; Modify the `Page` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
+👉 Modify the `Page` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
 
 Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
 
@@ -216,7 +216,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#page-consumer).
 
 The `Card` component, located at `shared/Card.js`, needs to also utilize the `theme` property from the ThemeContext.
 
-&#128073; Modify the `Card` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
+👉 Modify the `Card` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
 
 Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
 
@@ -226,7 +226,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#card-consumer).
 
 The `FriendFlipper` component, located at `friend-detail/FriendFlipper.js`, needs to also utilize the `theme` property from the ThemeContext.
 
-&#128073; Modify the `FriendFlipper` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
+👉 Modify the `FriendFlipper` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
 
 Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
 

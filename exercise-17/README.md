@@ -5,7 +5,7 @@ In this exercise we'll look at testing our React components, and verifying that 
 
 ### Setup
 
-&#128073; Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-17`.
+👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-17`.
 
 You should see the following output:
 
@@ -31,7 +31,7 @@ If you're unfamiliar with writing automated tests, or you're unfamiliar with Jes
 
 We're going to write tests against our `friend-detail/FriendDetail.js` component. We've created a test file at `friend-detail/FriendDetail.spec.js` - our tests will go there.
 
-&#128073; Open the `friend-detail/FriendDetail.spec.js` file.
+👉 Open the `friend-detail/FriendDetail.spec.js` file.
 
 ### Importing Testing Dependencies
 
@@ -67,7 +67,7 @@ The first test you'll write is named 'it renders loading if friend isn`t loaded 
 
 #### Arrange: Set up an empty friend
 
-&#128073; In the first test, define a `friend` variable. Set it to `undefined`.
+👉 In the first test, define a `friend` variable. Set it to `undefined`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#loading-arrange).
 
@@ -77,7 +77,7 @@ The [`render()` function](https://github.com/kentcdodds/react-testing-library#re
 
 The return value from `render()` is an object that contains methods which can be used to inspect the rendered output.
 
-&#128073; In the first test, render a `<FriendDetail>` component.
+👉 In the first test, render a `<FriendDetail>` component.
 
 * Use the `render()` function from react-testing-library.
 * Store the result in a variable named `context`.
@@ -108,7 +108,7 @@ context.queryByText('Hello'); // returns null
 context.queryByText('asdfadsfd'); // returns null
 ```
 
-&#128073; In the first test, assert that the `Loading...` text is appearing in the rendered output.
+👉 In the first test, assert that the `Loading...` text is appearing in the rendered output.
 
 * Use `context.queryByText()` to find the element.
 * Use the `expect()` function to compare the result of `context.queryByText()`.
@@ -118,7 +118,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#loading-assert).
 
 ### Verify that your test is passing.
 
-&#128073; Check your console. You should see output that indicates your test is passing:
+👉 Check your console. You should see output that indicates your test is passing:
 
 ```
 PASS  exercise-17/friend-detail/FriendDetail.spec.js
@@ -143,13 +143,13 @@ The second test you'll write is a test that "it renders loading if friend isn`t 
 
 #### Arrange: Set up a hydrated friend
 
-&#128073; In the second test, define a `friend` variable. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
+👉 In the second test, define a `friend` variable. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-arrange).
 
 #### Act: Render the `<FriendDetail>` component.
 
-&#128073; In the second test, render a `<FriendDetail>` component.
+👉 In the second test, render a `<FriendDetail>` component.
 
 * Use the `render()` function from react-testing-library.
 * Store the result in a variable named `context`.
@@ -160,7 +160,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-act).
 
 #### Assert: Verify that the context contains text matching the rendered friend.
 
-&#128073; In the second test, assert that text from the hydrated friend appears in the rendered output.
+👉 In the second test, assert that text from the hydrated friend appears in the rendered output.
 
 * Verify that the friend's name is present.
 * Verify that the friend's bio is present.
@@ -172,7 +172,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-assert)
 
 ### Verify that your test is passing.
 
-&#128073; Check your console. You should see output that indicates your test is passing:
+👉 Check your console. You should see output that indicates your test is passing:
 
 ```
 PASS  exercise-17/friend-detail/FriendDetail.spec.js

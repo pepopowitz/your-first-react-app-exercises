@@ -3,7 +3,7 @@
 
 In this exercise, we're going to use React-Router to build a second page into our app. When we're complete, users will be able to navigate from our friends list to a detailed view of each friend.
 
-&#128073; Start the app for Exercise 12
+👉 Start the app for Exercise 12
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-12`.
 
@@ -30,7 +30,7 @@ To set up React-Router, we've already taken a few steps:
 
 In the folder `/friend-detail`, we've added a couple components that render a very simple Friend Detail page.
 
-&#128073; Add a new `<Route>` to `App.js`, which will render the new Friend Detail page.
+👉 Add a new `<Route>` to `App.js`, which will render the new Friend Detail page.
 
 You'll want to import the `<FriendDetail>` component from './friend-detail/FriendDetail.entry'.
 
@@ -44,7 +44,7 @@ We need a way to navigate to the route we added.
 
 React-Router includes a `<Link>` component for navigating to a router-friendly URL. 
 
-&#128073; Wrap the `<Card>` element in `'/friends/FriendProfile.js` in a `<Link>` element. 
+👉 Wrap the `<Card>` element in `'/friends/FriendProfile.js` in a `<Link>` element. 
 
 Remember that you'll need to import the `Link` component from `react-router-dom`, and that the `to` prop is where the link will go when it is clicked.
 
@@ -56,7 +56,7 @@ When you click on one of our kitten friends, you should navigate to the Friend D
 
 Unfortunately, regardless of which kitten you click, it always renders the same friend - Turtle.
 
-&#128073; Open `/friend-detail/FriendDetail.entry.js`, and see if you can identify why we are always rendering Turtle.
+👉 Open `/friend-detail/FriendDetail.entry.js`, and see if you can identify why we are always rendering Turtle.
 
 ...(come back when you've figured it out, or you give up)...
 
@@ -64,7 +64,7 @@ As the comment in the component indicates, we aren't getting the active friend I
 
 When we use React-Router, our components automatically get access to a prop named `match`. This `match` prop contains a `params` array, which contains all the parameters passed into the current route.
 
-&#128073; Modify `/friend-detail/FriendDetail.entry.js` so that it pulls the active friend ID from the `match` prop.
+👉 Modify `/friend-detail/FriendDetail.entry.js` so that it pulls the active friend ID from the `match` prop.
 
 Use `console.log` to inspect the props passed into the component if you need to.
 
@@ -80,6 +80,6 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#active-friend-id
 
 We can use the browser navigation to go back to the Home page, but it'd be really helpful if we could add a link to the "Home" page on the Friend Detail page.
 
-&#128073; Add a Link to `/friend-detail/FriendDetail.js` that takes us back to the Home page.
+👉 Add a Link to `/friend-detail/FriendDetail.js` that takes us back to the Home page.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#home-link).

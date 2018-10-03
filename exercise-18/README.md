@@ -5,7 +5,7 @@ In this exercise, we're going to write tests to verify that the `FriendFlipper` 
 
 ### Setup
 
-&#128073; Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-17`.
+👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-17`.
 
 You should see the following output:
 
@@ -41,11 +41,11 @@ It'd be better to specify an identifier explicitly on the element - so that when
 
 We'll do this with the attribute `data-testid`.
 
-&#128073; Add a `data-testid="front"` prop to the front side of the `FriendFlipper` component. 
+👉 Add a `data-testid="front"` prop to the front side of the `FriendFlipper` component. 
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-front).
 
-&#128073; Add a `data-testid="back"` prop to the back side of the `FriendFlipper` component. 
+👉 Add a `data-testid="back"` prop to the back side of the `FriendFlipper` component. 
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-back).
 
@@ -53,7 +53,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-ba
 
 We've created a test file at `friend-detail/FriendFlipper.spec.js` - our tests will go there.
 
-&#128073; Open the `friend-detail/FriendFlipper.spec.js` file.
+👉 Open the `friend-detail/FriendFlipper.spec.js` file.
 
 ### Imported Testing Dependencies
 
@@ -74,13 +74,13 @@ The first test you'll write is named 'it defaults to the front side'.
 
 #### Arrange: Set up a fully-hydrated friend.
 
-&#128073; In the 'front side' test, define a `friend` variable. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
+👉 In the 'front side' test, define a `friend` variable. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#front-arrange).
 
 #### Act: Render the `<FriendFlipper>` component.
 
-&#128073; In the 'front side' test, render a `<FriendFlipper>` component.
+👉 In the 'front side' test, render a `<FriendFlipper>` component.
 
 * Use the `render()` function from react-testing-library.
 * Store the result in a variable named `context`.
@@ -97,7 +97,7 @@ We'll use a different method from the rendered context this time, named `queryBy
 
 If an element is found with that test ID, it is returned. If no matching element is found, `null` is returned.
 
-&#128073; In the 'front side' test, assert that the proper side is showing in the rendered output.
+👉 In the 'front side' test, assert that the proper side is showing in the rendered output.
 
 * Verify that the `front` testId is present.
 * Verify that the `back` testId is **not** present.
@@ -108,7 +108,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#front-assert).
 
 ### Verify that your test is passing.
 
-&#128073; Check your console. You should see output that indicates your test is passing.
+👉 Check your console. You should see output that indicates your test is passing.
 
 [The complete test can be seen here.](./SOLUTIONS.md#front-complete-test)
 
@@ -118,7 +118,7 @@ The second test you'll write is a test that "it flips to the back side after a b
 
 #### Arrange: Set up a fully-hydrated friend.
 
-&#128073; In the second test, define a `friend` variable. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
+👉 In the second test, define a `friend` variable. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#back-arrange).
 
@@ -126,7 +126,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#back-arrange).
 
 ##### Render the `<FriendFlipper>` component.
 
-&#128073; In the second test, render a `<FriendFlipper>` component.
+👉 In the second test, render a `<FriendFlipper>` component.
 
 * Use the `render()` function from react-testing-library.
 * Store the result in a variable named `context`.
@@ -137,7 +137,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#back-arrange).
 
 Once we've rendered the component, we need to grab the rendered `Details >` button. We can use the `getByText()` method of the rendered context. This method will find an element with the exact matching text, and return it.
 
-&#128073; In the second test, get the rendered `Details >` button, by text, from the context.
+👉 In the second test, get the rendered `Details >` button, by text, from the context.
 
 * Use the `context.getByText()` method to find the element.
 
@@ -153,7 +153,7 @@ const renderedButton = context.getByText('button text');
 fireEvent.click(renderedButton);
 ```
 
-&#128073; In the second test, fire a `click` event against the button captured by `context.getByText()`.
+👉 In the second test, fire a `click` event against the button captured by `context.getByText()`.
 
 If you get stuck, [see a possible solution for the `arrange` portion of this test here](./SOLUTIONS.md#back-act).
 
@@ -161,7 +161,7 @@ If you get stuck, [see a possible solution for the `arrange` portion of this tes
 
 At this stage, if the component were rendered to the browser, we should see the "back" side showing up.
 
-&#128073; In the second test, assert that the proper side is showing in the rendered output.
+👉 In the second test, assert that the proper side is showing in the rendered output.
 
 * Verify that the `back` testId is present.
 * Verify that the `front` testId is **not** present.
@@ -172,6 +172,6 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#back-assert).
 
 ### Verify that your test is passing.
 
-&#128073; Check your console. You should see output that indicates your tests are passing.
+👉 Check your console. You should see output that indicates your tests are passing.
 
 [The complete test can be seen here.](./SOLUTIONS.md#back-complete-test)

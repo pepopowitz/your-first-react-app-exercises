@@ -3,7 +3,7 @@
 
 When building a React app, it's important to colocate your CSS with your components. In this exercise, you'll move styles from a global CSS file into component-specific CSS files.
 
-&#128073; Start the app for Exercise 10
+👉 Start the app for Exercise 10
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-10`.
 
@@ -15,7 +15,7 @@ In this exercise, we've moved components into their own files. `Exercise.js` no 
 
 What we didn't do yet is break the CSS into component-specific CSS files. You'll do that now!
 
-&#128073; Break the styles in App.css into the appropriate `(component).css` file.
+👉 Break the styles in App.css into the appropriate `(component).css` file.
 
 You will need to create the .css files for each component.
 
@@ -29,7 +29,7 @@ Check your browser to make sure you succeeded.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#component-css-files).
 
-&#128073; Modify the colors of the app.
+👉 Modify the colors of the app.
 
 Teal is so 2017. Choose a different color scheme for the app, and make the appropriate changes in the (component).css files.
 

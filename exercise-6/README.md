@@ -3,13 +3,13 @@
 
 The `render()` method of a React component can return any of 6 kinds of objects. This exercise will introduce you to the 5 most frequently returned kinds of objects.
 
-&#128073; Start the app for Exercise 6
+👉 Start the app for Exercise 6
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-6`.
 
 This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 6: render() Results". If it doesn't, ask your neighbor for assistance or raise your hand.
 
-&#128073; Open Exercise.js
+👉 Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
 
@@ -21,13 +21,13 @@ Currently, the `Friends` component is returning an HTML element - a single `<div
 
 There is a second component in `Exercise.js` - the `FriendProfile` component.
 
-&#128073; Modify the `Friends` component to return a single `<FriendProfile>` element. Pass the name of the first item in the `myFriends` array as a prop to the `<FriendProfile>`.
+👉 Modify the `Friends` component to return a single `<FriendProfile>` element. Pass the name of the first item in the `myFriends` array as a prop to the `<FriendProfile>`.
 
 Check your browser to see if you succeeded! You should see the name `Potatoes` rendered.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#react-components).
 
-&#128073; "Inspect element" in your browser, and look for the elements rendered by the `<FriendProfile>` component.
+👉 "Inspect element" in your browser, and look for the elements rendered by the `<FriendProfile>` component.
 
 You should see that the component is rendered as a div with text content.
 
@@ -35,7 +35,7 @@ You should see that the component is rendered as a div with text content.
 
 Valid JSX requires a single top-level element (similar to how valid XML requires a single top-level element). To demonstrate this, we're going to break our app.
 
-&#128073; Modify the `Friends` component to return an `<h1>` element adjacent to the `<FriendProfile>` element. 
+👉 Modify the `Friends` component to return an `<h1>` element adjacent to the `<FriendProfile>` element. 
 
 You should see an error in your browser, similar to this:
 
@@ -58,13 +58,13 @@ We can fix this a couple ways.
 
 #### Wrapping in a `<div>`
 
-&#128073; Modify the `Friends` component so that the `<h1>` and `<FriendProfile>` elements are wrapped in a `<div>` element. 
+👉 Modify the `Friends` component so that the `<h1>` and `<FriendProfile>` elements are wrapped in a `<div>` element. 
 
 Check your browser to see if you succeeded! You should see your title emitted, along with the name `Potatoes`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#wrapping-in-a-div).
 
-&#128073; "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
+👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
 
 You'll see that your components are wrapped in a `<div>` - the one you used to wrap the `<h1>` and `<FriendProfile>` elements.
 
@@ -78,13 +78,13 @@ The `Fragment` component is basically an empty wrapper. It allows us to provide 
 
 You can access the `Fragment` component on the default `React` import (i.e. `React.Fragment`).
 
-&#128073; Replace the wrapping `<div>` element in the `Friends` component with a wrapping `<React.Fragment>` element.
+👉 Replace the wrapping `<div>` element in the `Friends` component with a wrapping `<React.Fragment>` element.
 
 Check your browser to see if you succeeded! You should still see all friends listed.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#wrapping-in-a-fragment).
 
-&#128073; "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
+👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
 
 You should see that there's no longer an unnecessary div wrapping your output.
 
@@ -92,7 +92,7 @@ You should see that there's no longer an unnecessary div wrapping your output.
 
 Sometimes you want to turn an array of data into an array of elements. This can be accomplished with `Array.map`, as we saw in the JSX Fundamentals exercise.
 
-&#128073; Modify the `Friends` component to return one `<FriendProfile>` element for each item in the `myFriends` array. For each item, pass the `name` and `age` as props to the `<FriendProfile>`.
+👉 Modify the `Friends` component to return one `<FriendProfile>` element for each item in the `myFriends` array. For each item, pass the `name` and `age` as props to the `<FriendProfile>`.
 
 Don't forget that React wants you to use a `key` prop when you render an array of items!
 
@@ -100,7 +100,7 @@ Check your browser to see if you succeeded! You should see each of the friends l
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#arrays).
 
-&#128073; "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
+👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
 
 You should see a `<div>` for each friend.
 
@@ -108,13 +108,13 @@ You should see a `<div>` for each friend.
 
 Sometimes you want a component to render nothing more than a string or number. When a `render()` method returns a string or number, it gets rendered as a text node in the DOM.
 
-&#128073; Modify the `FriendProfile` component to render only the `name` prop. 
+👉 Modify the `FriendProfile` component to render only the `name` prop. 
 
 Check your browser to see if you succeeded! You should see each of the friends listed, abutted against each other.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#strings-or-numbers).
 
-&#128073; "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
+👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
 
 You will see that the friend names are rendered as text nodes, all within the same `<div>`.
 
@@ -124,7 +124,7 @@ Sometimes we don't want a component to render anything at all. This is usually t
 
 When the value `null` is returned from a component's `render` method, nothing gets rendered to the DOM. 
 
-&#128073; Modify the `FriendProfile` component's `render` method to return `null` if the `age` prop is undefined; otherwise return the value of the `name` prop. 
+👉 Modify the `FriendProfile` component's `render` method to return `null` if the `age` prop is undefined; otherwise return the value of the `name` prop. 
 
 Check your browser to see if you succeeded! You should see two of the friends listed - Potatoes and Flower.
 

@@ -3,7 +3,7 @@
 
 This exercise introduces you to the usual method of loading data from an API in a React component.
 
-&#128073; Start the app for Exercise 15
+👉 Start the app for Exercise 15
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-15`.
 
@@ -15,7 +15,7 @@ Prior to this exercise, we were using a static list of friends, imported from th
 
 The API is already running. To see it in action, you can navigate to an endpoint in your browser.
 
-&#128073; Browse to the URL `http://localhost:3000/api/friends`. 
+👉 Browse to the URL `http://localhost:3000/api/friends`. 
 
 You should see a JSON response that contains our three friends.
 
@@ -79,13 +79,13 @@ The first component we'll update to pull from the API is the `FriendsEntry` comp
 
 We've included a function in `friends/get-friends-from-api.js`, which will make the API call to collect all of our friends. It uses the `axios` library to make an HTTP call to the `friends` API endpoint.
 
-&#128073; Import the `getFriendsFromApi` function into `friends/Friends.entry.js`.
+👉 Import the `getFriendsFromApi` function into `friends/Friends.entry.js`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-import-api).
 
 Before we can use our lifecycle events to connect to the API endpoint, we'll need to convert our component to a stateful one.
 
-&#128073; Convert the `FriendsEntry` component from a stateless functional component to a stateful class syntax component.
+👉 Convert the `FriendsEntry` component from a stateless functional component to a stateful class syntax component.
 
 For a reminder on how to do this, see [exercise 7](../exercise-7/README.md#the-process).
 
@@ -95,13 +95,13 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-stateful
 
 Our component renders a list of friends. We'll want to initialize our component state so that it contains an empty friends array.
 
-&#128073; Initialize the state of the `FriendsEntry` component so that it contains an empty array named `friends`.
+👉 Initialize the state of the `FriendsEntry` component so that it contains an empty array named `friends`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-initialize).
 
 #### Render the `friends` data from local state
 
-&#128073; Modify the `render()` function of the `FriendsEntry` component so that it renders the friends from `this.state.friends`.
+👉 Modify the `render()` function of the `FriendsEntry` component so that it renders the friends from `this.state.friends`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-render).
 
@@ -109,7 +109,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-render).
 
 The final step for connecting the `FriendsEntry` component to an API is to load the data from within `componentDidMount()`.
 
-&#128073; Add a `componentDidMount()` method that (a) calls the API to get friend data, then (b) calls `setState()` to update the state of the component with the friend data.
+👉 Add a `componentDidMount()` method that (a) calls the API to get friend data, then (b) calls `setState()` to update the state of the component with the friend data.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-componentdidmount).
 
@@ -123,13 +123,13 @@ In the previous activity, the `FriendsEntry` component worked with an empty arra
 
 A great place to handle this dichotomy is within the `FriendDetail` component, in `friends/FriendDetail.js`.
 
-&#128073; Modify the `FriendDetail` component to render an appropriately constructed page when an undefined `friend` is passed in.
+👉 Modify the `FriendDetail` component to render an appropriately constructed page when an undefined `friend` is passed in.
 
 If an actual `friend` is passed in, it should continue to render the full `FriendDetail` information.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetail-handle-empty-friend).
 
-&#128073; Repeat the activity of loading data from an API for the `FriendDetailEntry` component. 
+👉 Repeat the activity of loading data from an API for the `FriendDetailEntry` component. 
 
 Refer to the notes above as a reminder of how to do this. There are a couple details that make this component different than the first:
 

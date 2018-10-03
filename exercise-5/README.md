@@ -5,13 +5,13 @@ This exercise will introduce you to JSX syntax. JSX is a powerful hybrid of Java
 
 You'll use JSX to render different types of things to the browser.
 
-&#128073; Start the app for Exercise 5
+👉 Start the app for Exercise 5
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-5`.
 
 This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 5: JSX Fundamentals". If it doesn't, ask your neighbor for assistance or raise your hand.
 
-&#128073; Open Exercise.js
+👉 Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
 
@@ -19,7 +19,7 @@ All of your work for this exercise will take place in Exercise.js.
 
 JSX can be used to render static HTML. Currently, Exercise.js is rendering a single `div` element. 
 
-&#128073; Modify the `Friends` component to render an `h1` element as a child of the `div`.
+👉 Modify the `Friends` component to render an `h1` element as a child of the `div`.
 
 Inside the h1, place some static text, like "Hello, Friends!".
 
@@ -65,7 +65,7 @@ would render this element to the browser:
 
 Currently, `Friends.js` has a variabled defined named `greeting`.
 
-&#128073; Add an `h2` element that displays the value of `greeting` in your `Friends` component.
+👉 Add an `h2` element that displays the value of `greeting` in your `Friends` component.
 
 Check your browser to see if you succeeded! You should see your greeting rendered.
 
@@ -89,7 +89,7 @@ would execute `add(1, 2)`, and render the result to the browser as the following
 
 `Friends.js` contains a function named `emphasize`. It takes a string, and returns the string emphasized with exclamation points. 
 
-&#128073; Modify the `h2` element in your `Friends` component to call `emphasize` on the `greeting` variable.
+👉 Modify the `h2` element in your `Friends` component to call `emphasize` on the `greeting` variable.
 
 Check your browser to see if you succeeded! You should see your greeting emphasized.
 
@@ -121,7 +121,7 @@ To emit a `class="..."` attribute in your element, you need to use the `classNam
 
 Side note: Why do you think this is? Why would `class` be different than any other attribute in JSX? We'll discuss after the exercise.
 
-&#128073; Add a CSS class named `friends-title` to the `h1` in your `Friends` component. 
+👉 Add a CSS class named `friends-title` to the `h1` in your `Friends` component. 
 
 Check your browser to see if you succeeded! You should see your `Hello, Friends` title turn blue-green.
 
@@ -145,7 +145,7 @@ would render this element to the browser:
 
 `Friends.js` contains a function named `determineGreetingClass`. It takes no arguments, and returns one of two CSS class names, based on the current clock ticks (effectively a random number). 
 
-&#128073; Add a CSS class to the `h2` greeting element, based on the result of the `determineGreetingClass` function. 
+👉 Add a CSS class to the `h2` greeting element, based on the result of the `determineGreetingClass` function. 
 
 Check your browser to see if you succeeded! You should see your greeting message turn either orange or purple. 
 
@@ -187,7 +187,7 @@ For each element in the items array, an `li` element would be rendered; the cont
 
 `Friends.js` contains an array named `myFriends`. 
 
-&#128073; Following the `h2` greeting of your `Friends` component, render a list of names, based on the `myFriends` variable.
+👉 Following the `h2` greeting of your `Friends` component, render a list of names, based on the `myFriends` variable.
 
 Check your browser to see if you succeeded! You should see your friends' names listed below the greeting. 
 
@@ -217,7 +217,7 @@ For example, in our previous example, we could render a key for each item with t
 </ul>
 ```
 
-&#128073; Add a `key` prop to the items being rendered in your friends list. Use a property from the `myFriends` items that is semantic & unique to each item.
+👉 Add a `key` prop to the items being rendered in your friends list. Use a property from the `myFriends` items that is semantic & unique to each item.
 
 Check your browser to see if you succeeded! You should not see any error messages in your browser console.
 
@@ -254,7 +254,7 @@ Note: When we return a JSX element that takes up more than one line, we wrap it 
 
 Some items in the `myFriends` array have ages; some don't.
 
-&#128073; Conditionally display the age of each friend. If it exists, display it in parentheses next to the name. If it doesn't, display nothing.
+👉 Conditionally display the age of each friend. If it exists, display it in parentheses next to the name. If it doesn't, display nothing.
 
 Check your browser to see if you succeeded! You should see ages next to some friends, but not others.
 

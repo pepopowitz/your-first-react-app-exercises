@@ -3,7 +3,7 @@
 
 In this exercise, we'll use component state to flip an information card back-and-forth on our FriendDetail page.
 
-&#128073; Start the app for Exercise 13
+👉 Start the app for Exercise 13
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-13`.
 
@@ -56,7 +56,7 @@ export default class Component extends React.Component {
 }
 ```
 
-&#128073; Initialize the state in `friend-detail/FriendFlipper.js` so that the `flipped` property is defaulted to `false`.
+👉 Initialize the state in `friend-detail/FriendFlipper.js` so that the `flipped` property is defaulted to `false`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#initialization).
 
@@ -92,7 +92,7 @@ export default class Component extends React.Component {
 }
 ```
 
-&#128073; Add an event handler to `friend-detail/FriendFlipper.js` that updates the `flipped` state property to the opposite of the current value of `flipped`.
+👉 Add an event handler to `friend-detail/FriendFlipper.js` that updates the `flipped` state property to the opposite of the current value of `flipped`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#event-handler).
 
@@ -102,7 +102,7 @@ Once our event handler changes the state, we'll need our `render` function to fl
 
 We can do this by conditionally calling `renderFront()` or `renderBack()` in our `render` function.
 
-&#128073; Conditionally call `renderFront()` or `renderBack()` in `friend-detail/FriendFlipper.js`, based on the value of `this.state.flipped`. 
+👉 Conditionally call `renderFront()` or `renderBack()` in `friend-detail/FriendFlipper.js`, based on the value of `this.state.flipped`. 
 
 If `this.state.flipped` is true, `renderBack()` should be called. If `this.state.flipped` is false, `renderFront()` should be called.
 
@@ -131,7 +131,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-&#128073; Call the event handler you added above from the `onClick` event of both `<button>` elements in `friend-detail/FriendFlipper.js`. 
+👉 Call the event handler you added above from the `onClick` event of both `<button>` elements in `friend-detail/FriendFlipper.js`. 
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#connect-buttons-to-handler).
 

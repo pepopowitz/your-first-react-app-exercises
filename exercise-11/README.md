@@ -3,7 +3,7 @@
 
 In this exercise, we'll be converting from component CSS files to CSS Modules. 
 
-&#128073; Start the app for Exercise 11
+👉 Start the app for Exercise 11
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-11`.
 
@@ -17,7 +17,7 @@ All of our component-specific CSS files are here, but the only one that seems to
 
 #### They're imported differently
 
-&#128073; Open the App.js file.
+👉 Open the App.js file.
 
 The first difference between component CSS files and CSS Modules is that the stylesheets are imported differently. 
 
@@ -57,7 +57,7 @@ This will pick up any styles associated with the `.app` selector in `styles.css`
 
 #### Classes are named differently (though they don't *need* to be)
 
-&#128073; Open the App.css file.
+👉 Open the App.css file.
 
 In our component-based CSS files, we were using names that had dashes, like `app-title` below: 
 
@@ -84,7 +84,7 @@ This allows us to reference `styles.appTitle` in our component.
 
 ### What gets rendered by a CSS Module?
 
-&#128073; Inspect a styled element in your browser.
+👉 Inspect a styled element in your browser.
 
 Notice the class name associated with the element - it will look something like `App__appHeader___13lYj`.
 
@@ -94,7 +94,7 @@ CSS modules are compiled into a stylesheet where every class name is unique. Thi
 
 The remaining components in the exercise - `Card`, `FriendProfile`, and `Page` - are written to use component CSS files, which is why they don't appear to be styled. 
 
-&#128073; Convert the `Card`, `FriendProfile`, and `Page` components to use CSS Modules.
+👉 Convert the `Card`, `FriendProfile`, and `Page` components to use CSS Modules.
 
 ### Combining class names
 
@@ -124,11 +124,6 @@ import classNames from 'classnames';
 
 Aside from combining multiple class names, the `classnames` library also makes it easier to apply *conditional* class names.
 
-&#128073; Modify the `h1` in `App.js` to apply both the `styles.appTitle` and `styles.emphasize` styles.
+👉 Modify the `h1` in `App.js` to apply both the `styles.appTitle` and `styles.emphasize` styles.
 
 Use the method you prefer from the above options (manually inserting spaces, or using the `classnames` library).
-
-
-
-
-TODO - npm install classnames!!!!

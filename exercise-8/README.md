@@ -5,13 +5,13 @@ Every React component receives a special prop named `children`. This prop contai
 
 This exercise will give you experience working with the special `children` prop.
 
-&#128073; Start the app for Exercise 8
+👉 Start the app for Exercise 8
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-8`.
 
 This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 8: Composition & props.children", and three adorable kittens. If it doesn't, ask your neighbor for assistance or raise your hand.
 
-&#128073; Open Exercise.js
+👉 Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
 
@@ -63,7 +63,7 @@ The App.css for this exercise contains all the styles you'll need, if you define
 
 Let's write a Page component that we will use to wrap the content on our page.
 
-&#128073; Add a component named `Page` to `Exercise.js` that wraps its children in `.page` and `.content` `div`s. 
+👉 Add a component named `Page` to `Exercise.js` that wraps its children in `.page` and `.content` `div`s. 
 
 For example, if a component rendered
 
@@ -87,7 +87,7 @@ You won't notice any changes in your browser, as we're not using the `<Page>` co
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#page).
 
-&#128073; Modify the `Friends` component to wrap the mapped `<FriendProfile>` elements in a `<Page>` element.
+👉 Modify the `Friends` component to wrap the mapped `<FriendProfile>` elements in a `<Page>` element.
 
 You should notice a difference in the browser this time. If you got everything right, you'll have green gradients down the sides of the page. In addition, our kitten friends will be lined up horizontally instead of vertically.
 
@@ -99,7 +99,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-with-pag
 
 Our kittens look a little close together. Let's wrap them in `<Card>` components, to give them a bit more distinction.
 
-&#128073; Add a component named `Card` to `Exercise.js` that wraps its children in a `.card` `div`. 
+👉 Add a component named `Card` to `Exercise.js` that wraps its children in a `.card` `div`. 
 
 For example, if a component rendered
 
@@ -121,7 +121,7 @@ You won't notice any changes in your browser, as we're not using the `<Card>` co
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#card).
 
-&#128073; Modify the `FriendProfile` component to wrap the `.friend-profile` div in a `<Card>` element.
+👉 Modify the `FriendProfile` component to wrap the `.friend-profile` div in a `<Card>` element.
 
 You should notice a difference in the browser this time. If you got everything right, each of our kitten friends will have a nice card element separating them from the rest.
 

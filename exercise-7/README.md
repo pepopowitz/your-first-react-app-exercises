@@ -5,13 +5,13 @@ Components that don't maintain their own state or use React methods other than `
 
 In this exercise, you'll convert a component from class syntax to stateless functional. This is an activity that happens often in React development.
 
-&#128073; Start the app for Exercise 7
+👉 Start the app for Exercise 7
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-7`.
 
 This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 7: Convert a Component". If it doesn't, ask your neighbor for assistance or raise your hand.
 
-&#128073; Open Exercise.js
+👉 Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
 
@@ -77,13 +77,13 @@ becomes
 
 That's all it takes to convert from a class syntax component to a stateless functional one!
 
-&#128073; Convert the `Friends` component to a stateless functional component
+👉 Convert the `Friends` component to a stateless functional component
 
 Check your browser to make sure the components are still rendering properly!
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-stateless).
 
-&#128073; Convert the `FriendProfile` component to a stateless functional component
+👉 Convert the `FriendProfile` component to a stateless functional component
 
 Check your browser to make sure the components are still rendering properly!
 
@@ -91,13 +91,13 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to
 
 Sometimes, we need to convert the other direction - from stateless functional component to class syntax component.
 
-&#128073; Convert the `Friends` component back to a class syntax component
+👉 Convert the `Friends` component back to a class syntax component
 
 Check your browser to make sure the components are still rendering properly!
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-class).
 
-&#128073; Convert the `FriendProfile` component back to a class syntax component
+👉 Convert the `FriendProfile` component back to a class syntax component
 
 Check your browser to make sure the components are still rendering properly!
 
