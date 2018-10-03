@@ -9,7 +9,7 @@ The instructor will lead you through some code examples. Follow along!
 
 This exercise utilizes unit tests for demonstration purposes. You don't need to know much about unit tests coming in. 
 
-&#128073; Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-1`.
+👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-1`.
 
 You should see the following output:
 
