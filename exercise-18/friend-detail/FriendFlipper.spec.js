@@ -6,9 +6,24 @@ import ThemeProvider from '../theme/Provider';
 import FriendFlipper from './FriendFlipper';
 
 describe('./friend-detail/FriendFlipper', () => {
-  // Write your tests here!
+  it('defaults to the front side', () => {
+    // arrange
 
-  // FINISHED -- 
+    // act
+
+    // assert
+  });
+
+  it('flips to the back side after a button click', () => {
+    // arrange
+
+    // act
+
+    // assert
+  });
+
+
+  // FINISHED -- don't forget to remove testid's from component!!!
   
   it('defaults to the front side', () => {
     const friend = {
@@ -27,12 +42,10 @@ describe('./friend-detail/FriendFlipper', () => {
     );
 
     // things from the front side SHOULD be there
-    expect(context.getByTestId('front')).not.toBeNull();
-    expect(context.getByText('Details >')).not.toBeNull();
+    expect(context.queryByTestId('front')).not.toBeNull();
 
     // things from the back side SHOULD NOT be there
     expect(context.queryByTestId('back')).toBeNull();
-    expect(context.queryByText('Colors:')).toBeNull();
   });
 
 
@@ -56,10 +69,8 @@ describe('./friend-detail/FriendFlipper', () => {
 
     // things from the front side SHOULD NOT be there
     expect(context.queryByTestId('front')).toBeNull();
-    expect(context.queryByText('Details >')).toBeNull();
 
     // things from the back side SHOULD be there
-    expect(context.getByTestId('back')).not.toBeNull();
-    expect(context.getByText('Colors:')).not.toBeNull();
+    expect(context.queryByTestId('back')).not.toBeNull();
   });
 });

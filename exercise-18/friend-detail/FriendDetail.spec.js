@@ -6,10 +6,10 @@ import ThemeProvider from '../theme/Provider';
 import FriendDetail from './FriendDetail';
 
 describe('./friend-detail/FriendDetail', () => {
-  it('renders loading if in a loading state', () => {
+  it('renders loading if friend isn`t loaded yet', () => {
     const friend = undefined;
     
-    const { getByText } = render(
+    const context = render(
       <MemoryRouter>
         <ThemeProvider>
           <FriendDetail friend={friend} />
@@ -17,10 +17,10 @@ describe('./friend-detail/FriendDetail', () => {
       </MemoryRouter>
     );
 
-    expect(getByText('Loading...')).not.toBeNull();
+    expect(context.queryByText('Loading...')).not.toBeNull();
   });
 
-  it('renders friend if not in a loading state', () => {
+  it('renders a friend if friend is loaded', () => {
     const friend = {
       name: 'Mr. Smidgens',
       colors: ['brown'],
@@ -28,7 +28,7 @@ describe('./friend-detail/FriendDetail', () => {
         "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
     };
 
-    const { getByText } = render(
+    const context = render(
       <MemoryRouter>
         <ThemeProvider>
           <FriendDetail friend={friend} />
@@ -36,7 +36,9 @@ describe('./friend-detail/FriendDetail', () => {
       </MemoryRouter>
     );
 
-    expect(getByText('Mr. Smidgens')).not.toBeNull();
-    expect(getByText('This little guy likes a bowl of milk at bedtime. Scratch his belly and he\'ll be your best friend.')).not.toBeNull();
+    expect(context.queryByText('Mr. Smidgens')).not.toBeNull();
+    expect(context.queryByText('This little guy likes a bowl of milk at bedtime. Scratch his belly and he\'ll be your best friend.')).not.toBeNull();
+
   });
+
 });
