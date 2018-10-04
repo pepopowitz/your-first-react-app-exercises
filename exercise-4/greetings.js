@@ -10,6 +10,3 @@ export function choosePartingWordFromObject(data) {
 
 export function mapPartingWords(languages) {
 }
-
-export function removeUnknownLanguages(languages) {
-}

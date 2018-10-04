@@ -129,3 +129,7 @@ When the value `null` is returned from a component's `render` method, nothing ge
 Check your browser to see if you succeeded! You should see two of the friends listed - Potatoes and Flower.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#null).
+
+### Extra Credit
+
+* Read the [React docs](https://reactjs.org/docs/hello-world.html)

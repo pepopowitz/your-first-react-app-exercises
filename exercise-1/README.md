@@ -33,39 +33,6 @@ If you do see this output, you're in good shape. The output will change as we mo
 
 The instructor will help you rewrite unit tests using class syntax. 
 
+### Extra Credit
 
-
-throw away ->
-
-### Background
-
-Modules are a way to share and reuse code. If you've used `require('...')` before, you've used modules. Languages other than JavaScript also have module systems that you might have used. Modules, put simply, allow you to write code in one file, and include it in others. 
-
-The `import` & `export` keywords were introduced in ES2015 to provide a standard JavaScript module system. CommonJS and AMD module systems predated the ES2015 module system, but building a module system into JavaScript simplifies sharing modules.
-
-The basic syntax for modules in modern JavaScript is simple: you `export` a module from one file, and `import` it into another.
-
-### Default Import/Export
-
-Every file can have exactly one default export. This ......
-
-is this too much????? just walk them through it???
-
----
-
-## instructor notes
-
-0. Get your test suite running
-  a. npm run test-module-1
-  b. You should see this test output (show)
-1. Write a test of our `add` function.
-  a. Uncomment the test (in ./add.spec.js) (A!)
-  b. Import the `add` function (as a default import) (B!)
-  c. Mark the `add` function as a default export (C!)
-2. Write a test of our `addThree` function.
-  a. Uncomment the test in ./add.spec.js (A!)
-  b. Import the `addThree` function (as a named import) (D!)
-  c. Mark the `addThree` function as a named export (E!)
-3. Show an import from npm (F!)
-
-
+* Read about [modern JS development](https://medium.com/the-node-js-collection/modern-javascript-explained-for-dinosaurs-f695e9747b70)

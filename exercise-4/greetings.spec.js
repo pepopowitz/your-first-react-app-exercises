@@ -3,7 +3,6 @@ import {
   choosePartingWord,
   choosePartingWordFromObject,
   mapPartingWords,
-  removeUnknownLanguages,
 } from './greetings';
 
 // 1: Uncomment the next 6 lines for test 1.
@@ -63,22 +62,3 @@ import {
 //   ])
 // });
 
-
-
-// 5: Uncomment the next 16 lines for test 5.
-// //  Calling a function that takes an array, but only returns some values, based on a condition.
-// it('filters languages', () => {
-//   const languages = [
-//     'Spanish',
-//     'English',
-//     'German',
-//     'French'
-//   ];
-
-//   const result = removeUnknownLanguages(languages);
-
-//   expect(result).toEqual([
-//     'Spanish',
-//     'English'
-//   ]);
-// });

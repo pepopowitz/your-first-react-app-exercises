@@ -57,6 +57,7 @@ export default function() {
 
 ## Header: Consumer
 ```jsx
+// import theme from './theme/static'; // no longer needed
 import ThemeContext from './theme/context';
 
 export default function Header() {
