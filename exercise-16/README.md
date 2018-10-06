@@ -239,3 +239,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-co
 At this point your entire app should change from green to purple and vice versa when the "Change Theme" button is clicked.
 
 If this doesn't happen, re-read the instructions above thoroughly. If you can't figure out what you missed, ask your neighbor, or raise your hand.
+
+### Extra Credit
+
+[Read about React Context vs Redux](https://daveceddia.com/context-api-vs-redux/).

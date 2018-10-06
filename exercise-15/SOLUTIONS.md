@@ -89,7 +89,7 @@ export default class FriendDetailEntry extends React.Component {
   };
 
   render() {
-    return <FriendDetailFinished friend={this.state.friend} />;
+    return <FriendDetail friend={this.state.friend} />;
   }
 
   async componentDidMount() {

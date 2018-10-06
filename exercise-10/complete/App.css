@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: teal;
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-family: 'Pacifico', cursive;
+  line-height: 0.5em;
+}
+
+.App-intro {
+  font-size: large;
+}

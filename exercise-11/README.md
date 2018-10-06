@@ -96,6 +96,8 @@ The remaining components in the exercise - `Card`, `FriendProfile`, and `Page` -
 
 👉 Convert the `Card`, `FriendProfile`, and `Page` components to use CSS Modules.
 
+If you get stuck, see the `./complete` folder for possible solutions.
+
 ### Combining class names
 
 One interesting problem with CSS Modules is that applying multiple classes to an element is not as simple as in component CSS files.
@@ -127,3 +129,9 @@ Aside from combining multiple class names, the `classnames` library also makes i
 👉 Modify the `h1` in `App.js` to apply both the `styles.appTitle` and `styles.emphasize` styles.
 
 Use the method you prefer from the above options (manually inserting spaces, or using the `classnames` library).
+
+If you get stuck, see [`./complete/App.js`](./complete/App.js) for a possible solution.
+
+### Extra Credit
+
+* Read a [comparison of CSS Modules to another approach for styling in React - CSS-in-JS](https://medium.com/@pioul/modular-css-with-react-61638ae9ea3e).

@@ -128,3 +128,7 @@ You should notice a difference in the browser this time. If you got everything r
 ![Finished](docs/pages-and-cards.png)
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-with-card).
+
+### Extra Credit
+
+Read more about [composition vs. inheritance in React](https://reactjs.org/docs/composition-vs-inheritance.html)

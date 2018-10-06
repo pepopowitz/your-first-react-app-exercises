@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Exercise from './Exercise';
-import ExerciseFinished from './ExerciseFinished';
 
 class App extends Component {
   render() {
@@ -11,7 +10,7 @@ class App extends Component {
           <h1 className="App-title">Exercise 5</h1>
           <h2 className="sub-title">JSX Fundamentals</h2>
         </header>
-        <ExerciseFinished />
+        <Exercise />
       </div>
     );
   }

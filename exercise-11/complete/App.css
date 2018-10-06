@@ -1,0 +1,28 @@
+.app {
+  text-align: center;
+
+  --brand-dark: blueviolet;
+  --brand-light: ghostwhite;
+}
+
+.appHeader {
+  background-color: var(--brand-dark);
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+
+.emphasize {
+  font-style: italic;
+}
+.emphasize:before {
+  content: '👉'
+}
+.emphasize:after {
+  content: '👈'
+}
+
+.appTitle {
+  font-family: 'Pacifico', cursive;
+  line-height: 0.5em;
+}

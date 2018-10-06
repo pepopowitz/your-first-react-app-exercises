@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Page from '../shared/Page';
 import Card from '../shared/Card';
-import FriendFlipper from './FriendFlipper.finished';
+import FriendFlipper from './FriendFlipper';
 
 import styles from './FriendDetail.css';
 

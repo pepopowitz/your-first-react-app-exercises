@@ -87,3 +87,9 @@ index.js:2178 Warning: Failed prop type: The prop `image` is marked as required 
 ```
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#removed-property).
+
+### Extra Credit
+
+* Read about [other the different types you can validate with PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html).
+
+* Read about [static typechecking, and why it might be better than using PropTypes](https://reactjs.org/docs/static-type-checking.html).

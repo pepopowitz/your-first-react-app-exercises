@@ -21,4 +21,10 @@ If you still can't figure out why things aren't working, raise your hand if in-p
 
 ## Common issues
 
-https://github.com/expo/expo/issues/854 - install watchman on macs if fsevents error; sometimes homebrew fails to link the keg because of permissions, and that can be resolved by manually linking.
+### `fsevents`/`watchman` error on Mac
+
+You might need to manually install watchman on a Mac. Do this with homebrew (brew install watchman). 
+
+Even after installing, sometimes it seems to fail at linking. You might need to do this manually, too (`brew link watchman`).
+
+A possibly related issue is here - https://github.com/expo/expo/issues/854.

@@ -142,3 +142,7 @@ At this stage, you've completed everything necessary to manage state in the `Fri
 When you browse the web app, you should not see any console errors. You should also be able to click on a specific friend to navigate to their detail page. From their detail page, you should be able to click the "Details" button, and see their information card flip over to show some details.
 
 If you are unable to do this, see if you can figure out why. Investigate any console errors, look at the example solutions, ask your neighbor for help, or raise your hand for help.
+
+### Extra Credit
+
+* Read about ["lifting up state" in React](https://reactjs.org/docs/lifting-state-up.html).

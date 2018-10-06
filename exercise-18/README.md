@@ -175,3 +175,9 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#back-assert).
 👉 Check your console. You should see output that indicates your tests are passing.
 
 [The complete test can be seen here.](./SOLUTIONS.md#back-complete-test)
+
+### Extra Credit
+
+* Read about [the guiding principles behind react-testing-library](https://github.com/kentcdodds/react-testing-library#guiding-principles).
+
+* Read [an article I wrote](https://medium.com/@pepopowitz/chekhovs-gun-and-better-unit-tests-96fb439e6d0e), about what we can learn about testing from a long-dead Russian playwright.

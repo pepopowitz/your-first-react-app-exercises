@@ -145,3 +145,11 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetailentr
 You should now have your friends loading from API endpoints throughout the app.
 
 You can verify this by making a change in `data/db.json`, and making sure the change is reflected in the app. You will need to refresh the app to see the change.
+
+### Extra Credit
+
+* Show a "loading" indicator when the friends array has not yet loaded on the Friends list page.
+
+* Read more about [state & lifecycle events](https://reactjs.org/docs/state-and-lifecycle.html).
+
+* Read about another use of React lifecycle events - [integrating with non-React libraries](https://reactjs.org/docs/integrating-with-other-libraries.html).

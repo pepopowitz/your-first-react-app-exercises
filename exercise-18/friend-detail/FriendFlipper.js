@@ -34,7 +34,7 @@ export default class FriendFlipper extends React.Component {
       <ThemeContext.Consumer>
         {({ theme }) => (
           <div className={styles.front}>
-            <div className={styles.frontContents} data-testid="front">
+            <div className={styles.frontContents}>
               <img src={friend.image} alt={friend.image} />
               <button
                 type="button"
@@ -56,10 +56,7 @@ export default class FriendFlipper extends React.Component {
       <ThemeContext.Consumer>
         {({ theme }) => (
           <div className={styles.back}>
-            <div
-              className={classNames(styles.backContents, styles[theme])}
-              data-testid="back"
-            >
+            <div className={classNames(styles.backContents, styles[theme])}>
               <img src={friend.image} alt={friend.image} />
               <div className={styles.backDetails}>
                 <h3>
