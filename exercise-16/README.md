@@ -5,7 +5,7 @@ In this exercise, we'll use React Context to manage application-level state. Tha
 
 Throughout the workshop, you've seen the app alternate between green and purple themes. We're going to automate that, with a "theme switcher" button.
 
-👉 Start the app for Exercise 15
+👉 Start the app for Exercise 16
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-15`.
 
