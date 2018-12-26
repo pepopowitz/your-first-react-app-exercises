@@ -1,13 +1,14 @@
 # Exercise 1
+
 ## Modern JavaScript: Modules
 
-This exercise introduces you to the module import & export features utilized in modern JavaScript applications. 
+This exercise introduces you to the module import & export features utilized in modern JavaScript applications.
 
 The instructor will lead you through some code examples. Follow along!
 
 ### Setup
 
-This exercise utilizes unit tests for demonstration purposes. You don't need to know much about unit tests coming in. 
+This exercise utilizes unit tests for demonstration purposes. You don't need to know much about unit tests coming in.
 
 👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-1`.
 
@@ -31,8 +32,8 @@ If you do see this output, you're in good shape. The output will change as we mo
 
 ### Follow Along
 
-The instructor will help you rewrite unit tests using class syntax. 
+The instructor will help you write unit tests of ES6 modules.
 
 ### Extra Credit
 
-* Read about [modern JS development](https://medium.com/the-node-js-collection/modern-javascript-explained-for-dinosaurs-f695e9747b70)
+- Read about [modern JS development](https://medium.com/the-node-js-collection/modern-javascript-explained-for-dinosaurs-f695e9747b70)
