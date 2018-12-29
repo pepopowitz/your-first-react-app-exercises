@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import FriendFlipperFront from './FriendFlipperFront';
 import FriendFlipperBack from './FriendFlipperBack';
 
-import styles from './FriendFlipper.css';
+import styles from './FriendFlipper.module.css';
 
 export default function FriendFlipper({ friend }) {
   const [flipped, setFlipped] = useState(false);
@@ -59,7 +59,7 @@ import React, { useContext } from 'react';
 
 import ThemeContext from './context';
 
-import styles from './Switcher.css';
+import styles from './Switcher.module.css';
 
 export default function() {
   const { onThemeChanged } = useContext(ThemeContext);

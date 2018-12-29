@@ -7,7 +7,7 @@ import Header from './Header';
 import Friends from './friends/Friends.entry';
 import FriendDetail from './friend-detail/FriendDetail.entry';
 
-import styles from './App.css';
+import styles from './App.module.css';
 
 //finished!
 import ThemeProvider from './theme/Provider';

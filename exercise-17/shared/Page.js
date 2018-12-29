@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import ThemeContext from '../theme/context';
 
-import styles from './Page.css';
+import styles from './Page.module.css';
 
 export default function Page({ children }) {
   return (

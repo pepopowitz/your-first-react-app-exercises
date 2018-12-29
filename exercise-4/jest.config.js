@@ -3,12 +3,12 @@ const exercise = 'exercise-4';
 module.exports = {
   rootDir: '../',
   collectCoverageFrom: [`<rootDir>/${exercise}/**/*.{js,jsx,mjs}`],
-  setupFiles: ['<rootDir>/_not_important/config/polyfills.js'],
+  setupFiles: ['react-app-polyfill/jsdom'],
   testMatch: [
     `<rootDir>/${exercise}/**/__tests__/**/*.{js,jsx,mjs}`,
     `<rootDir>/${exercise}/**/?(*.)(spec|test).{js,jsx,mjs}`,
   ],
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   testURL: 'http://localhost',
   transform: {
     '^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
@@ -16,9 +16,13 @@ module.exports = {
     '^(?!.*\\.(js|jsx|mjs|css|json)$)':
       '<rootDir>/_not_important/config/jest/fileTransform.js',
   },
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
   moduleFileExtensions: [
     'web.js',

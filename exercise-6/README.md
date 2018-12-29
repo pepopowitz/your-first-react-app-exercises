@@ -1,4 +1,5 @@
 # Exercise 6
+
 ## render() Results
 
 The `render()` method of a React component can return any of 6 kinds of objects. This exercise will introduce you to the 5 most frequently returned kinds of objects.
@@ -35,19 +36,19 @@ You should see that the component is rendered as a div with text content.
 
 Valid JSX requires a single top-level element (similar to how valid XML requires a single top-level element). To demonstrate this, we're going to break our app.
 
-👉 Modify the `Friends` component to return an `<h1>` element adjacent to the `<FriendProfile>` element. 
+👉 Modify the `Friends` component to return an `<h1>` element adjacent to the `<FriendProfile>` element.
 
 You should see an error in your browser, similar to this:
 
 ```
 ./exercise-6/Exercise.js
-Syntax error: C:/.../your-first-react-app-exercises/exercise-6/ExerciseFinished.js: Adjacent JSX elements must be wrapped in an enclosing tag (7:6)
+  Line 7:  Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?
 
    5 |     return (
    6 |       <h1>hello, friends!</h1>
 >  7 |       <FriendProfile name={myFriends[0].name} />
      |       ^
-   8 |     );
+   8 |       );
    9 |   }
   10 | }
 ```
@@ -58,7 +59,7 @@ We can fix this a couple ways.
 
 #### Wrapping in a `<div>`
 
-👉 Modify the `Friends` component so that the `<h1>` and `<FriendProfile>` elements are wrapped in a `<div>` element. 
+👉 Modify the `Friends` component so that the `<h1>` and `<FriendProfile>` elements are wrapped in a `<div>` element.
 
 Check your browser to see if you succeeded! You should see your title emitted, along with the name `Potatoes`.
 
@@ -68,7 +69,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#wrapping-in-a-di
 
 You'll see that your components are wrapped in a `<div>` - the one you used to wrap the `<h1>` and `<FriendProfile>` elements.
 
-This solves the problem...but it adds elements to the DOM that we don't really need. One element might not seem like a big deal, but in a large React app, we can end up with significant DOM pollution from this practice. 
+This solves the problem...but it adds elements to the DOM that we don't really need. One element might not seem like a big deal, but in a large React app, we can end up with significant DOM pollution from this practice.
 
 React v16 introduced a way to solve this problem - the `Fragment`.
 
@@ -108,7 +109,7 @@ You should see a `<div>` for each friend.
 
 Sometimes you want a component to render nothing more than a string or number. When a `render()` method returns a string or number, it gets rendered as a text node in the DOM.
 
-👉 Modify the `FriendProfile` component to render only the `name` prop. 
+👉 Modify the `FriendProfile` component to render only the `name` prop.
 
 Check your browser to see if you succeeded! You should see each of the friends listed, abutted against each other.
 
@@ -120,11 +121,11 @@ You will see that the friend names are rendered as text nodes, all within the sa
 
 ### null
 
-Sometimes we don't want a component to render anything at all. This is usually true when we are using conditional logic to render different results based on inputs. 
+Sometimes we don't want a component to render anything at all. This is usually true when we are using conditional logic to render different results based on inputs.
 
-When the value `null` is returned from a component's `render` method, nothing gets rendered to the DOM. 
+When the value `null` is returned from a component's `render` method, nothing gets rendered to the DOM.
 
-👉 Modify the `FriendProfile` component's `render` method to return `null` if the `age` prop is undefined; otherwise return the value of the `name` prop. 
+👉 Modify the `FriendProfile` component's `render` method to return `null` if the `age` prop is undefined; otherwise return the value of the `name` prop.
 
 Check your browser to see if you succeeded! You should see two of the friends listed - Potatoes and Flower.
 
@@ -132,4 +133,4 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#null).
 
 ### Extra Credit
 
-* Read the [React docs](https://reactjs.org/docs/hello-world.html)
+- Read the [React docs](https://reactjs.org/docs/hello-world.html)

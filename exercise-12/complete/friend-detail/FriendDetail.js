@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Page from '../shared/Page';
 import Card from '../shared/Card';
 
-import styles from './FriendDetail.css';
+import styles from './FriendDetail.module.css';
 
 export default function({ friend }) {
   return (

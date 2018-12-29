@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './FriendFlipper.css';
+import styles from './FriendFlipper.module.css';
 
 export default class FriendFlipper extends React.Component {
   render() {

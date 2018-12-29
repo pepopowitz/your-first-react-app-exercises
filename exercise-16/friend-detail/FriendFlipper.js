@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import theme from '../theme/static';
 
-import styles from './FriendFlipper.css';
+import styles from './FriendFlipper.module.css';
 
 export default class FriendFlipper extends React.Component {
   state = {

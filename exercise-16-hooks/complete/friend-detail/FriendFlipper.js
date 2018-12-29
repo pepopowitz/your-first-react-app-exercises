@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import FriendFlipperFront from './FriendFlipperFront';
 import FriendFlipperBack from './FriendFlipperBack';
 
-import styles from './FriendFlipper.css';
+import styles from './FriendFlipper.module.css';
 
 export default function FriendFlipper({ friend }) {
   const [flipped, setFlipped] = useState(false);

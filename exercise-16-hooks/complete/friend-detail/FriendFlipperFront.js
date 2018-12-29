@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import classNames from 'classnames';
 import ThemeContext from '../theme/context';
 
-import styles from './FriendFlipper.css';
+import styles from './FriendFlipper.module.css';
 
 export default function FriendFlipperFront({ friend, toggleFlipped }) {
   const { theme } = useContext(ThemeContext);

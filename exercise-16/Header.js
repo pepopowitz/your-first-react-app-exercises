@@ -4,7 +4,7 @@ import theme from './theme/static';
 
 import ThemeSwitcher from './theme/Switcher';
 
-import styles from './Header.css';
+import styles from './Header.module.css';
 
 export default function Header() {
   return (

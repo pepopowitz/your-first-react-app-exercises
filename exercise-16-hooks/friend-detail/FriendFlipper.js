@@ -3,7 +3,7 @@ import React from 'react';
 import FriendFlipperBack from './FriendFlipperBack';
 import FriendFlipperFront from './FriendFlipperFront';
 
-import styles from './FriendFlipper.css';
+import styles from './FriendFlipper.module.css';
 
 export default class FriendFlipper extends React.Component {
   state = {

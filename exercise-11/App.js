@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Exercise from './Exercise';
-import styles from './App.css';
+import styles from './App.module.css';
 
 class App extends Component {
   render() {

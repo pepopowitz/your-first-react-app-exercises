@@ -1,6 +1,6 @@
 'use strict';
 
-// Anything in this file regarding APP_EXERCISE is custom. 
+// Anything in this file regarding _not_important_ or APP_EXERCISE is custom.
 //  The user specifies the exercise as an env, and we swap out the source folder based on the requested exercise.
 
 const path = require('path');
@@ -8,22 +8,23 @@ const fs = require('fs');
 const url = require('url');
 
 // Make sure any symlinks in the project folder are resolved:
-// https://github.com/facebookincubator/create-react-app/issues/637
-
+// https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-const resolveExercise = relativePath => path.resolve(appDirectory, process.env.APP_EXERCISE, relativePath);
+// SJH CUSTOM vvvv
+const resolveExercise = relativePath =>
+  path.resolve(appDirectory, process.env.APP_EXERCISE, relativePath);
 
 const envPublicUrl = process.env.PUBLIC_URL;
 
-function ensureSlash(path, needsSlash) {
-  const hasSlash = path.endsWith('/');
+function ensureSlash(inputPath, needsSlash) {
+  const hasSlash = inputPath.endsWith('/');
   if (hasSlash && !needsSlash) {
-    return path.substr(path, path.length - 1);
+    return inputPath.substr(0, inputPath.length - 1);
   } else if (!hasSlash && needsSlash) {
-    return `${path}/`;
+    return `${inputPath}/`;
   } else {
-    return path;
+    return inputPath;
   }
 }
 
@@ -43,18 +44,56 @@ function getServedPath(appPackageJson) {
   return ensureSlash(servedUrl, true);
 }
 
+const moduleFileExtensions = [
+  'web.mjs',
+  'mjs',
+  'web.js',
+  'js',
+  'web.ts',
+  'ts',
+  'web.tsx',
+  'tsx',
+  'json',
+  'web.jsx',
+  'jsx',
+];
+
+// Resolve file paths in the same order as webpack
+const resolveModule = (resolveFn, filePath) => {
+  const extension = moduleFileExtensions.find(extension =>
+    fs.existsSync(resolveFn(`${filePath}.${extension}`))
+  );
+
+  if (extension) {
+    return resolveFn(`${filePath}.${extension}`);
+  }
+
+  return resolveFn(`${filePath}.js`);
+};
+
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),
+  appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
+  // SJH CUSTOM vvvv
   appPublic: resolveApp('_not_important/public'),
+  // SJH CUSTOM vvvv
   appHtml: resolveApp('_not_important/public/index.html'),
+  // SJH CUSTOM vvvv
   appIndexJs: resolveExercise('index.js'),
   appPackageJson: resolveApp('package.json'),
+  // SJH CUSTOM vvvv
   appSrc: resolveExercise(''),
+  appTsConfig: resolveApp('tsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
+  // SJH CUSTOM vvvv
   testsSetup: resolveExercise('setupTests.js'),
+  // SJH CUSTOM vvvv
+  proxySetup: resolveApp('_not_important/config/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 };
+
+module.exports.moduleFileExtensions = moduleFileExtensions;

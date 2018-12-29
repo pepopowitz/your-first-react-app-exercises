@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Card from '../shared/Card';
 
-import styles from './FriendProfile.css';
+import styles from './FriendProfile.module.css';
 
 export default function FriendProfile({ id, name, image }) {
   return (

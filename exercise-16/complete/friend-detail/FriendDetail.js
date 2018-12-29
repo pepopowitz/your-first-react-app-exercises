@@ -4,7 +4,7 @@ import Page from '../shared/Page';
 import Card from '../shared/Card';
 import FriendFlipper from './FriendFlipper';
 
-import styles from './FriendDetail.css';
+import styles from './FriendDetail.module.css';
 
 function renderFriend(friend) {
   if (friend === undefined) {

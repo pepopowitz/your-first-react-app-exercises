@@ -2,7 +2,7 @@ import React from 'react';
 
 import Card from './Card';
 
-import styles from './FriendProfile.css'
+import styles from './FriendProfile.module.css';
 
 export default function FriendProfile({ name, image }) {
   return (

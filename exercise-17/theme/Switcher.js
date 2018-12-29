@@ -2,7 +2,7 @@ import React from 'react';
 
 import ThemeContext from './context';
 
-import styles from './Switcher.css';
+import styles from './Switcher.module.css';
 
 export default function() {
   return (

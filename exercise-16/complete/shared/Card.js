@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import ThemeContext from '../theme/context';
 
-import styles from './Card.css';
+import styles from './Card.module.css';
 
 export default function Card({ children }) {
   return (
