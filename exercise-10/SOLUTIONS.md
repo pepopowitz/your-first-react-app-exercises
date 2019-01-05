@@ -3,6 +3,7 @@
 ## Component CSS Files
 
 ### App.css
+
 ```css
 .App {
   text-align: center;
@@ -19,13 +20,10 @@
   font-family: 'Pacifico', cursive;
   line-height: 0.5em;
 }
-
-.App-intro {
-  font-size: large;
-}
 ```
 
 ### Card.css
+
 ```css
 .card {
   min-width: 150px;
@@ -41,6 +39,7 @@
 ```
 
 ### FriendProfile.css
+
 ```css
 .friend-profile {
   display: flex;
@@ -54,6 +53,7 @@
 ```
 
 ### Page.css
+
 ```css
 .page {
   display: flex;
@@ -63,7 +63,7 @@
   height: calc(100vh - 140px);
 }
 
-.content{
+.content {
   background-color: white;
   display: flex;
   flex-direction: row;

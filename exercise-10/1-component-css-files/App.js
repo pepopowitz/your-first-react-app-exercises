@@ -8,7 +8,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Exercise 10</h1>
-          <h2 className="sub-title">Component CSS Files</h2>
+          <h2 className="sub-title">Styling - Component CSS Files</h2>
         </header>
         <div className="exercise">
           <Exercise />

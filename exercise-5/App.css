@@ -11,11 +11,7 @@
 
 .App-title {
   font-family: 'Pacifico', cursive;
-  line-height: .5em;
-}
-
-.App-intro {
-  font-size: large;
+  line-height: 0.5em;
 }
 
 .friends-title {
