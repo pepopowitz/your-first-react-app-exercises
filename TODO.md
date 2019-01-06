@@ -22,16 +22,15 @@
 ✅ leave exercise
 ✅ Option for talk only
 
+## CSS:
+
+✅ Add StyledComponents examples to also look around
+✅ Rewrite CSS Modules exercise to use ".module" in the name
+✅ Rewrite README
+
 ---
 
 # yes!
-
-## Ex 10 (Component CSS files):
-
-- make it just about looking around.
-- Make CSS just a talk????
-- Add StyledComponents examples to also look around?
-- Rewrite CSS Modules exercise to use ".module" in the name?
 
 ## Verify Browsers
 
@@ -49,7 +48,9 @@
 
 # maybe
 
-## Find a place to mention array destructuring
+## Talk about forms?
+
+- right after state conversation?
 
 ## Add a slight delay to the API so you can see loading
 
@@ -57,5 +58,3 @@
 - `--delay 500`
 
 ## Add time for 20 minutes? of questions at the end
-
-## Talk about forms?
