@@ -9,17 +9,22 @@ import FriendDetail from './friend-detail/FriendDetail.entry';
 
 import styles from './App.module.css';
 
+//finished!
+import ThemeProvider from './theme/Provider';
+
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className={styles.app}>
-          <Header />
-          <div className={styles.exercise}>
-            <Route path="/" exact component={Friends} />
-            <Route path="/friends/:id" component={FriendDetail} />
+        <ThemeProvider>
+          <div className={styles.app}>
+            <Header />
+            <div className={styles.exercise}>
+              <Route path="/" exact component={Friends} />
+              <Route path="/friends/:id" component={FriendDetail} />
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </BrowserRouter>
     );
   }

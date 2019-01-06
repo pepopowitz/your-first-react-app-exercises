@@ -1,103 +1,142 @@
 # Possible Solutions
 
-## Friends: Import API
-```js
-import getFriendsFromApi from './get-friends-from-api';
-```
+## App: ThemeProvider
 
-## Friends: Stateful
 ```jsx
-export default class FriendsEntry extends React.Component {
+import ThemeProvider from './theme/Provider';
+
+class App extends Component {
   render() {
-    return <Friends friends={myFriends} />
+    return (
+      <BrowserRouter>
+        <ThemeProvider>
+          <div className={styles.app}>
+            // ...
+          </div>
+        </ThemeProvider>
+      </BrowserRouter>
+    );
   }
 }
 ```
 
-## Friends: Initialize
+## Switcher: ThemeContext.Consumer
 
 ```jsx
-export default class FriendsEntry extends React.Component {
-  state = {
-    friends: []
-  }
+import ThemeContext from './context';
 
-  // ...
-}
-```
-
-## Friends: render
-```jsx
-export default class FriendsEntry extends React.Component {
-  // ...
-  
-  render() {
-    return <Friends friends={this.state.friends} />;
-  }
-}
-```
-
-## Friends: componentDidMount
-```jsx
-export default class FriendsEntry extends React.Component {
-  // ...
-
-  async componentDidMount() {
-    const friends = await getFriendsFromApi();
-    this.setState({
-      friends
-    });
-  }
-}
-```
-
-## FriendDetail: Handle empty friend
-```jsx
-export default function({ friend }) {
+export default function() {
   return (
-    <Page>
-      <div className={styles.friendDetail}>
-        <div className={styles.toolbar}>
-          <Link to="/">&lt; Home</Link>
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <button className={styles.switcher}>
+          Change Theme
+        </button>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## Switcher: onThemeChanged
+```jsx
+import ThemeContext from './context';
+
+export default function() {
+  return (
+    <ThemeContext.Consumer>
+      {({ theme, onThemeChanged }) => (
+        <button className={styles.switcher} onClick={onThemeChanged}>
+          Change Theme
+        </button>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## Header: Consumer
+```jsx
+// import theme from './theme/static'; // no longer needed
+import ThemeContext from './theme/context';
+
+export default function Header() {
+  return (
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <header ... >
+          ...
+        </header
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## Page: Consumer
+```jsx
+import ThemeContext from '../theme/context';
+
+export default function Page({ children }) {
+  return (
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <div className={classNames(styles.page, styles[theme])}>
+          <div className={styles.content}>{children}</div>
         </div>
-        <Card>{renderFriend(friend)}</Card>
-      </div>
-    </Page>
-  );
-}
-
-function renderFriend(friend) {
-  if (friend === undefined) {
-    return <h1>Loading...</h1>;
-  }
-
-  return (
-    <div className={styles.cardContents}>
-      <h1>{friend.name}</h1>
-      <FriendFlipper friend={friend} />
-      <p>{friend.bio}</p>
-    </div>
+      )}
+    </ThemeContext.Consumer>
   );
 }
 ```
 
-## FriendDetailEntry
+## Card: Consumer
 ```jsx
-export default class FriendDetailEntry extends React.Component {
-  state = {
-    friend: undefined,
-  };
+import ThemeContext from '../theme/context';
 
-  render() {
-    return <FriendDetail friend={this.state.friend} />;
+export default function Card({ children }) {
+  return (
+    <ThemeContext.Consumer>
+      {({theme}) => (
+        <div className={classNames(styles.card, styles[theme])}>{children}</div>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## FriendFlipper: Consumer
+```jsx
+import ThemeContext from '../theme/context';
+
+export default class FriendFlipper extends React.Component {
+
+  // ...
+
+  renderFront() {
+    const { friend } = this.props;
+    return (
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div className={styles.front}>
+            // ...
+          </div>
+        )}
+      </ThemeContext.Consumer>
+    );
   }
 
-  async componentDidMount() {
-    // the match prop is passed in via react.router
-    const friend = await getFriendFromApi(this.props.match.params.id);
-    this.setState({
-      friend,
-    });
+  renderBack() {
+    const { friend } = this.props;
+    return (
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div className={styles.back}>
+            // ...
+          </div>
+        )}
+      </ThemeContext.Consumer>
+    );
   }
 }
 ```

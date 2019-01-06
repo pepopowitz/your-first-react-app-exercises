@@ -10,7 +10,7 @@ function renderFriend(friend) {
   if (friend === undefined) {
     return <h1>Loading...</h1>;
   }
-
+  
   return (
     <div className={styles.cardContents}>
       <h1>{friend.name}</h1>

@@ -4,9 +4,10 @@ import friends from '../data/friends';
 
 import FriendDetail from './FriendDetail';
 
-export default function() {
-  //TODO - how do we get the active friend id???
-  const friend = friends[2];
+export default function({match}) {
+  // the match prop is passed in via react.router
+  const friendId = match.params.id;
+  const friend = friends.find(x => x.id === parseInt(friendId, 10));
 
   return <FriendDetail friend={friend} />;
 }

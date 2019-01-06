@@ -1,22 +1,7 @@
 .app {
   text-align: center;
-
-  --brand-dark: teal;
-  --brand-light: mintcream;
-}
-
-.appHeader {
-  background-color: var(--brand-dark);
-  height: 100px;
-  padding: 20px;
-  color: white;
 }
 
 .emphasize {
   text-decoration: underline;
-}
-
-.appTitle {
-  font-family: 'Pacifico', cursive;
-  line-height: 0.5em;
 }

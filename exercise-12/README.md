@@ -1,85 +1,148 @@
 # Exercise 12
-## React Router
 
-In this exercise, we're going to use React-Router to build a second page into our app. When we're complete, users will be able to navigate from our friends list to a detailed view of each friend.
+## Managing Component State
+
+In this exercise, we'll use component state to flip an information card back-and-forth on our FriendDetail page.
 
 👉 Start the app for Exercise 12
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-12`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 12: React Router", and our three adorable kitten friends. If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 12: Managing Component State", and our three adorable kitten friends. If it doesn't, ask your neighbor for assistance or raise your hand.
 
-### Component Reorganization
+### FriendFlipper: A New Component
 
-In this exercise, we've re-architected our file & folder structure. We've created some folders:
+We've redesigned our FriendDetail page a bit. It references a new child component - the `<FriendFlipper>`.
 
-* `/data`: this folder holds the data that drives our app. For now, that's our list of friends.
-* `/friend-detail`: this folder holds components that render a "friend detail" page. This is a new page we'll be building out in this exercise.
-* `/friends`: this folder holds components that render the "friends list" page - the one we've been working with so far.
-* `/shared`: this folder contains components that could be shared across multiple other folders.
+The `<FriendFlipper>` component will flip an information card for the user. The front is an image of our friend; on the back will be some details, like their ID & colors. The flipper isn't functional yet - but it has all the styles & content built out for it.
 
-### Router Setup
+Your responsibility will be to utilize React component state to toggle the visible side of the flipper.
 
-To set up React-Router, we've already taken a few steps:
+### Initializing State
 
-* Installed React-Router as a dependency, by running `npm install --save react-router`
-* Wrapped our app in a `<BrowserRouter>` component, in `App.js`
-* Defined a route in `App.js` that matches the path `/` exactly, and renders our `<Friends>` entry component.
+The first thing we need to do with a stateful component is initialize the state.
 
-### Add a new `<Route>`
+In this case, we'll want our initial state to be such that the card is not flipped yet. We will use a boolean state property named `flipped` to manage this.
 
-In the folder `/friend-detail`, we've added a couple components that render a very simple Friend Detail page.
+Remember that when initializing state, we can do it a couple ways:
 
-👉 Add a new `<Route>` to `App.js`, which will render the new Friend Detail page.
+1. Constructor initialization
 
-You'll want to import the `<FriendDetail>` component from './friend-detail/FriendDetail.entry'.
+This method utilizes the class constructor, and looks something like this:
 
-The route should match the path `friends/:id`. The token `:id` indicates that this route will have an `id` parameter submitted in the path. 
+```jsx
+export default class Component extends React.Component {
+  constructor(props) {
+    super(props); // This calls the base constructor, with the passed-in props.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetail-route).
+    this.state = {
+      // set initial state properties here
+    };
+  }
+  // ...
+}
+```
 
-### Add a link to the new Route
+2. Class property initialization
 
-We need a way to navigate to the route we added.
+This method utilizes a newer feature of JavaScript - class properties - and looks something like this:
 
-React-Router includes a `<Link>` component for navigating to a router-friendly URL. 
+```jsx
+export default class Component extends React.Component {
+  state = {
+    myValue: 0, // or whatever default you want to set it to
+  };
 
-👉 Wrap the `<Card>` element in `'/friends/FriendProfile.js` in a `<Link>` element. 
+  // ...
+}
+```
 
-Remember that you'll need to import the `Link` component from `react-router-dom`, and that the `to` prop is where the link will go when it is clicked.
+👉 Initialize the state in `friend-detail/FriendFlipper.js` so that the `flipped` property is defaulted to `false`.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-link).
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#initialization).
 
-### Get friend ID from the URL
+### Adding An Event Handler
 
-When you click on one of our kitten friends, you should navigate to the Friend Detail page!
+We need to handle the event that a user "flips" the information card.
 
-Unfortunately, regardless of which kitten you click, it always renders the same friend - Turtle.
+Recall that we handle an event in a stateful component with a class property assigned to a fat-arrow method that calls `setState`. This looks something like this:
 
-👉 Open `/friend-detail/FriendDetail.entry.js`, and see if you can identify why we are always rendering Turtle.
+```jsx
+export default class Component extends React.Component {
+  myEventHandler = () => {
+    this.setState({
+      myValue: 1, // or whatever value you want to set it to
+    });
+  };
+  // ...
+}
+```
 
-...(come back when you've figured it out, or you give up)...
+If we want to update the state based on the current state of the component, we can use the alternate override for `setState`, like this:
 
-As the comment in the component indicates, we aren't getting the active friend ID in this component.
+```jsx
+export default class Component extends React.Component {
+  myEventHandler = () => {
+    this.setState(prevProps => {
+      return {
+        myValue: prevProps.myValue + 1, // or whatever value you want to set it to
+      };
+    });
+  };
+  // ...
+}
+```
 
-When we use React-Router, our components automatically get access to a prop named `match`. This `match` prop contains a `params` array, which contains all the parameters passed into the current route.
+👉 Add an event handler to `friend-detail/FriendFlipper.js` that updates the `flipped` state property to the opposite of the current value of `flipped`.
 
-👉 Modify `/friend-detail/FriendDetail.entry.js` so that it pulls the active friend ID from the `match` prop.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#event-handler).
 
-Use `console.log` to inspect the props passed into the component if you need to.
+### Conditionally flipping the card based on state
 
-You'll want to use `friends.find(...)` to find the friend whose id property matches the ID passed in.
+Once our event handler changes the state, we'll need our `render` function to flip the card based on the `flipped` state property.
 
-One other trick - the `id` parameter in the `match.params` array is a string; the `id` properties in the `friends` array are integers. You could use `parseInt(...)` to convert between the two types.
+We can do this by conditionally calling `renderFront()` or `renderBack()` in our `render` function.
 
-When you've completed this task, you should be able to navigate to all three kitten friends' detail pages.
+👉 Conditionally call `renderFront()` or `renderBack()` in `friend-detail/FriendFlipper.js`, based on the value of `this.state.flipped`.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#active-friend-id).
+If `this.state.flipped` is true, `renderBack()` should be called. If `this.state.flipped` is false, `renderFront()` should be called.
 
-### Return to Home
+You can use ternaries to call the appropriate `render___()` function, or call a function that uses an if/else.
 
-We can use the browser navigation to go back to the Home page, but it'd be really helpful if we could add a link to the "Home" page on the Friend Detail page.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#conditional-render).
 
-👉 Add a Link to `/friend-detail/FriendDetail.js` that takes us back to the Home page.
+### Tying it all together - connecting the buttons to the event handler
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#home-link).
+We have one last step to hook up our state management. When the buttons on the information card are clicked, they need to call our event handler.
+
+Calling event handlers from a button click looks like this:
+
+```jsx
+class MyComponent extends React.Component {
+  myEventHandler = () => {
+    // ...
+  };
+
+  render() {
+    // ...
+    <button type="button" onClick={this.myEventHandler} />;
+    // ...
+  }
+}
+```
+
+👉 Call the event handler you added above from the `onClick` event of both `<button>` elements in `friend-detail/FriendFlipper.js`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#connect-buttons-to-handler).
+
+### Test it out
+
+At this stage, you've completed everything necessary to manage state in the `FriendFlipper` component.
+
+When you browse the web app, you should not see any console errors. You should also be able to click on a specific friend to navigate to their detail page. From their detail page, you should be able to click the "Details" button, and see their information card flip over to show some details.
+
+If you are unable to do this, see if you can figure out why. Investigate any console errors, look at the example solutions, ask your neighbor for help, or raise your hand for help.
+
+### Extra Credit
+
+- Read about ["lifting up state" in React](https://reactjs.org/docs/lifting-state-up.html).

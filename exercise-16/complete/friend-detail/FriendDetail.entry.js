@@ -1,22 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import FriendDetail from './FriendDetail';
 import getFriendFromApi from './get-friend-from-api';
 
-export default class FriendDetailEntry extends React.Component {
-  state = {
-    friend: undefined,
-  };
+export default function FriendDetailEntry({ match }) {
+  const [friend, setFriend] = useState({});
 
-  async componentDidMount() {
-    // the match prop is passed in via react.router
-    const friend = await getFriendFromApi(this.props.match.params.id);
-    this.setState({
-      friend,
-    });
-  }
+  useEffect(async () => {
+    const friend = await getFriendFromApi(match.params.id);
+    setFriend(friend);
+  }, match.params.id); // Note: removing `, match.params.id` causes an infinite render loop!
 
-  render() {
-    return <FriendDetail friend={this.state.friend} />;
-  }
+  return <FriendDetail friend={friend} />;
 }

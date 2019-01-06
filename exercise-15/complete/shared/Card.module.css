@@ -1,8 +1,13 @@
 .card {
   min-width: 150px;
-  background-color: var(--brand-light);
   margin: 20px;
   padding: 30px;
-  box-shadow: 0 1px 2px var(--brand-dark);
 }
-
+.card.green {
+  background-color: mintcream;
+  box-shadow: 0 1px 2px teal;
+}
+.card.purple {
+  background-color: ghostwhite;
+  box-shadow: 0 1px 2px purple;
+}

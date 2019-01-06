@@ -13,7 +13,7 @@ export default function Header() {
       {({ theme }) => (
         <header className={classNames(styles.appHeader, styles[theme])}>
           <h1 className={styles.appTitle}>Exercise 16</h1>
-          <h2 className={styles.subTitle}>React Context</h2>
+          <h2 className={styles.subTitle}>Hooks</h2>
           <div className={styles.switcherWrapper}>
             <ThemeSwitcher />
           </div>

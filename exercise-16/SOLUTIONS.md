@@ -1,142 +1,73 @@
+TODO - fill these in!
+
 # Possible Solutions
 
-## App: ThemeProvider
+## FriendFlipper: `useState`
 
 ```jsx
-import ThemeProvider from './theme/Provider';
+import React, { useState } from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <ThemeProvider>
-          <div className={styles.app}>
-            // ...
-          </div>
-        </ThemeProvider>
-      </BrowserRouter>
-    );
-  }
+import FriendFlipperFront from './FriendFlipperFront';
+import FriendFlipperBack from './FriendFlipperBack';
+
+import styles from './FriendFlipper.module.css';
+
+export default function FriendFlipper({ friend }) {
+  const [flipped, setFlipped] = useState(false);
+
+  const toggleFlipped = () => setFlipped(!flipped);
+
+  return (
+    <div className={styles.flipWrapper}>
+      <div className={styles.flipper}>
+        {flipped ? (
+          <FriendFlipperBack friend={friend} toggleFlipped={toggleFlipped} />
+        ) : (
+          <FriendFlipperFront friend={friend} toggleFlipped={toggleFlipped} />
+        )}
+      </div>
+    </div>
+  );
 }
 ```
 
-## Switcher: ThemeContext.Consumer
+## Friends.entry: `useEffect`
 
 ```jsx
+import React, { useState, useEffect } from 'react';
+
+import getFriendsFromApi from './get-friends-from-api';
+
+import Friends from './Friends';
+
+export default function FriendsEntry() {
+  const [friends, setFriends] = useState([]);
+
+  useEffect(async () => {
+    const apiFriends = await getFriendsFromApi();
+    setFriends(apiFriends);
+  }, []);
+
+  return <Friends friends={friends} />;
+}
+```
+
+## Switcher: `useContext`
+
+```jsx
+import React, { useContext } from 'react';
+
 import ThemeContext from './context';
 
-export default function() {
-  return (
-    <ThemeContext.Consumer>
-      {({ theme }) => (
-        <button className={styles.switcher}>
-          Change Theme
-        </button>
-      )}
-    </ThemeContext.Consumer>
-  );
-}
-```
-
-## Switcher: onThemeChanged
-```jsx
-import ThemeContext from './context';
+import styles from './Switcher.module.css';
 
 export default function() {
+  const { onThemeChanged } = useContext(ThemeContext);
+
   return (
-    <ThemeContext.Consumer>
-      {({ theme, onThemeChanged }) => (
-        <button className={styles.switcher} onClick={onThemeChanged}>
-          Change Theme
-        </button>
-      )}
-    </ThemeContext.Consumer>
+    <button className={styles.switcher} onClick={onThemeChanged}>
+      Change Theme
+    </button>
   );
-}
-```
-
-## Header: Consumer
-```jsx
-// import theme from './theme/static'; // no longer needed
-import ThemeContext from './theme/context';
-
-export default function Header() {
-  return (
-    <ThemeContext.Consumer>
-      {({ theme }) => (
-        <header ... >
-          ...
-        </header
-      )}
-    </ThemeContext.Consumer>
-  );
-}
-```
-
-## Page: Consumer
-```jsx
-import ThemeContext from '../theme/context';
-
-export default function Page({ children }) {
-  return (
-    <ThemeContext.Consumer>
-      {({ theme }) => (
-        <div className={classNames(styles.page, styles[theme])}>
-          <div className={styles.content}>{children}</div>
-        </div>
-      )}
-    </ThemeContext.Consumer>
-  );
-}
-```
-
-## Card: Consumer
-```jsx
-import ThemeContext from '../theme/context';
-
-export default function Card({ children }) {
-  return (
-    <ThemeContext.Consumer>
-      {({theme}) => (
-        <div className={classNames(styles.card, styles[theme])}>{children}</div>
-      )}
-    </ThemeContext.Consumer>
-  );
-}
-```
-
-## FriendFlipper: Consumer
-```jsx
-import ThemeContext from '../theme/context';
-
-export default class FriendFlipper extends React.Component {
-
-  // ...
-
-  renderFront() {
-    const { friend } = this.props;
-    return (
-      <ThemeContext.Consumer>
-        {({ theme }) => (
-          <div className={styles.front}>
-            // ...
-          </div>
-        )}
-      </ThemeContext.Consumer>
-    );
-  }
-
-  renderBack() {
-    const { friend } = this.props;
-    return (
-      <ThemeContext.Consumer>
-        {({ theme }) => (
-          <div className={styles.back}>
-            // ...
-          </div>
-        )}
-      </ThemeContext.Consumer>
-    );
-  }
 }
 ```

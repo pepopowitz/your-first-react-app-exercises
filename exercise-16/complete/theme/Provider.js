@@ -1,28 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ThemeContext from './context';
 
-export default class ThemeProvider extends React.Component {
-  state = {
-    theme: 'purple',
+export default function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('purple');
+
+  const onThemeChanged = () => setTheme(theme === 'green' ? 'purple' : 'green');
+
+  const data = {
+    theme,
+    onThemeChanged,
   };
 
-  handleThemeChange = () => {
-    this.setState(prevState => ({
-      theme: prevState.theme === 'green' ? 'purple' : 'green',
-    }));
-  };
-
-  render() {
-    const data = {
-      theme: this.state.theme,
-      onThemeChanged: this.handleThemeChange,
-    };
-
-    return (
-      <ThemeContext.Provider value={data}>
-        {this.props.children}
-      </ThemeContext.Provider>
-    );
-  }
+  return <ThemeContext.Provider value={data}>{children}</ThemeContext.Provider>;
 }

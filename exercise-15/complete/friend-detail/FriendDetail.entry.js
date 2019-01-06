@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FriendDetailFinished from './FriendDetail';
+import FriendDetail from './FriendDetail';
 import getFriendFromApi from './get-friend-from-api';
 
 export default class FriendDetailEntry extends React.Component {
@@ -17,6 +17,6 @@ export default class FriendDetailEntry extends React.Component {
   }
 
   render() {
-    return <FriendDetailFinished friend={this.state.friend} />;
+    return <FriendDetail friend={this.state.friend} />;
   }
 }

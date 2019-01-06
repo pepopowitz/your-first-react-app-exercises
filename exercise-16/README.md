@@ -1,245 +1,232 @@
 # Exercise 16
-## React Context
 
-In this exercise, we'll use React Context to manage application-level state. That is, state that applies to the entire application, instead of a single component (or a few closely-related components).
+## React Hooks
 
-Throughout the workshop, you've seen the app alternate between green and purple themes. We're going to automate that, with a "theme switcher" button.
+This exercise will give you hands-on experience converting code to use the upcoming React hooks API. Hooks will simplify how we use several React features that we've already seen.
 
 👉 Start the app for Exercise 16
 
-In a console window, pointed at the root of this project, run `npm run start-exercise-15`.
+In a console window, pointed at the root of this project, run `npm run start-exercise-16`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 15: Loading Data", and our three adorable kitten friends in the purple theme. If it doesn't, ask your neighbor for assistance or raise your hand.
+This will open a browser window pointed at localhost:3000, showing a web app titled "Exercise 16: Hooks", our three adorable kitten friends, and a theme switcher that toggles between purple and green themes. If it doesn't, ask your neighbor for assistance or raise your hand.
 
-### Static theme
+### New Components: FriendFlipperBack and FriendFlipperFront
 
-We've modified the CSS Modules coming into this exercise, so that they render based on a static theme. The static theme is defined in `./theme/static/index.js`. If you change the static theme, the UI will reflect it.
+We've refactored the FriendFlipper component, extracting the `renderBack()` and `renderFront()` functions into `FriendFlipperBack` and `FriendFlipperFront` components. This will help us focus on the changes we're making.
 
-👉 Change the exported value in `./theme/static/index.js` from `purple` to `green`.
+---
 
-In your browser, you should see the theme change from purple to green.
+### Rethinking State Management: `useState()`
 
-### ThemeSwitcher
+The `useState` hook is a way to manage state in a functional React component without converting it to a class.
 
-In `Header.js`, you'll see that we've rendered a new component named `<ThemeSwitcher>`. This shows up in the UI as a button that says "Change Theme". We're going to hook theme-toggling up to this `ThemeSwitcher` component, using React Context.
+Here's an example of a stateful component written as a class (**not** using the `useState` hook):
 
-### React Context
-
-The React Context API involves three players: a Context, a Provider, and many Consumers.
-
-The Context defines that we will use a specific type of context in our app.
-
-### ThemeContext
-
-For this exercise, we've already created the Context. It is named `ThemeContext`, and is located at `theme/context.js`.
-
-👉 Open the `theme/context.js` file.
-
-You should see this: 
-
-```js
+```jsx
 import React from 'react';
 
-export default React.createContext();
-```
-
-There isn't much happening here. The important thing is that it is calling `React.createContext()`, and exporting the result. When we want to create a Provider or Consumer, we'll need to use this Context.
-
-### ThemeProvider
-
-A Provider handles the state management for a Context.
-
-For this exercise, we've already created the Provider. It is named `ThemeProvider`, and it's located at `theme/Provider.js`.
-
-👉 Open the `theme/Provider.js` file.
-
-You should see a component that looks similar to other stateful components. It includes several pieces we've seen in previous exercises.
-
-#### State Initialization
-
-The `ThemeProvider` initializes its state, so that the `theme` is defaulted to `purple`.
-
-```jsx
-export default class ThemeProvider extends React.Component {
+class MyCheckBox extends React.Component {
   state = {
-    theme: 'purple',
+    checked: false,
   };
 
-  // ...
-}
-```
-
-#### Handle State Change
-
-The `ThemeProvider` includes a `handleTimeChange()` method, which updates the state of the Context using `setState`. 
-
-This handler is swapping the value of `this.state.theme` between `green` and `purple` each time it is called.
-
-```jsx
-export default class ThemeProvider extends React.Component {
-  // ...
-
-  handleThemeChange = () => {
-    this.setState(prevState => ({
-      theme: prevState.theme === 'green' ? 'purple' : 'green',
-    }));
+  handleChanged = e => {
+    this.setState({ checked: e.target.checked });
   };
-
-  // ...
-}
-```
-
-#### render()
-
-The last thing the `ThemeProvider` does is render the current state. 
-
-A Context Provider passes the state down to its children via the `value` prop. The `value` prop can contain a single value, or it can contain an object if there are multiple values to pass down.
-
-In this case, we need to pass down the current theme, as well as our handler that toggles the theme from `green` to `purple`. Thus we create an object (`data`), and pass that into the rendered `<ThemeContext.Provider>`, instead of a single value.
-
-```jsx
-export default class ThemeProvider extends React.Component {
-  // ...
 
   render() {
-    const data = {
-      theme: this.state.theme,
-      onThemeChanged: this.handleThemeChange,
-    };
-
     return (
-      <ThemeContext.Provider value={data}>
-        {this.props.children}
-      </ThemeContext.Provider>
+      <input
+        type="checkbox"
+        checked={this.state.checked}
+        onChanged={this.handleChanged}
+      />
     );
   }
 }
 ```
 
-Inside the `<ThemeContext.Provider>` is rendered the children passed into the provider. This allows the Provider to wrap a component tree, and pass the state down to all of its children.
-
-### Wrap the app in a `<ThemeProvider>`
-
-Having created a `ThemeProvider`, we need to wrap our component tree within it, so that it may pass the state throughout the app.
-
-👉 Wrap the app in a `<ThemeProvider>` component, within `App.js`.
-
-We want our entire app to have access to the ThemeContext, so we'll wrap the entire app in the `ThemeProvider`.
-
-You'll want to import the `ThemeProvider`, and wrap the rendered `App` component within a `<ThemeProvider>` element.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#app-themeprovider).
-
-### Adding ThemeContext.Consumers
-
-Now that we've wrapped the app in the `ThemeProvider`, we can attach Consumers anywhere down the tree.
-
-Consumers look like this:
+And here is that same component written as a stateful function, with the `useState` hook:
 
 ```jsx
-import ThemeContext from './theme/context';
+import React, { useState } from 'react';
 
-export default function MyComponent() {
+function MyCheckBox() {
+  const [checked, setChecked] = useState(false);
+
   return (
-    <ThemeContext.Consumer>
-      {(value) => (
-        <MyComponent value={value} />
+    <input
+      type="checkbox"
+      checked={checked}
+      onChanged={() => setChecked(!checked)}
+    />
+  );
+}
+```
+
+There are 4 steps to using the `useState` hook in a component:
+
+1. If the component is a class, convert it to a function. We practiced this in [exercise 7](../exercise-7/README.md).
+
+2. Import the `useState` function as a named import, from the 'react' dependency. (`import React, { useState } from 'react';`)
+
+3. Call `useState` at the beginning of the function.
+
+   a. Pass the default value as the lone argument to `useState`. In the example above, the default value is `false`.
+
+   b. An array is returned by `useState`. The first item in the array represents the current value of the state item; the second item is a function we can call to change the value of the state item. In the example above, we are destructuring the returned array into `checked` and `setChecked` variables.
+
+4. Use the state variables from 3b (`checked` and `setChecked`) in the rendered component.
+
+👉 Convert `friend-detail/FriendFlipper.js` from a stateful class component to a stateful function component, using the `useState` hook.
+
+Use the example & steps above as a guide.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-usestate).
+
+---
+
+### Rethinking Lifecycle Events: `useEffect()`
+
+The `useEffect` hook allows you to tap into React lifecycle events in a functional React component, without converting it to a class.
+
+Here's an example of a class component that utilizes lifecycle events (**not** using the `useEffect` hook):
+
+```jsx
+import React from 'react';
+
+class Chat extends React.Component {
+  componentDidMount () {
+    socket.emit('join', { id: this.props.friendId });
+  }
+
+  componentDidUpdate(nextProps) {
+    if (nextProps.friendId !== this.props.friendId) {
+      socket.emit('leave', { id: this.props.friendId });
+      socket.emit('join', { id: nextProps.friendId });
+    }
+  }
+
+  componentWillUnmount () {
+    socket.emit('leave', { id: this.props.friendId });
+  }
+
+  render() { ... }
+}
+```
+
+This component joins a socket when the component mounts, leaves the original socket and joins a new one when the `friendId` prop changes, and leaves the socket when the component unmounts.
+
+Here is the same component written as a functional component that uses the `useEffect` hook:
+
+```jsx
+import React, { useEffect } from 'react';
+
+function Chat(props) {
+
+  useEffect(() => {
+    socket.emit('join', { id: props.friendId });
+
+    return () => {
+      socket.emit('leave', { id: props.friendId });
+    }
+
+  }, [ props.friendId ])
+
+  return ( ... )
+}
+```
+
+There are 3 steps to using the `useEffect` hook in a component:
+
+1. If the component is a class, convert it to a function. We practiced this in [exercise 7](../exercise-7/README.md).
+
+2. Import the `useEffect` function as a named import, from the 'react' dependency. (`import React, { useEffect } from 'react';`)
+
+3. Call `useEffect` at the beginning of the function.
+
+   a. The first argument to `useEffect` is a function that should execute when the component mounts, or when props change that require the effect to re-run. In the example above, this function joins a socket based on `props.friendId`.
+
+   b. Not all effects require "cleanup" code - but if they do, this is accomplished by the function in 3a returning another anonymous function. This returned function will execute when the component unmounts, or when props change that require the effect to re-run. In our example above, this "cleanup" function will leave a socket based on the friendId.
+
+   c. The second argument to `useEffect` is an array. This array will contain all props which, when their value changes, would require the effect to re-run. In the example above, we pass `[ props.friendId ]` - this means that the effect will re-run whenever the value of the `friendId` prop changes.
+
+👉 Convert `friends/Friends.entry.js` from a class component to a function component, using the `useEffect` hook.
+
+Use the example & steps above as a guide.
+
+Notice that this component manages state, in addition to using the `componentDidMount` lifecycle method. You'll want to convert the stateful portions to use `useState`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends.entry-useeffect).
+
+---
+
+### Rethinking Context: `useContext()`
+
+The `useContext` hook eliminates the need for the "function as a child" pattern when consuming a context in a component. "Function as a child", similar to the "render props" pattern, is a useful pattern in React apps, but it can also be confusing. You can read more about these patterns [here](https://reactjs.org/docs/render-props.html).
+
+Here's an example of a component that consumes a context without the `useContext` hook. Notice how the child of `<CurrentUserContext.Consumer>` is a function:
+
+```jsx
+import React from 'react';
+import CurrentUserContext from './context';
+
+export default function CurrentUser() {
+  return (
+    <CurrentUserContext.Consumer>
+      {({ currentUser, handleUserLogout }) => (
+        <div>
+          {currentUser.name}
+          <button onClick={handleUserLogout}>Log Out</button>
+        </div>
       )}
-    </ThemeContext.Consumer>
-  )
+    </CurrentUserContext.Consumer>
+  );
 }
 ```
 
-The child of the `<ThemeContext.Consumer>` is a function. It takes an argument that contains the `value` that was passed down by the `ThemeContext.Provider`.
-
-Inside the inner function, your components can do whatever they need with the value passed in.
-
-Remember that in our case, we have two properties on the `value` that we are interested in: the `theme` and an `onThemeChanged` handler. This means we could use object destructuring to write a consumer like this:
+And here is the same component, using the `useContext` hook:
 
 ```jsx
-import ThemeContext from './theme/context';
+import React, { useContext } from 'react';
 
-export default function MyComponent() {
+import CurrentUserContext from './context';
+
+export default function CurrentUser() {
+  const { currentUser, handleUserLogout } = useContext(CurrentUserContext);
+
   return (
-    <ThemeContext.Consumer>
-      {({theme, onThemeChanged}) => (
-        <MyComponent value={value} />
-      }}
-    </ThemeContext.Consumer>
-  )
+    <div>
+      {currentUser.name}
+      <button onClick={handleUserLogout}>Log Out</button>
+    </div>
+  );
 }
 ```
 
-### Make the Switcher a Consumer
+There are 3 steps to using the `useContext` hook in a component:
 
-The `Switcher` component is located at `theme/Switcher.js`. It is the button that toggles the theme from `green` to `purple`. In the context of our ThemeContext, that means it is a Consumer that needs to call the `onThemeChanged` handler.
+1. Import the `useContext` function as a named import, from the 'react' dependency. (`import React, { useContext } from 'react';`)
 
-👉 Wrap the `Switcher` component in `<ThemeContext.Consumer>`
+2. Call `useContext` at the beginning of the function.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-themecontext.consumer).
+   a. Pass the associated context as the lone argument to `useContext`. In the example above, that's the `CurrentUserContext` context.
 
-Wrapping in `<ThemeContext.Consumer>` gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes an `onThemeChanged` handler. We need to connect our button to that handler.
+   b. The "value" of the context is returned by `useContext`. This will have been defined by you when you create the context. In our example, it is an object containing `currentUser` and `handleUserLogout` properties.
 
-👉 Within the `Switcher` component, connect the button `click` event to the `onThemeChanged` handler passed into the rendering function.
+3. Use the context value from 2b (an object with `currentUser` and `handleUserLogout`) in the rendered component.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-onthemechanged).
+👉 Convert `theme/Switcher.js` to use the `useContext` hook.
 
-### Make the Header a Consumer
+Use the example & steps above as a guide.
 
-We've hooked up the Consumer that modifies the application-level state; now we need to connect the Consumers that read the application-level state. This starts with the `Header` component, located at `Header.js`.
-
-👉 Wrap the `Header` component's `<header>` element in a `<ThemeContext.Consumer>` component.
-
-Wrapping in `<ThemeContext.Consumer>` gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes a `theme` property. We need to connect our header to that property.
-
-Now that we're using the `theme` passed into the rendering function, we no longer need the static theme imported from `./theme/static`.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#header-consumer).
-
-### Test it out
-
-At this point you should see the header color change when you click the button.
-
-If you don't, re-read the instructions above thoroughly. If you can't figure out what you missed, ask your neighbor, or raise your hand.
-
-### Make the `Page` shared component a `ThemeContext.Consumer`
-
-The `Page` component, located at `shared/Page.js`, needs to also utilize the `theme` property from the ThemeContext.
-
-👉 Modify the `Page` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
-
-Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#page-consumer).
-
-### Make the `Card` shared component a `ThemeContext.Consumer`
-
-The `Card` component, located at `shared/Card.js`, needs to also utilize the `theme` property from the ThemeContext.
-
-👉 Modify the `Card` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
-
-Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#card-consumer).
-
-### Make the `FriendFlipper` a `ThemeContext.Consumer`
-
-The `FriendFlipper` component, located at `friend-detail/FriendFlipper.js`, needs to also utilize the `theme` property from the ThemeContext.
-
-👉 Modify the `FriendFlipper` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function. 
-
-Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
-
-In this component, there is a `renderFront()` and `renderBack()` method. Both of these could individually be made Consumers, or you could make the overall `render()` method a Consumer and pass the `theme` into `renderFront()` and `renderBack()`. 
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-consumer).
-
-### Test it out
-
-At this point your entire app should change from green to purple and vice versa when the "Change Theme" button is clicked.
-
-If this doesn't happen, re-read the instructions above thoroughly. If you can't figure out what you missed, ask your neighbor, or raise your hand.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-usecontext).
 
 ### Extra Credit
 
-[Read about React Context vs Redux](https://daveceddia.com/context-api-vs-redux/).
+The following components could also be converted to use hooks:
+
+- friend-detail/FriendDetail.entry.js (`useState`, `useEffect`)
+- friend-detail/FriendFlipperBack.js (`useContext`)
+- friend-detail/FriendFlipperFront.js (`useContext`)
+- theme/Provider.js (`useState`)

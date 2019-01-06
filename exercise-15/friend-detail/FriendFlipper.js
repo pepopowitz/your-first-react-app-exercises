@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+import theme from '../theme/static';
 
 import styles from './FriendFlipper.module.css';
 
@@ -34,7 +36,7 @@ export default class FriendFlipper extends React.Component {
           <img src={friend.image} alt={friend.image} />
           <button
             type="button"
-            className={styles.flipperNav}
+            className={classNames(styles.flipperNav, styles[theme])}
             onClick={this.handleFlipped}
           >
             Details &gt;
@@ -48,7 +50,7 @@ export default class FriendFlipper extends React.Component {
     const { friend } = this.props;
     return (
       <div className={styles.back}>
-        <div className={styles.backContents}>
+        <div className={classNames(styles.backContents, styles[theme])}>
           <img src={friend.image} alt={friend.image} />
           <div className={styles.backDetails}>
             <h3>
@@ -64,7 +66,7 @@ export default class FriendFlipper extends React.Component {
           </div>
           <button
             type="button"
-            className={styles.flipperNav}
+            className={classNames(styles.flipperNav, styles[theme])}
             onClick={this.handleFlipped}
           >
             &lt; Back
