@@ -9,7 +9,7 @@ You'll need 4 things for this workshop:
 1. [git](#1-git)
 2. [NodeJS](#2-nodejs)
 3. [NPM](#3-npm)
-4. [Clone This Repository](#clone-this-repository).
+4. [This repository](#clone-this-repository)
 
 ### 1. git
 
