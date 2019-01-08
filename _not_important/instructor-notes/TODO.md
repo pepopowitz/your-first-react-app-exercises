@@ -28,21 +28,15 @@
 ✅ Rewrite CSS Modules exercise to use ".module" in the name
 ✅ Rewrite README
 
----
-
-# yes!
-
 ## Verify Browsers
 
 ✅ Firefox
-
-- Edge
+✅ Edge
 
 ## Verify Platforms
 
 ✅ Mac
-
-- Windows
+✅ Windows
 
 ---
 
