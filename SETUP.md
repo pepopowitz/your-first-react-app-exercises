@@ -4,9 +4,12 @@ This document will help you set up your local environment!
 
 ## Requirements
 
-You're going to need three tools installed: [git](#1-git), [NodeJS](#2-nodejs), and [NPM](#3-npm). 
+You'll need 4 things for this workshop:
 
-If you know you're all set with recent versions of these three things, skip ahead to [Clone This Repository](#clone-this-repository).
+1. [git](#1-git)
+2. [NodeJS](#2-nodejs)
+3. [NPM](#3-npm)
+4. [Clone This Repository](#clone-this-repository).
 
 ### 1. git
 
