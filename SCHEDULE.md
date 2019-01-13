@@ -2,93 +2,146 @@
 
 ## Morning
 
-### Setup
+(15m)
+Slides: 01/Title
+Slides: 02/Setup
+Slides: 03/About
 
-### About
+---
 
-### History
+(5m)
+Slides: 04/History
 
-### React
+---
 
-### JavaScript
+(15m)
+Slides: 05/React
 
-### Components
+---
 
-### Components + React
+(20m)
+Slides: 06/JavaScript
+5m
+Ex: 01/Modern JS
+15m
 
-### Components + React + JSX
+---
 
-9:55 - 10:15
+(15m)
+Slides: 07/Components
+10m
+Ex: 02/Identifying Components
+5m
 
-#### Ex 6: render Results
+---
 
-10:23-10:40 (15-20 min)
+(45m)
+Slides: 08/Components + React
+5m
+Ex: 03/Class Syntax
+10m
+Ex: 04/Modern JavaScript: Working With Objects
+10m
+Ex: 05/JSX Fundamentals
+20m
 
-#### Ex 7: Convert a component
+---
 
-10:50-11:00 (10 min)
+(50m)
+Slides: 09/Components + React + JSX
+20m
+Ex: 06/render() Results
+20m
+Ex: 07/Convert a component
+10m
 
-### Props
+---
 
-#### Ex. 8: Composition/props.children
+(20m)
+Slides: 10/Props
+10m
+Ex: 08/Composition/props.children
+10m
+Ex: 09/prop types
+On your own time!
 
-11:10-??
+---
 
-#### Ex. 9: prop types
+(30m)
+Slides: 11/CSS
+10m
+Ex: 10/CSS
+20m
 
-SKIP THIS!!!
-this took me up to 11:45
+---
 
 ## Lunch!
+
+---
 
 ## After lunch:
 
 Starting at 1:00
 
-### CSS
+Ex: 10/CSS???
 
-### Routing
+---
 
-#### Ex 12: React Router
+(20m)
+Slides: 12/Routing
+5m
+Ex 11: React Router
+15m
 
-1:40-1:55 (15 min)
+---
 
-### State (15 min)
+(30m)
+Slides: 13/State
+10m
+Ex 12: Managing Component State
+20m
 
-#### Ex 13: Managing Component State
+---
 
-2:10-2:30 (20 min)
+(15m)
+Slides: 14/Events
+5m
+Ex 13: Async/Await
+10m
 
-### Break (10)
+---
 
-### Events (5 min)
+(25m)
+Slides: 15/Lifecycle
+5m
+Ex 14: Loading Data
+20m
 
-#### Ex 14: Async/Await (10 min)
+---
 
-### Lifecycle (5 min)
+(20m)
+Slides: 16/App State
+Ex 15: React Context
+20m
 
-#### Ex 15: Loading Data
+---
 
-2:55-3:15 (20 min)
+(30m)
+Slides: 17/Hooks
+10m
+Ex 16: Hooks
+20m
 
-### App State
+---
 
-#### Ex 16: React Context
+(45m)
+Slides: 18/Testing
+10m
+Ex 17: Testing Render
+15m
+Ex 18: Testing Interactions
+20m
 
-3:25-3:45 TALKING ONLY (20 min)
-
-### Break (5-10)
-
-### Testing
-
-3:55-4:05
-
-#### Ex 17: Testing Render
-
-4:05-4:20
-
-#### Ex 18: Testing Interactions
-
-4:22-4:40
+(20m)
 
 ### Good Practices/Questions
