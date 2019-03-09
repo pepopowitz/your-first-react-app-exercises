@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1 className="App-title">Exercise 6</h1>
-        <h2 className="sub-title">render() Results</h2>
+        <h2 className="sub-title">What can a component render?</h2>
       </header>
       <div className="exercise">
         <Exercise />

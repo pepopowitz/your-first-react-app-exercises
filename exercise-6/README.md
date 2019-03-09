@@ -1,22 +1,24 @@
 # Exercise 6
 
-## render() Results
+## What can a component render?
 
-The `render()` method of a React component can return any of 6 kinds of objects. This exercise will introduce you to the 5 most frequently returned kinds of objects.
+React function components are limited in what they can return. This exercise will introduce you to the 5 most frequently returned kinds of results.
 
 👉 Start the app for Exercise 6
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-6`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 6: render() Results". If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 6: What can a component render?". If it doesn't, ask your neighbor for assistance or raise your hand.
 
 👉 Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
 
+The return value of a React function component is what gets rendered to the DOM. Throughout this exercise, we'll use the terms "render" and "return" interchangeably.
+
 ### Elements/React Components
 
-Most frequently, a `render()` method will return either an HTML element, or another React component.
+Most frequently, a component will render either an HTML element, or another React component.
 
 Currently, the `Friends` component is returning an HTML element - a single `<div>`. Most of the examples we've seen so far have returned HTML elements.
 
@@ -42,15 +44,15 @@ You should see an error in your browser, similar to this:
 
 ```
 ./exercise-6/Exercise.js
-  Line 7:  Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?
+  Line 4:  Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?
 
-   5 |     return (
-   6 |       <h1>hello, friends!</h1>
->  7 |       <FriendProfile name={myFriends[0].name} />
-     |       ^
-   8 |       );
-   9 |   }
-  10 | }
+  2 |
+  3 | export default function Friends() {
+> 4 |   return <h1>hello, friends!</h1><FriendProfile name={myFriends[0].name} />;
+    |                                  ^
+  5 | }
+  6 |
+  7 | function FriendProfile(props) {
 ```
 
 As the error indicates, this is invalid syntax.
@@ -107,9 +109,9 @@ You should see a `<div>` for each friend.
 
 ### Strings/Numbers
 
-Sometimes you want a component to render nothing more than a string or number. When a `render()` method returns a string or number, it gets rendered as a text node in the DOM.
+Sometimes you want a component to render nothing more than a string or number. When a React function component returns a string or number, it gets rendered as a text node in the DOM.
 
-👉 Modify the `FriendProfile` component to render only the `name` prop.
+👉 Modify the `FriendProfile` component to return only the `name` prop.
 
 Check your browser to see if you succeeded! You should see each of the friends listed, abutted against each other.
 
@@ -123,9 +125,9 @@ You will see that the friend names are rendered as text nodes, all within the sa
 
 Sometimes we don't want a component to render anything at all. This is usually true when we are using conditional logic to render different results based on inputs.
 
-When the value `null` is returned from a component's `render` method, nothing gets rendered to the DOM.
+When the value `null` is returned from a component, nothing gets rendered to the DOM.
 
-👉 Modify the `FriendProfile` component's `render` method to return `null` if the `age` prop is undefined; otherwise return the value of the `name` prop.
+👉 Modify the `FriendProfile` component to return `null` if the `age` prop is undefined; otherwise return the value of the `name` prop.
 
 Check your browser to see if you succeeded! You should see two of the friends listed - Potatoes and Flower.
 

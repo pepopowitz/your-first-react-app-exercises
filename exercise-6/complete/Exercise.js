@@ -1,20 +1,16 @@
 import React from 'react';
 
-export default class Friends extends React.Component {
-  render() {
-    return myFriends.map(friend => (
-      <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
-    ));
-  }
+export default function Friends() {
+  return myFriends.map(friend => (
+    <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
+  ));
 }
 
-class FriendProfile extends React.Component {
-  render() {
-    if (this.props.age === undefined) {
-      return null;
-    }
-    return this.props.name;
+function FriendProfile(props) {
+  if (props.age === undefined) {
+    return null;
   }
+  return props.name;
 }
 
 const myFriends = [
