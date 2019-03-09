@@ -17,21 +17,19 @@ const myFriends = [
   {
     id: 1,
     name: 'Potatoes',
-    age: '4 months'
+    age: '4 months',
   },
   {
     id: 2,
     name: 'Flower',
-    age: '6 months'
+    age: '6 months',
   },
   {
     id: 3,
-    name: 'Turtle'
-  }
+    name: 'Turtle',
+  },
 ];
 
-export default class Friends extends React.Component {
-  render() {
-    return <div />;
-  }
+export default function Friends() {
+  return <div />;
 }

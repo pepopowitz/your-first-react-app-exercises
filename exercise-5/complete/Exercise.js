@@ -30,23 +30,21 @@ const myFriends = [
   },
 ];
 
-export default class Friends extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1 className="friends-title">Hello, Friends!</h1>
-        <h2 className={determineGreetingClass()}>
-          {emphasize(greeting)}
-        </h2>
-        <ul>
-          {myFriends.map(friend => (
+export default function Friends() {
+  return (
+    <div>
+      <h1 className="friends-title">Hello, Friends!</h1>
+      <h2 className={determineGreetingClass()}>{emphasize(greeting)}</h2>
+      <ul>
+        {myFriends.map(friend => {
+          return (
             <li key={friend.id}>
               {friend.name}
               {friend.age ? ` (${friend.age})` : null}
             </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+          );
+        })}
+      </ul>
+    </div>
+  );
 }

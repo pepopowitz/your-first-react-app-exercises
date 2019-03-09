@@ -1,4 +1,5 @@
 # Exercise 5
+
 ## JSX Fundamentals
 
 This exercise will introduce you to JSX syntax. JSX is a powerful hybrid of JavaScript and XML, used most often in React components.
@@ -17,9 +18,9 @@ All of your work for this exercise will take place in Exercise.js.
 
 ### Static HTML
 
-JSX can be used to render static HTML. Currently, Exercise.js is rendering a single `div` element. 
+JSX can be used to render static HTML. Currently, Exercise.js is rendering a single `div` element.
 
-👉 Modify the `Friends` component to render an `h1` element as a child of the `div`.
+👉 Modify the `Friends` function component to render an `h1` element as a child of the `div`.
 
 Inside the h1, place some static text, like "Hello, Friends!".
 
@@ -31,12 +32,12 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#static-html).
 
 JSX is much more powerful than simple static HTML. We can tell our JSX to evaluate any JavaScript expression with curly braces (`{}`).
 
-Curly braces can be placed inside any element of your JSX. Any JavaScript expression that can be evaluated can be placed inside the braces. 
+Curly braces can be placed inside any element of your JSX. Any JavaScript expression that can be evaluated can be placed inside the braces.
 
 For example, this JSX...
 
 ```jsx
-<div>{2+1}</div>
+<div>{2 + 1}</div>
 ```
 
 would evaluate `2+1`, and render the following element to the browser:
@@ -49,7 +50,7 @@ You won't evaluate many expressions like that while building a React app. Here a
 
 #### Evaluating a variable
 
-The value of any variable can be rendered in your component. 
+The value of any variable can be rendered in your component.
 
 For example, if we had a variable declared as `const total = 3` in our component, this JSX...
 
@@ -57,13 +58,13 @@ For example, if we had a variable declared as `const total = 3` in our component
 <div>{total}</div>
 ```
 
-would render this element to the browser: 
+would render this element to the browser:
 
 ```html
 <div>3</div>
 ```
 
-Currently, `Friends.js` has a variabled defined named `greeting`.
+Currently, `Friends.js` has a variable defined named `greeting`.
 
 👉 Add an `h2` element that displays the value of `greeting` in your `Friends` component.
 
@@ -73,21 +74,21 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#evaluating-a-var
 
 #### Evaluating a function
 
-A function can be executed from inside our JSX, by calling it within the curly braces. 
+A function can be executed from inside our JSX, by calling it within the curly braces.
 
 For example, the following JSX:
 
 ```jsx
-<div>{add(1,2)}</div>
+<div>{add(1, 2)}</div>
 ```
 
-would execute `add(1, 2)`, and render the result to the browser as the following element: 
+would execute `add(1, 2)`, and render the result to the browser as the following element:
 
 ```html
 <div>3</div>
 ```
 
-`Friends.js` contains a function named `emphasize`. It takes a string, and returns the string emphasized with exclamation points. 
+`Friends.js` contains a function named `emphasize`. It takes a string, and returns the string emphasized with exclamation points.
 
 👉 Modify the `h2` element in your `Friends` component to call `emphasize` on the `greeting` variable.
 
@@ -103,7 +104,7 @@ Attributes are attached to elements in JSX the same way they are in HTML or XML.
 <div id="title">Hello, Friends!</div>
 ```
 
-will render this element: 
+will render this element:
 
 ```html
 <div id="title">Hello, Friends!</div>
@@ -121,7 +122,7 @@ To emit a `class="..."` attribute in your element, you need to use the `classNam
 
 Side note: Why do you think this is? Why would `class` be different than any other attribute in JSX? We'll discuss after the exercise.
 
-👉 Add a CSS class named `friends-title` to the `h1` in your `Friends` component. 
+👉 Add a CSS class named `friends-title` to the `h1` in your `Friends` component.
 
 Check your browser to see if you succeeded! You should see your `Hello, Friends` title turn blue-green.
 
@@ -137,17 +138,17 @@ For example, this JSX...
 <div id={'friend_' + add(1, 2)}>Potatoes</div>
 ```
 
-would render this element to the browser: 
+would render this element to the browser:
 
 ```html
 <div id="friend_3">Potatoes</div>
 ```
 
-`Friends.js` contains a function named `determineGreetingClass`. It takes no arguments, and returns one of two CSS class names, based on the current clock ticks (effectively a random number). 
+`Friends.js` contains a function named `determineGreetingClass`. It takes no arguments, and returns one of two CSS class names, based on the current clock ticks (effectively a random number).
 
-👉 Add a CSS class to the `h2` greeting element, based on the result of the `determineGreetingClass` function. 
+👉 Add a CSS class to the `h2` greeting element, based on the result of the `determineGreetingClass` function.
 
-Check your browser to see if you succeeded! You should see your greeting message turn either orange or purple. 
+Check your browser to see if you succeeded! You should see your greeting message turn either orange or purple.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#evaluating-attributes).
 
@@ -161,15 +162,15 @@ Remember that JSX is an extension of JavaScript. Anything we can do in JavaScrip
 
 To render items in an array, we take advantage of the `Array.map` prototype function, and display something for each item.
 
-For example, imagine we had an array of integers defined as `const items = [1, 2, 3]`. We want to display an unordered list (`ul`) of the items in this array. 
+For example, imagine we had an array of integers defined as `const items = [1, 2, 3]`. We want to display an unordered list (`ul`) of the items in this array.
 
 This JSX...
 
 ```jsx
 <ul>
-  {
-    items.map(item => <li>{item}</li>)
-  }
+  {items.map(item => {
+    return <li>{item}</li>;
+  })}
 </ul>
 ```
 
@@ -183,13 +184,13 @@ would render this element to the browser:
 </ul>
 ```
 
-For each element in the items array, an `li` element would be rendered; the contents of each resolves to the value of `{item}`. 
+For each element in the items array, an `li` element would be rendered; the contents of each resolves to the value of `{item}`.
 
-`Friends.js` contains an array named `myFriends`. 
+`Friends.js` contains an array named `myFriends`.
 
 👉 Following the `h2` greeting of your `Friends` component, render a list of names, based on the `myFriends` variable.
 
-Check your browser to see if you succeeded! You should see your friends' names listed below the greeting. 
+Check your browser to see if you succeeded! You should see your friends' names listed below the greeting.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#arraymap).
 
@@ -197,23 +198,23 @@ Preferences vary in regards to mapping over arrays inline (directly in the JSX),
 
 #### key
 
-You might notice a message in your browser console after the previous task: 
+You might notice a message in your browser console after the previous task:
 
 `Warning: Each child in an array or iterator should have a unique "key" prop.`
 
-When rendering an array of items, React prefers that each item rendered have a unique `key` property. This allows React to optimize how elements are rendered to the DOM. It can use this `key` property to identify which items have changed, and which haven't, and update only the ones that have changed. 
+When rendering an array of items, React prefers that each item rendered have a unique `key` property. This allows React to optimize how elements are rendered to the DOM. It can use this `key` property to identify which items have changed, and which haven't, and update only the ones that have changed.
 
-To eliminate this message, and improve the performance of our rendered list, we can specify a `key` prop on our rendered items. 
+To eliminate this message, and improve the performance of our rendered list, we can specify a `key` prop on our rendered items.
 
 It's important that our key be something that is specific to the item being rendered - often, an ID is a great fit.
 
-For example, in our previous example, we could render a key for each item with the following JSX: 
+For example, in our previous example, we could render a key for each item with the following JSX:
 
 ```jsx
 <ul>
-  {
-    items.map(item => <li key={item}>{item}</li>)
-  }
+  {items.map(item => (
+    <li key={item}>{item}</li>
+  ))}
 </ul>
 ```
 
@@ -225,7 +226,7 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#array-keys).
 
 ### Conditional rendering
 
-Components often need to display one thing under one condition, and something different under another condition. 
+Components often need to display one thing under one condition, and something different under another condition.
 
 JSX is based on JavaScript, so we can use simple `if` conditions to render conditional elements.
 
@@ -233,9 +234,9 @@ For example, this JSX...
 
 ```jsx
 if (name === 'Potatoes') {
-  return <div>You're my favorite friend!</div>
+  return <div>You're my favorite friend!</div>;
 }
-return <div>You're okay, I guess.</div>
+return <div>You're okay, I guess.</div>;
 ```
 
 would render a div based conditionally on the name.
@@ -245,12 +246,14 @@ This same condition can also be accomplished using a ternary operator:
 ```jsx
 return (
   <div>
-    {name === 'Potatoes' ? 'You\'re my favorite friend!' : 'You\'re okay, I guess.'}
+    {name === 'Potatoes'
+      ? "You're my favorite friend!"
+      : "You're okay, I guess."}
   </div>
 );
 ```
 
-Note: When we return a JSX element that takes up more than one line, we wrap it in parentheses. This tells the `return` statement that we are going to give it a return value on the next lines. This is an easy thing to forget!
+> Note: See the `(` after the keyword `return`? When we return a JSX element that takes up more than one line, we wrap it in parentheses. This tells the `return` statement that we are going to give it a return value on the next lines. This is an easy thing to forget!
 
 Some items in the `myFriends` array have ages; some don't.
 
