@@ -7,24 +7,23 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import FriendDetail from './friend-detail/FriendDetail.entry';
 ...
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div className={styles.app}>
-          <header className={styles.appHeader}>
-            <h1 className={styles.appTitle}>Exercise 11</h1>
-            <h2 className={styles.subTitle}>React Router</h2>
-          </header>
-          <div className={styles.exercise}>
-            <Route path="/" exact component={Friends} />
-            <Route path="/friends/:id" component={FriendDetail} />
-          </div>
+function App() {
+  return (
+    <BrowserRouter>
+      <div className={styles.app}>
+        <header className={styles.appHeader}>
+          <h1 className={styles.appTitle}>Exercise 11</h1>
+          <h2 className={styles.subTitle}>React Router</h2>
+        </header>
+        <div className={styles.exercise}>
+          <Route path="/" exact component={Friends} />
+          <Route path="/friends/:id" component={FriendDetail} />
         </div>
-      </BrowserRouter>
-    );
-  }
+      </div>
+    </BrowserRouter>
+  );
 }
+
 ```
 
 ## FriendProfile Link

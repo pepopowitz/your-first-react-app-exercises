@@ -5,19 +5,18 @@
 ```jsx
 import ThemeProvider from './theme/Provider';
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <ThemeProvider>
-          <div className={styles.app}>
-            // ...
-          </div>
-        </ThemeProvider>
-      </BrowserRouter>
-    );
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <ThemeProvider>
+        <div className={styles.app}>
+          // ...
+        </div>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
 }
+
 ```
 
 ## Switcher: ThemeContext.Consumer

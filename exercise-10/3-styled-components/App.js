@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Exercise from './Exercise';
 
@@ -18,20 +18,18 @@ const Title = styled.h1`
   line-height: 0.5em;
 `;
 
-class App extends Component {
-  render() {
-    return (
-      <AppDiv>
-        <AppHeader className="App-header">
-          <Title>Exercise 10</Title>
-          <h2>Styling - Styled Components</h2>
-        </AppHeader>
-        <div>
-          <Exercise />
-        </div>
-      </AppDiv>
-    );
-  }
+function App() {
+  return (
+    <AppDiv>
+      <AppHeader className="App-header">
+        <Title>Exercise 10</Title>
+        <h2>Styling - Styled Components</h2>
+      </AppHeader>
+      <div>
+        <Exercise />
+      </div>
+    </AppDiv>
+  );
 }
 
 export default App;
