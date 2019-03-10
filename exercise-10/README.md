@@ -1,6 +1,6 @@
 # Exercise 10
 
-## Modern JS: Async/Await
+## Modern JavaScript: `async`/`await`
 
 This exercise introduces you to the async/await features utilized in modern JavaScript applications.
 

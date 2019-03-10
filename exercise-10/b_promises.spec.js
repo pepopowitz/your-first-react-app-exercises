@@ -1,6 +1,6 @@
 import { takeCareOfKitten, runOutOfBowls, washBowls } from './b_promises';
 
-describe('exercise-13', () => {
+describe('exercise-10', () => {
   describe('b_promises', () => {
     it('feeds a kitten when we have bowls', done => {
       washBowls();

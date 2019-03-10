@@ -1,6 +1,6 @@
 import { takeCareOfKitten, runOutOfBowls, washBowls } from './c_async';
 
-describe('exercise-13', () => {
+describe('exercise-10', () => {
   describe('c_async', () => {
     it('feeds a kitten when we have bowls', async () => {
       washBowls();

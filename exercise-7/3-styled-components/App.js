@@ -22,7 +22,7 @@ function App() {
   return (
     <AppDiv>
       <AppHeader className="App-header">
-        <Title>Exercise 10</Title>
+        <Title>Exercise 7</Title>
         <h2>Styling - Styled Components</h2>
       </AppHeader>
       <div>

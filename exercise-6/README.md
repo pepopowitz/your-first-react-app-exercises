@@ -1,6 +1,6 @@
 # Exercise 6
 
-## Composition & props.children
+## Composition & `props.children`
 
 Every React component receives a special prop named `children`. This prop contains any elements declared inside of the component.
 

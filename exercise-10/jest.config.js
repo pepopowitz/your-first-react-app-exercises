@@ -1,4 +1,4 @@
-const exercise = 'exercise-13';
+const exercise = 'exercise-10';
 
 module.exports = {
   rootDir: '../',

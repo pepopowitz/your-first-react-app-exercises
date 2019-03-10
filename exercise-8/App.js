@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <div className={styles.app}>
         <header className={styles.appHeader}>
-          <h1 className={styles.appTitle}>Exercise 11</h1>
+          <h1 className={styles.appTitle}>Exercise 8</h1>
           <h2 className={styles.subTitle}>React Router</h2>
         </header>
         <div className={styles.exercise}>

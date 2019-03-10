@@ -1,6 +1,6 @@
 import { takeCareOfKitten, runOutOfBowls, washBowls } from './a_callbacks';
 
-describe('exercise-13', () => {
+describe('exercise-10', () => {
   describe('a_callbacks', () => {
     it('feeds a kitten when we have bowls', done => {
       washBowls();

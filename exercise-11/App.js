@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <div className={styles.app}>
         <header className={styles.appHeader}>
-          <h1 className={styles.appTitle}>Exercise 14</h1>
+          <h1 className={styles.appTitle}>Exercise 11</h1>
           <h2 className={styles.subTitle}>Loading Data</h2>
         </header>
         <div className={styles.exercise}>

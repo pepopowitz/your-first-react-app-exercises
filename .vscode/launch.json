@@ -10,8 +10,7 @@
       "name": "Launch Program",
       "program": "${workspaceFolder}/_not_important/scripts/start.js",
       "env": {
-        "APP_EXERCISE": "exercise-17",
-        "APP_USE_CSS_MODULES": "true"
+        "APP_EXERCISE": "exercise-17"
       }
     }
   ]
