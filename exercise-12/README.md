@@ -16,9 +16,9 @@ This should open a browser window pointed at localhost:3000, showing a web app t
 
 We've modified the CSS Modules coming into this exercise, so that they render based on a static theme. The static theme is defined in `./theme/static/index.js`. If you change the static theme, the UI will reflect it.
 
-👉 Change the exported value in `./theme/static/index.js` from `purple` to `green`.
+👉 Change the exported value in `./theme/static/index.js` from `green` to `purple`.
 
-In your browser, you should see the theme change from purple to green.
+In your browser, you should see the theme change from green to purple.
 
 ### ThemeSwitcher
 

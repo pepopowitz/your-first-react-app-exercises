@@ -1,1 +1,1 @@
-export default 'purple';
+export default 'green';

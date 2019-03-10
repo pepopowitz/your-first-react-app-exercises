@@ -1,8 +1,8 @@
 .app {
   text-align: center;
 
-  --brand-dark: blueviolet;
-  --brand-light: ghostwhite;
+  --brand-dark: teal;
+  --brand-light: mintcream;
 }
 
 .appHeader {
