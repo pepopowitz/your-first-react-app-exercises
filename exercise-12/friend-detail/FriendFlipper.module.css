@@ -9,6 +9,7 @@
 
 .flipper {
   position: relative;
+  background-color: gray;
 }
 
 /* hide back of pane during swap */
@@ -22,13 +23,20 @@
   box-shadow: 0 1px 2px;
 }
 
+/* front pane, placed above back */
+
 .flipperNav {
-  background: var(--brand-dark);
   border: none;
   padding: 5px 10px;
   color: white;
   text-decoration: underline;
   cursor: pointer;
+}
+.flipperNav.green {
+  background: teal;
+}
+.flipperNav.purple {
+  background: blueviolet;
 }
 .flipperNav:focus {
   opacity: 0.8;
@@ -41,11 +49,16 @@
 }
 .backContents {
   font-size: 0.8rem;
-  background-color: var(--brand-dark);
   color: white;
   text-align: left;
   height: calc(100% - 10px);
   padding: 5px;
+}
+.backContents.green {
+  background: teal;
+}
+.backContents.purple {
+  background: blueviolet;
 }
 .backContents .flipperNav {
   position: absolute;

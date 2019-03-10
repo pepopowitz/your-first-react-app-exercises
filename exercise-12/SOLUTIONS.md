@@ -1,56 +1,141 @@
 # Possible Solutions
 
-## Initialization
+## App: ThemeProvider
+
 ```jsx
-export default class FriendFlipper extends React.Component {
-  state = {
-    flipped: false,
-  };
+import ThemeProvider from './theme/Provider';
 
-  ...
-}
-```
-
-## Event Handler
-```jsx
-export default class FriendFlipper extends React.Component {
-  ...
-
-  handleFlipped = () => {
-    this.setState(prevProps => {
-      return {
-        flipped: !prevProps.flipped,
-      };
-    });
-  };
-
-  ...
-}
-```
-
-## Conditional Render
-```jsx
-export default class FriendFlipper extends React.Component {
-  ...
-  render() {
-    return (
-      <div className={styles.flipWrapper}>
-        <div className={styles.flipper}>
-          {this.state.flipped ? null : this.renderFront()}
-          {!this.state.flipped ? null : this.renderBack()}
+function App() {
+  return (
+    <BrowserRouter>
+      <ThemeProvider>
+        <div className={styles.app}>
+          // ...
         </div>
-      </div>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
+}
+
+```
+
+## Switcher: ThemeContext.Consumer
+
+```jsx
+import ThemeContext from './context';
+
+export default function() {
+  return (
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <button className={styles.switcher}>
+          Change Theme
+        </button>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## Switcher: onThemeChanged
+```jsx
+import ThemeContext from './context';
+
+export default function() {
+  return (
+    <ThemeContext.Consumer>
+      {({ theme, onThemeChanged }) => (
+        <button className={styles.switcher} onClick={onThemeChanged}>
+          Change Theme
+        </button>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## Header: Consumer
+```jsx
+// import theme from './theme/static'; // no longer needed
+import ThemeContext from './theme/context';
+
+export default function Header() {
+  return (
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <header ... >
+          ...
+        </header
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## Page: Consumer
+```jsx
+import ThemeContext from '../theme/context';
+
+export default function Page({ children }) {
+  return (
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <div className={classNames(styles.page, styles[theme])}>
+          <div className={styles.content}>{children}</div>
+        </div>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## Card: Consumer
+```jsx
+import ThemeContext from '../theme/context';
+
+export default function Card({ children }) {
+  return (
+    <ThemeContext.Consumer>
+      {({theme}) => (
+        <div className={classNames(styles.card, styles[theme])}>{children}</div>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+## FriendFlipper: Consumer
+```jsx
+import ThemeContext from '../theme/context';
+
+export default class FriendFlipper extends React.Component {
+
+  // ...
+
+  renderFront() {
+    const { friend } = this.props;
+    return (
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div className={styles.front}>
+            // ...
+          </div>
+        )}
+      </ThemeContext.Consumer>
     );
   }
-  ...
-}
-```
 
-## Connect Buttons To Handler
-```jsx
-  <button
-    type="button"
-    className={styles.flipperNav}
-    onClick={this.handleFlipped}
-  >
+  renderBack() {
+    const { friend } = this.props;
+    return (
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div className={styles.back}>
+            // ...
+          </div>
+        )}
+      </ThemeContext.Consumer>
+    );
+  }
+}
 ```

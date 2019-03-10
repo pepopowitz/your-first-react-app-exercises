@@ -1,54 +1,56 @@
 # Possible Solutions
 
-## FriendProfile PropTypes
+## Initialization
+```jsx
+export default class FriendFlipper extends React.Component {
+  state = {
+    flipped: false,
+  };
 
-```javascript
-FriendProfile.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-};
+  ...
+}
 ```
 
-## Friends array
+## Event Handler
+```jsx
+export default class FriendFlipper extends React.Component {
+  ...
 
-```javascript
-Friends.propTypes = {
-  friends: PropTypes.array.isRequired,
-};
+  handleFlipped = () => {
+    this.setState(prevProps => {
+      return {
+        flipped: !prevProps.flipped,
+      };
+    });
+  };
+
+  ...
+}
 ```
 
-## Friends arrayOf shape
-
-```javascript
-Friends.propTypes = {
-  friends: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
+## Conditional Render
+```jsx
+export default class FriendFlipper extends React.Component {
+  ...
+  render() {
+    return (
+      <div className={styles.flipWrapper}>
+        <div className={styles.flipper}>
+          {this.state.flipped ? null : this.renderFront()}
+          {!this.state.flipped ? null : this.renderBack()}
+        </div>
+      </div>
+    );
+  }
+  ...
+}
 ```
 
-## Removed Property
-
-```javascript
-const myFriends = [
-  {
-    id: 1,
-    name: 'Potatoes',
-    image: 'http://placekitten.com/150/150?image=1',
-  },
-  {
-    id: 2,
-    name: 'Flower',
-    image: 'http://placekitten.com/150/150?image=12',
-  },
-  {
-    id: 3,
-    name: 'Turtle',
-    // image is missing!
-  },
-];
+## Connect Buttons To Handler
+```jsx
+  <button
+    type="button"
+    className={styles.flipperNav}
+    onClick={this.handleFlipped}
+  >
 ```

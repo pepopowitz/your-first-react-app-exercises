@@ -1,156 +1,109 @@
 # Exercise 14
 
-## Loading Data
+## Convert A Component
 
-This exercise introduces you to the usual method of loading data from an API in a React component.
+Components that don't maintain their own state or use React methods other than `render()` can be converted from class syntax components to stateless functional components. This reduces code boilerplate.
+
+In this exercise, you'll convert a component from a function to a class. This is an activity that, until React version 16.8, happened quite often during development.
 
 👉 Start the app for Exercise 14
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-14`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 14: Loading Data", and our three adorable kitten friends. If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 14: Convert a Component". If it doesn't, ask your neighbor for assistance or raise your hand.
 
-### The `friends` API
+👉 Open Exercise.js
 
-Prior to this exercise, we were using a static list of friends, imported from the file `data/friends.js`. We're going to instead retrieve our data from a simple API based on the contents of `data/db.json`.
+All of your work for this exercise will take place in Exercise.js.
 
-The API is already running. To see it in action, you can navigate to an endpoint in your browser.
+### Background
 
-👉 Browse to the URL `http://localhost:3000/api/friends`.
+In this exercise, we have two components in `Exercise.js` - `Friends` and `FriendProfile`. Neither of these components needs state, and neither needs any React methods other than `render()`. We can convert them both!
 
-You should see a JSON response that contains our three friends.
+### The Process
 
-If you change any contents in `data/db.json`, the `friends` endpoint will reflect it. (Though you will have to refresh the page to see the updates.)
+When converting to a stateless functional component, there are three things that need to be done:
 
-### Lifecycle Events
+#### 1. Convert the class to a function of the same name
 
-Several lifecycle events are involved when loading data from an API: initialization, `render`, and `componentDidMount`.
-
-#### Initialization
-
-The state to be loaded from an API is initialized to an empty value.
-
-For a refresher on how to initialize state, see [exercise 12](../exercise-12/README.md#initializing-state).
-
-#### `render`
-
-The state data is rendered in the `render` function of a component. When the component initially loads, it renders with an empty value (`undefined`, or `null`, or an empty array, or whatever you choose).
-
-After the data is completed loading from the API, the component renders with the updated state.
-
-#### componentDidMount
-
-The `componentDidMount` lifecycle event fires right after a React component is added to the DOM. From within `componentDidMount`, we'll call the API endpoint.
-
-When the API call is complete, we can use `setState()` to update the state with the loaded data.
-
-Recall that to easily handle asynchronous processing in a component lifecycle event, you can simply mark the method with `async`, and call `await` within it.
-
-#### An example
-
-Following is a simple example of how the lifecycle events work together to load data into a component.
+For example,
 
 ```jsx
-export default class MyComponent extends React.Component {
-  // Initialization
-  state = {
-    items: [],
-  };
+class FriendProfile extends React.Component {
+  // render()...
+}
+```
 
-  // Render the state
+becomes
+
+```jsx
+function FriendProfile(props) {
+  // render()...
+}
+```
+
+#### 2. Remove the render() method
+
+For example,
+
+```jsx
+function FriendProfile(props) {
   render() {
-    return <ItemList items={this.state.items} />;
-  }
-
-  // Load the state from an API
-  async componentDidMount() {
-    const items = await loadItemsFromApi();
-    this.setState({
-      items,
-    });
+    // ...what gets rendered
   }
 }
 ```
 
-### Loading the FriendsEntry data from the API
+becomes
 
-The first component we'll update to pull from the API is the `FriendsEntry` component, located at `friends/Friends.entry.js`.
+```jsx
+function FriendProfile(props) {
+  // ...what gets rendered
+}
+```
 
-#### get-friends-from-api.js
+#### 3. Convert `this.props` references to `props`.
 
-We've included a function in `friends/get-friends-from-api.js`, which will make the API call to collect all of our friends. It uses the `axios` library to make an HTTP call to the `friends` API endpoint.
+For example,
 
-👉 Import the `getFriendsFromApi` function into `friends/Friends.entry.js`.
+```jsx
+{
+  this.props.name;
+}
+```
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-import-api).
+becomes
 
-Before we can use our lifecycle events to connect to the API endpoint, we'll need to convert our component to a stateful one.
+```jsx
+{
+  props.name;
+}
+```
 
-👉 Convert the `FriendsEntry` component from a stateless functional component to a stateful class syntax component.
+That's all it takes to convert from a class syntax component to a stateless functional one!
 
-For a reminder on how to do this, see [exercise 7](../exercise-7/README.md#the-process).
+👉 Convert the `Friends` component to a stateless functional component
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-stateful).
+Check your browser to make sure the components are still rendering properly!
 
-#### Initialize the state
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-stateless).
 
-Our component renders a list of friends. We'll want to initialize our component state so that it contains an empty friends array.
+👉 Convert the `FriendProfile` component to a stateless functional component
 
-👉 Initialize the state of the `FriendsEntry` component so that it contains an empty array named `friends`.
+Check your browser to make sure the components are still rendering properly!
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-initialize).
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-stateless).
 
-#### Render the `friends` data from local state
+Sometimes, we need to convert the other direction - from stateless functional component to class syntax component.
 
-👉 Modify the `render()` function of the `FriendsEntry` component so that it renders the friends from `this.state.friends`.
+👉 Convert the `Friends` component back to a class syntax component
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-render).
+Check your browser to make sure the components are still rendering properly!
 
-#### Call the `friends` API to get data
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-class).
 
-The final step for connecting the `FriendsEntry` component to an API is to load the data from within `componentDidMount()`.
+👉 Convert the `FriendProfile` component back to a class syntax component
 
-👉 Add a `componentDidMount()` method that (a) calls the API to get friend data, then (b) calls `setState()` to update the state of the component with the friend data.
+Check your browser to make sure the components are still rendering properly!
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-componentdidmount).
-
-### Loading FriendDetailEntry data from the API
-
-The `FriendDetailEntry` component, at `friend-detail/FriendDetail.entry.js`, also needs to load data from an API endpoint.
-
-#### Handling an empty friend
-
-In the previous activity, the `FriendsEntry` component worked with an empty array for the default state. In this activity, the `FriendDetailEntry` component will need to account for an `undefined` friend. This situation can happen when the component is still loading data from the API, and if our component can't handle an `undefined` friend, it will err out.
-
-A great place to handle this dichotomy is within the `FriendDetail` component, in `friends/FriendDetail.js`.
-
-👉 Modify the `FriendDetail` component to render an appropriately constructed page when an undefined `friend` is passed in.
-
-If an actual `friend` is passed in, it should continue to render the full `FriendDetail` information.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetail-handle-empty-friend).
-
-👉 Repeat the activity of loading data from an API for the `FriendDetailEntry` component.
-
-Refer to the notes above as a reminder of how to do this. There are a couple details that make this component different than the first:
-
-- You'll only be loading one friend this time.
-- It should default to `undefined`, instead of an empty array.
-- The ID for the current friend will be passed into the `FriendDetailEntry` component via the `match.params.id` prop, thanks to ReactRouter.
-- The function that calls the API is in `friend-detail/get-friend-from-api.js`.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetailentry).
-
-### Test it out
-
-You should now have your friends loading from API endpoints throughout the app.
-
-You can verify this by making a change in `data/db.json`, and making sure the change is reflected in the app. You will need to refresh the app to see the change.
-
-### Extra Credit
-
-- Show a "loading" indicator when the friends array has not yet loaded on the Friends list page.
-
-- Read more about [state & lifecycle events](https://reactjs.org/docs/state-and-lifecycle.html).
-
-- Read about another use of React lifecycle events - [integrating with non-React libraries](https://reactjs.org/docs/integrating-with-other-libraries.html).
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-class).

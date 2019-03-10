@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+import ThemeContext from '../theme/context';
 
 import styles from './FriendFlipper.module.css';
 
@@ -29,48 +31,56 @@ export default class FriendFlipper extends React.Component {
   renderFront() {
     const { friend } = this.props;
     return (
-      <div className={styles.front}>
-        <div className={styles.frontContents}>
-          <img src={friend.image} alt={friend.image} />
-          <button
-            type="button"
-            className={styles.flipperNav}
-            onClick={this.handleFlipped}
-          >
-            Details &gt;
-          </button>
-        </div>
-      </div>
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div className={styles.front}>
+            <div className={styles.frontContents}>
+              <img src={friend.image} alt={friend.image} />
+              <button
+                type="button"
+                className={classNames(styles.flipperNav, styles[theme])}
+                onClick={this.handleFlipped}
+              >
+                Details &gt;
+              </button>
+            </div>
+          </div>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 
   renderBack() {
     const { friend } = this.props;
     return (
-      <div className={styles.back}>
-        <div className={styles.backContents}>
-          <img src={friend.image} alt={friend.image} />
-          <div className={styles.backDetails}>
-            <h3>
-              ID:
-              {friend.id}
-            </h3>
-            <h3>Colors:</h3>
-            <ul>
-              {friend.colors.map(color => (
-                <li key={color}>{color}</li>
-              ))}
-            </ul>
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div className={styles.back}>
+            <div className={classNames(styles.backContents, styles[theme])}>
+              <img src={friend.image} alt={friend.image} />
+              <div className={styles.backDetails}>
+                <h3>
+                  ID:
+                  {friend.id}
+                </h3>
+                <h3>Colors:</h3>
+                <ul>
+                  {friend.colors.map(color => (
+                    <li key={color}>{color}</li>
+                  ))}
+                </ul>
+              </div>
+              <button
+                type="button"
+                className={classNames(styles.flipperNav, styles[theme])}
+                onClick={this.handleFlipped}
+              >
+                &lt; Back
+              </button>
+            </div>
           </div>
-          <button
-            type="button"
-            className={styles.flipperNav}
-            onClick={this.handleFlipped}
-          >
-            &lt; Back
-          </button>
-        </div>
-      </div>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 }

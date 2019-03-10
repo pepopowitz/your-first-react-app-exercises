@@ -1,103 +1,51 @@
 # Possible Solutions
 
-## Friends: Import API
-```js
-import getFriendsFromApi from './get-friends-from-api';
-```
+## Friends to stateless
 
-## Friends: Stateful
 ```jsx
-export default class FriendsEntry extends React.Component {
-  render() {
-    return <Friends friends={myFriends} />
-  }
+export default function Friends(props) {
+  return myFriends.map(friend => (
+    <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
+  ));
 }
 ```
 
-## Friends: Initialize
+## FriendProfile to stateless
 
 ```jsx
-export default class FriendsEntry extends React.Component {
-  state = {
-    friends: []
-  }
-
-  // ...
-}
-```
-
-## Friends: render
-```jsx
-export default class FriendsEntry extends React.Component {
-  // ...
-  
-  render() {
-    return <Friends friends={this.state.friends} />;
-  }
-}
-```
-
-## Friends: componentDidMount
-```jsx
-export default class FriendsEntry extends React.Component {
-  // ...
-
-  async componentDidMount() {
-    const friends = await getFriendsFromApi();
-    this.setState({
-      friends
-    });
-  }
-}
-```
-
-## FriendDetail: Handle empty friend
-```jsx
-export default function({ friend }) {
+function FriendProfile(props) {
   return (
-    <Page>
-      <div className={styles.friendDetail}>
-        <div className={styles.toolbar}>
-          <Link to="/">&lt; Home</Link>
-        </div>
-        <Card>{renderFriend(friend)}</Card>
-      </div>
-    </Page>
-  );
-}
-
-function renderFriend(friend) {
-  if (friend === undefined) {
-    return <h1>Loading...</h1>;
-  }
-
-  return (
-    <div className={styles.cardContents}>
-      <h1>{friend.name}</h1>
-      <FriendFlipper friend={friend} />
-      <p>{friend.bio}</p>
+    <div className="friend-profile">
+      {props.name}
+      {props.age ? ` (${props.age})` : null}
     </div>
   );
 }
 ```
 
-## FriendDetailEntry
+## Friends to class
+
 ```jsx
-export default class FriendDetailEntry extends React.Component {
-  state = {
-    friend: undefined,
-  };
-
+export default class Friends extends React.Component {
   render() {
-    return <FriendDetail friend={this.state.friend} />;
+    return myFriends.map(friend => (
+      <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
+    ));
   }
+}
+```
 
-  async componentDidMount() {
-    // the match prop is passed in via react.router
-    const friend = await getFriendFromApi(this.props.match.params.id);
-    this.setState({
-      friend,
-    });
+## FriendProfile to class
+
+```jsx
+class FriendProfile extends React.Component {
+  render() {
+    return (
+      <div className="friend-profile">
+        {this.props.name}
+        {this.props.age ? ` (${this.props.age})` : null}
+      </div>
+    );
   }
 }
 ```

@@ -1,13 +1,14 @@
 # Exercise 3
-## Modern JavaScript: Class Syntax
 
-This exercise introduces you to the class syntax feature utilized in modern JavaScript applications. 
+## Modern JavaScript: Working With Variables
+
+This exercise introduces you to many features utilized in modern JavaScript applications for working with variables.
 
 The instructor will lead you through some code examples. Follow along!
 
 ### Setup
 
-This exercise utilizes unit tests for demonstration purposes. You don't need to know much about unit tests coming in. 
+This exercise utilizes unit tests for demonstration purposes. You don't need to know much about unit tests coming in.
 
 👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-3`.
 
@@ -31,8 +32,8 @@ If you do see this output, you're in good shape. The output will change as we mo
 
 ### Follow Along
 
-The instructor will help you rewrite unit tests using class syntax. 
+The instructor will help you rewrite unit tests using many modern JavaScript features.
 
 ### Extra Credit
 
-* Read about [prototypal inheritance](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain), and how it differs from classical inheritance.
+Read about [all the helpful methods available for working with arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#Methods_2)

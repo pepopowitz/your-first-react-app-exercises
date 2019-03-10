@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="App-title">Exercise 6</h1>
-        <h2 className="sub-title">What can a component render?</h2>
+        <h1 className="App-title">Exercise 8</h1>
+        <h2 className="sub-title">Composition & props.children</h2>
       </header>
       <div className="exercise">
         <Exercise />

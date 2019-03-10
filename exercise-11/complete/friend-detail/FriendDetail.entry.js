@@ -1,13 +1,22 @@
 import React from 'react';
 
-import friends from '../data/friends';
+import FriendDetailFinished from './FriendDetail';
+import getFriendFromApi from './get-friend-from-api';
 
-import FriendDetail from './FriendDetail';
+export default class FriendDetailEntry extends React.Component {
+  state = {
+    friend: undefined,
+  };
 
-export default function({match}) {
-  // the match prop is passed in via react.router
-  const friendId = match.params.id;
-  const friend = friends.find(x => x.id === parseInt(friendId, 10));
+  async componentDidMount() {
+    // the match prop is passed in via react.router
+    const friend = await getFriendFromApi(this.props.match.params.id);
+    this.setState({
+      friend,
+    });
+  }
 
-  return <FriendDetail friend={friend} />;
+  render() {
+    return <FriendDetailFinished friend={this.state.friend} />;
+  }
 }

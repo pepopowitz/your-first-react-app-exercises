@@ -1,264 +1,138 @@
 # Exercise 5
 
-## JSX Fundamentals
+## What can a component render?
 
-This exercise will introduce you to JSX syntax. JSX is a powerful hybrid of JavaScript and XML, used most often in React components.
-
-You'll use JSX to render different types of things to the browser.
+React function components are limited in what they can return. This exercise will introduce you to the 5 most frequently returned kinds of results.
 
 👉 Start the app for Exercise 5
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-5`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 5: JSX Fundamentals". If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 5: What can a component render?". If it doesn't, ask your neighbor for assistance or raise your hand.
 
 👉 Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
 
-### Static HTML
+The return value of a React function component is what gets rendered to the DOM. Throughout this exercise, we'll use the terms "render" and "return" interchangeably.
 
-JSX can be used to render static HTML. Currently, Exercise.js is rendering a single `div` element.
+### Elements/React Components
 
-👉 Modify the `Friends` function component to render an `h1` element as a child of the `div`.
+Most frequently, a component will render either an HTML element, or another React component.
 
-Inside the h1, place some static text, like "Hello, Friends!".
+Currently, the `Friends` component is returning an HTML element - a single `<div>`. Most of the examples we've seen so far have returned HTML elements.
 
-Check your browser to see if you succeeded! You should see your static html rendered.
+There is a second component in `Exercise.js` - the `FriendProfile` component.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#static-html).
+👉 Modify the `Friends` component to return a single `<FriendProfile>` element. Pass the name of the first item in the `myFriends` array as a prop to the `<FriendProfile>`.
 
-### Evaluating JavaScript Expressions
+Check your browser to see if you succeeded! You should see the name `Potatoes` rendered.
 
-JSX is much more powerful than simple static HTML. We can tell our JSX to evaluate any JavaScript expression with curly braces (`{}`).
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#react-components).
 
-Curly braces can be placed inside any element of your JSX. Any JavaScript expression that can be evaluated can be placed inside the braces.
+👉 "Inspect element" in your browser, and look for the elements rendered by the `<FriendProfile>` component.
 
-For example, this JSX...
+You should see that the component is rendered as a div with text content.
 
-```jsx
-<div>{2 + 1}</div>
+### Fragments
+
+Valid JSX requires a single top-level element (similar to how valid XML requires a single top-level element). To demonstrate this, we're going to break our app.
+
+👉 Modify the `Friends` component to return an `<h1>` element adjacent to the `<FriendProfile>` element.
+
+You should see an error in your browser, similar to this:
+
+```
+./exercise-5/Exercise.js
+  Line 4:  Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?
+
+  2 |
+  3 | export default function Friends() {
+> 4 |   return <h1>hello, friends!</h1><FriendProfile name={myFriends[0].name} />;
+    |                                  ^
+  5 | }
+  6 |
+  7 | function FriendProfile(props) {
 ```
 
-would evaluate `2+1`, and render the following element to the browser:
+As the error indicates, this is invalid syntax.
 
-```html
-<div>3</div>
-```
+We can fix this a couple ways.
 
-You won't evaluate many expressions like that while building a React app. Here are some you're more likely to see:
+#### Wrapping in a `<div>`
 
-#### Evaluating a variable
+👉 Modify the `Friends` component so that the `<h1>` and `<FriendProfile>` elements are wrapped in a `<div>` element.
 
-The value of any variable can be rendered in your component.
+Check your browser to see if you succeeded! You should see your title emitted, along with the name `Potatoes`.
 
-For example, if we had a variable declared as `const total = 3` in our component, this JSX...
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#wrapping-in-a-div).
 
-```jsx
-<div>{total}</div>
-```
+👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
 
-would render this element to the browser:
+You'll see that your components are wrapped in a `<div>` - the one you used to wrap the `<h1>` and `<FriendProfile>` elements.
 
-```html
-<div>3</div>
-```
+This solves the problem...but it adds elements to the DOM that we don't really need. One element might not seem like a big deal, but in a large React app, we can end up with significant DOM pollution from this practice.
 
-Currently, `Friends.js` has a variable defined named `greeting`.
+React v16 introduced a way to solve this problem - the `Fragment`.
 
-👉 Add an `h2` element that displays the value of `greeting` in your `Friends` component.
+#### Wrapping in a `<Fragment>`
 
-Check your browser to see if you succeeded! You should see your greeting rendered.
+The `Fragment` component is basically an empty wrapper. It allows us to provide a single top-level element when we are rendering multiple child elements, but it does not actually render anything to the DOM.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#evaluating-a-variable).
+You can access the `Fragment` component on the default `React` import (i.e. `React.Fragment`).
 
-#### Evaluating a function
+👉 Replace the wrapping `<div>` element in the `Friends` component with a wrapping `<React.Fragment>` element.
 
-A function can be executed from inside our JSX, by calling it within the curly braces.
+Check your browser to see if you succeeded! You should still see all friends listed.
 
-For example, the following JSX:
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#wrapping-in-a-fragment).
 
-```jsx
-<div>{add(1, 2)}</div>
-```
+👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
 
-would execute `add(1, 2)`, and render the result to the browser as the following element:
+You should see that there's no longer an unnecessary div wrapping your output.
 
-```html
-<div>3</div>
-```
+### Arrays
 
-`Friends.js` contains a function named `emphasize`. It takes a string, and returns the string emphasized with exclamation points.
+Sometimes you want to turn an array of data into an array of elements. This can be accomplished with `Array.map`, as we saw in the JSX Fundamentals exercise.
 
-👉 Modify the `h2` element in your `Friends` component to call `emphasize` on the `greeting` variable.
+👉 Modify the `Friends` component to return one `<FriendProfile>` element for each item in the `myFriends` array. For each item, pass the `name` and `age` as props to the `<FriendProfile>`.
 
-Check your browser to see if you succeeded! You should see your greeting emphasized.
+Don't forget that React wants you to use a `key` prop when you render an array of items!
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#evaluating-a-function).
+Check your browser to see if you succeeded! You should see each of the friends listed.
 
-### Attributes
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#arrays).
 
-Attributes are attached to elements in JSX the same way they are in HTML or XML. For example, this JSX...
+👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
 
-```jsx
-<div id="title">Hello, Friends!</div>
-```
+You should see a `<div>` for each friend.
 
-will render this element:
+### Strings/Numbers
 
-```html
-<div id="title">Hello, Friends!</div>
-```
+Sometimes you want a component to render nothing more than a string or number. When a React function component returns a string or number, it gets rendered as a text node in the DOM.
 
-There are a couple of sneaky things to know about attributes in JSX.
+👉 Modify the `FriendProfile` component to return only the `name` prop.
 
-#### className
+Check your browser to see if you succeeded! You should see each of the friends listed, abutted against each other.
 
-Most attributes you assign to a JSX element translate directly to the corresponding HTML attribute. In the example of, `id` in JSX translated directly to `id` in the browser.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#strings-or-numbers).
 
-One important outlier is the `class` attribute.
+👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
 
-To emit a `class="..."` attribute in your element, you need to use the `className` attribute in your JSX.
+You will see that the friend names are rendered as text nodes, all within the same `<div>`.
 
-Side note: Why do you think this is? Why would `class` be different than any other attribute in JSX? We'll discuss after the exercise.
+### null
 
-👉 Add a CSS class named `friends-title` to the `h1` in your `Friends` component.
+Sometimes we don't want a component to render anything at all. This is usually true when we are using conditional logic to render different results based on inputs.
 
-Check your browser to see if you succeeded! You should see your `Hello, Friends` title turn blue-green.
+When the value `null` is returned from a component, nothing gets rendered to the DOM.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#className).
+👉 Modify the `FriendProfile` component to return `null` if the `age` prop is undefined; otherwise return the value of the `name` prop.
 
-#### Evaluating attributes
+Check your browser to see if you succeeded! You should see two of the friends listed - Potatoes and Flower.
 
-Just like with children of elements, we can evaluate JavaScript expressions to determine the values of attributes. We simply use the curly braces, instead of quotes, to signify that the value of the attribute is a JavaScript expression.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#null).
 
-For example, this JSX...
+### Extra Credit
 
-```jsx
-<div id={'friend_' + add(1, 2)}>Potatoes</div>
-```
-
-would render this element to the browser:
-
-```html
-<div id="friend_3">Potatoes</div>
-```
-
-`Friends.js` contains a function named `determineGreetingClass`. It takes no arguments, and returns one of two CSS class names, based on the current clock ticks (effectively a random number).
-
-👉 Add a CSS class to the `h2` greeting element, based on the result of the `determineGreetingClass` function.
-
-Check your browser to see if you succeeded! You should see your greeting message turn either orange or purple.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#evaluating-attributes).
-
-### Rendering arrays
-
-One of the things you'll do frequently in React development is render an array of items. There are a couple secrets to rendering an array.
-
-#### Array.map
-
-Remember that JSX is an extension of JavaScript. Anything we can do in JavaScript, we can also do in JSX.
-
-To render items in an array, we take advantage of the `Array.map` prototype function, and display something for each item.
-
-For example, imagine we had an array of integers defined as `const items = [1, 2, 3]`. We want to display an unordered list (`ul`) of the items in this array.
-
-This JSX...
-
-```jsx
-<ul>
-  {items.map(item => {
-    return <li>{item}</li>;
-  })}
-</ul>
-```
-
-would render this element to the browser:
-
-```html
-<ul>
-  <li>1</li>
-  <li>2</li>
-  <li>3</li>
-</ul>
-```
-
-For each element in the items array, an `li` element would be rendered; the contents of each resolves to the value of `{item}`.
-
-`Friends.js` contains an array named `myFriends`.
-
-👉 Following the `h2` greeting of your `Friends` component, render a list of names, based on the `myFriends` variable.
-
-Check your browser to see if you succeeded! You should see your friends' names listed below the greeting.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#arraymap).
-
-Preferences vary in regards to mapping over arrays inline (directly in the JSX), defining variables that contain the mapped arrays (and then referencing them in the returned JSX), or calling a function to map an array (and calling it in the returned JSX). You will develop a preference over time.
-
-#### key
-
-You might notice a message in your browser console after the previous task:
-
-`Warning: Each child in an array or iterator should have a unique "key" prop.`
-
-When rendering an array of items, React prefers that each item rendered have a unique `key` property. This allows React to optimize how elements are rendered to the DOM. It can use this `key` property to identify which items have changed, and which haven't, and update only the ones that have changed.
-
-To eliminate this message, and improve the performance of our rendered list, we can specify a `key` prop on our rendered items.
-
-It's important that our key be something that is specific to the item being rendered - often, an ID is a great fit.
-
-For example, in our previous example, we could render a key for each item with the following JSX:
-
-```jsx
-<ul>
-  {items.map(item => (
-    <li key={item}>{item}</li>
-  ))}
-</ul>
-```
-
-👉 Add a `key` prop to the items being rendered in your friends list. Use a property from the `myFriends` items that is semantic & unique to each item.
-
-Check your browser to see if you succeeded! You should not see any error messages in your browser console.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#array-keys).
-
-### Conditional rendering
-
-Components often need to display one thing under one condition, and something different under another condition.
-
-JSX is based on JavaScript, so we can use simple `if` conditions to render conditional elements.
-
-For example, this JSX...
-
-```jsx
-if (name === 'Potatoes') {
-  return <div>You're my favorite friend!</div>;
-}
-return <div>You're okay, I guess.</div>;
-```
-
-would render a div based conditionally on the name.
-
-This same condition can also be accomplished using a ternary operator:
-
-```jsx
-return (
-  <div>
-    {name === 'Potatoes'
-      ? "You're my favorite friend!"
-      : "You're okay, I guess."}
-  </div>
-);
-```
-
-> Note: See the `(` after the keyword `return`? When we return a JSX element that takes up more than one line, we wrap it in parentheses. This tells the `return` statement that we are going to give it a return value on the next lines. This is an easy thing to forget!
-
-Some items in the `myFriends` array have ages; some don't.
-
-👉 Conditionally display the age of each friend. If it exists, display it in parentheses next to the name. If it doesn't, display nothing.
-
-Check your browser to see if you succeeded! You should see ages next to some friends, but not others.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#conditional-rendering).
+- Read the [React docs](https://reactjs.org/docs/hello-world.html)

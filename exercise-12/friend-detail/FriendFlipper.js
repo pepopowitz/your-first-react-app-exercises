@@ -1,12 +1,29 @@
 import React from 'react';
+import classNames from 'classnames';
+import theme from '../theme/static';
 
 import styles from './FriendFlipper.module.css';
 
 export default class FriendFlipper extends React.Component {
+  state = {
+    flipped: false,
+  };
+
+  handleFlipped = () => {
+    this.setState(prevProps => {
+      return {
+        flipped: !prevProps.flipped,
+      };
+    });
+  };
+
   render() {
     return (
       <div className={styles.flipWrapper}>
-        <div className={styles.flipper}>{this.renderFront()}</div>
+        <div className={styles.flipper}>
+          {this.state.flipped ? null : this.renderFront()}
+          {!this.state.flipped ? null : this.renderBack()}
+        </div>
       </div>
     );
   }
@@ -16,8 +33,12 @@ export default class FriendFlipper extends React.Component {
     return (
       <div className={styles.front}>
         <div className={styles.frontContents}>
-          <img src={friend.image} alt={friend.name} />
-          <button type="button" className={styles.flipperNav}>
+          <img src={friend.image} alt={friend.image} />
+          <button
+            type="button"
+            className={classNames(styles.flipperNav, styles[theme])}
+            onClick={this.handleFlipped}
+          >
             Details &gt;
           </button>
         </div>
@@ -29,7 +50,7 @@ export default class FriendFlipper extends React.Component {
     const { friend } = this.props;
     return (
       <div className={styles.back}>
-        <div className={styles.backContents}>
+        <div className={classNames(styles.backContents, styles[theme])}>
           <img src={friend.image} alt={friend.image} />
           <div className={styles.backDetails}>
             <h3>
@@ -43,7 +64,11 @@ export default class FriendFlipper extends React.Component {
               ))}
             </ul>
           </div>
-          <button type="button" className={styles.flipperNav}>
+          <button
+            type="button"
+            className={classNames(styles.flipperNav, styles[theme])}
+            onClick={this.handleFlipped}
+          >
             &lt; Back
           </button>
         </div>

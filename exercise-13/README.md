@@ -1,8 +1,8 @@
 # Exercise 13
 
-## Modern JS: Async/Await
+## Modern JavaScript: Class Syntax
 
-This exercise introduces you to the async/await features utilized in modern JavaScript applications.
+This exercise introduces you to the class syntax feature utilized in modern JavaScript applications.
 
 The instructor will lead you through some code examples. Follow along!
 
@@ -32,4 +32,8 @@ If you do see this output, you're in good shape. The output will change as we mo
 
 ### Follow Along
 
-The instructor will lead you in comparing different methods of writing asynchronous unit tests.
+The instructor will help you rewrite unit tests using class syntax.
+
+### Extra Credit
+
+- Read about [prototypal inheritance](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain), and how it differs from classical inheritance.

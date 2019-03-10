@@ -1,31 +1,60 @@
 import React from 'react';
 
-export default function Friends() {
-  return myFriends.map(friend => (
-    <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
-  ));
+export default function Exercise() {
+  return <Friends friends={myFriends} />;
 }
 
-function FriendProfile(props) {
-  if (props.age === undefined) {
-    return null;
-  }
-  return props.name;
+function Friends({ friends }) {
+  return (
+    <Page>
+      {friends.map(friend => (
+        <FriendProfile
+          key={friend.id}
+          name={friend.name}
+          image={friend.image}
+        />
+      ))}
+    </Page>
+  );
+}
+
+function Page({ children }) {
+  return (
+    <div className="page">
+      <div className="content">{children}</div>
+    </div>
+  );
+}
+
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+
+function FriendProfile({ name, image }) {
+  return (
+    <Card>
+      <div className="friend-profile">
+        <img src={image} alt={name} />
+        <h3>{name}</h3>
+      </div>
+    </Card>
+  );
 }
 
 const myFriends = [
   {
     id: 1,
     name: 'Potatoes',
-    age: '4 months',
+    image: 'http://placekitten.com/150/150?image=1',
   },
   {
     id: 2,
     name: 'Flower',
-    age: '6 months',
+    image: 'http://placekitten.com/150/150?image=12',
   },
   {
     id: 3,
     name: 'Turtle',
+    image: 'http://placekitten.com/150/150?image=15',
   },
 ];

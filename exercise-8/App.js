@@ -1,18 +1,23 @@
 import React from 'react';
-import './App.css';
-import Exercise from './Exercise';
+
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Friends from './friends/Friends.entry';
+import styles from './App.module.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Exercise 8</h1>
-        <h2 className="sub-title">Composition & props.children</h2>
-      </header>
-      <div className="exercise">
-        <Exercise />
+    <BrowserRouter>
+      <div className={styles.app}>
+        <header className={styles.appHeader}>
+          <h1 className={styles.appTitle}>Exercise 11</h1>
+          <h2 className={styles.subTitle}>React Router</h2>
+        </header>
+        <div className={styles.exercise}>
+          <Route path="/" exact component={Friends} />
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

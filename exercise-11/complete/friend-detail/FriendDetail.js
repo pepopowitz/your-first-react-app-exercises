@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Page from '../shared/Page';
 import Card from '../shared/Card';
+import FriendFlipper from './FriendFlipper';
 
 import styles from './FriendDetail.module.css';
 
@@ -12,13 +13,22 @@ export default function({ friend }) {
         <div className={styles.toolbar}>
           <Link to="/">&lt; Home</Link>
         </div>
-        <Card>
-          <h1>{friend.name}</h1>
-          <h2>ID: {friend.id}</h2>
-          <img src={friend.image} />
-          <p>{friend.bio}</p>
-        </Card>
+        <Card>{renderFriend(friend)}</Card>
       </div>
     </Page>
+  );
+}
+
+function renderFriend(friend) {
+  if (friend === undefined) {
+    return <h1>Loading...</h1>;
+  }
+
+  return (
+    <div className={styles.cardContents}>
+      <h1>{friend.name}</h1>
+      <FriendFlipper friend={friend} />
+      <p>{friend.bio}</p>
+    </div>
   );
 }

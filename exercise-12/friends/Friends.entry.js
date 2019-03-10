@@ -1,10 +1,22 @@
 import React from 'react';
 
-import myFriends from '../data/friends';
+import getFriendsFromApi from './get-friends-from-api';
 
 import Friends from './Friends';
 
-export default function FriendsEntry() {
-  return <Friends friends={myFriends} />
-}
+export default class FriendsEntry extends React.Component {
+  state = {
+    friends: []
+  }
 
+  async componentDidMount() {
+    const friends = await getFriendsFromApi();
+    this.setState({
+      friends
+    });
+  }
+
+  render() {
+    return <Friends friends={this.state.friends} />;
+  }
+}

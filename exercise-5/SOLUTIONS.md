@@ -1,124 +1,64 @@
-# Possible solutions
+# Possible Solutions
 
-## Static HTML
+## React Components
+
+```jsx
+export default function Friends() {
+  return <FriendProfile name={myFriends[0].name} />;
+}
+```
+
+## Wrapping in a div
 
 ```jsx
 export default function Friends() {
   return (
     <div>
-      <h1>Hello, Friends!</h1>
+      <h1>hello, friends!</h1>
+      <FriendProfile name={myFriends[0].name} />
     </div>
   );
 }
 ```
 
-## Evaluating a variable
+## Wrapping in a fragment
 
 ```jsx
 export default function Friends() {
   return (
-    <div>
-      <h1>Hello, Friends!</h1>
-      <h2>{greeting}</h2>
-    </div>
+    <React.Fragment>
+      <h1>hello, friends!</h1>
+      <FriendProfile name={myFriends[0].name} />
+    </React.Fragment>
   );
 }
 ```
 
-## Evaluating a function
+## Arrays
 
 ```jsx
 export default function Friends() {
-  return (
-    <div>
-      <h1>Hello, Friends!</h1>
-      <h2>{emphasize(greeting)}</h2>
-    </div>
-  );
+  return myFriends.map(friend => (
+    <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
+  ));
 }
 ```
 
-## className
+## Strings or numbers
 
 ```jsx
-export default function Friends() {
-  return (
-    <div>
-      <h1 className="friends-title">Hello, Friends!</h1>
-      <h2>{emphasize(greeting)}</h2>
-    </div>
-  );
+function FriendProfile(props) {
+  return props.name;
 }
 ```
 
-## Evaluating attributes
+## null
 
 ```jsx
-export default function Friends() {
-  return (
-    <div>
-      <h1 className="friends-title">Hello, Friends!</h1>
-      <h2 className={determineGreetingClass()}>{emphasize(greeting)}</h2>
-    </div>
-  );
-}
-```
-
-## Array.map
-
-```jsx
-export default function Friends() {
-  return (
-    <div>
-      <h1 className="friends-title">Hello, Friends!</h1>
-      <h2 className={determineGreetingClass()}>{emphasize(greeting)}</h2>
-      <ul>
-        {myFriends.map(friend => {
-          return <li>{friend.name}</li>;
-        })}
-      </ul>
-    </div>
-  );
-}
-```
-
-## Array keys
-
-```jsx
-export default function Friends() {
-  return (
-    <div>
-      <h1 className="friends-title">Hello, Friends!</h1>
-      <h2 className={determineGreetingClass()}>{emphasize(greeting)}</h2>
-      <ul>
-        {myFriends.map(friend => {
-          return <li key={friend.id}>{friend.name}</li>;
-        })}
-      </ul>
-    </div>
-  );
-}
-```
-
-## Conditional rendering
-
-```jsx
-export default function Friends() {
-  return (
-    <div>
-      <h1 className="friends-title">Hello, Friends!</h1>
-      <h2 className={determineGreetingClass()}>{emphasize(greeting)}</h2>
-      <ul>
-        {myFriends.map(friend => {
-          return (
-            <li key={friend.id}>
-              {friend.name}
-              {friend.age ? ` (${friend.age})` : null}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+function FriendProfile(props) {
+  if (props.age === undefined) {
+    return null;
+  }
+  return props.name;
 }
 ```

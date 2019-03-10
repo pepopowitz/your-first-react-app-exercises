@@ -1,148 +1,244 @@
 # Exercise 12
 
-## Managing Component State
+## React Context
 
-In this exercise, we'll use component state to flip an information card back-and-forth on our FriendDetail page.
+In this exercise, we'll use React Context to manage application-level state. That is, state that applies to the entire application, instead of a single component (or a few closely-related components).
+
+Throughout the workshop, you've seen the app alternate between green and purple themes. We're going to automate that, with a "theme switcher" button.
 
 👉 Start the app for Exercise 12
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-12`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 12: Managing Component State", and our three adorable kitten friends. If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 12: React Context", and our three adorable kitten friends in the purple theme. If it doesn't, ask your neighbor for assistance or raise your hand.
 
-### FriendFlipper: A New Component
+### Static theme
 
-We've redesigned our FriendDetail page a bit. It references a new child component - the `<FriendFlipper>`.
+We've modified the CSS Modules coming into this exercise, so that they render based on a static theme. The static theme is defined in `./theme/static/index.js`. If you change the static theme, the UI will reflect it.
 
-The `<FriendFlipper>` component will flip an information card for the user. The front is an image of our friend; on the back will be some details, like their ID & colors. The flipper isn't functional yet - but it has all the styles & content built out for it.
+👉 Change the exported value in `./theme/static/index.js` from `purple` to `green`.
 
-Your responsibility will be to utilize React component state to toggle the visible side of the flipper.
+In your browser, you should see the theme change from purple to green.
 
-### Initializing State
+### ThemeSwitcher
 
-The first thing we need to do with a stateful component is initialize the state.
+In `Header.js`, you'll see that we've rendered a new component named `<ThemeSwitcher>`. This shows up in the UI as a button that says "Change Theme". We're going to hook theme-toggling up to this `ThemeSwitcher` component, using React Context.
 
-In this case, we'll want our initial state to be such that the card is not flipped yet. We will use a boolean state property named `flipped` to manage this.
+### React Context
 
-Remember that when initializing state, we can do it a couple ways:
+The React Context API involves three players: a Context, a Provider, and many Consumers.
 
-1. Constructor initialization
+The Context defines that we will use a specific type of context in our app.
 
-This method utilizes the class constructor, and looks something like this:
+### ThemeContext
 
-```jsx
-export default class Component extends React.Component {
-  constructor(props) {
-    super(props); // This calls the base constructor, with the passed-in props.
+For this exercise, we've already created the Context. It is named `ThemeContext`, and is located at `theme/context.js`.
 
-    this.state = {
-      // set initial state properties here
-    };
-  }
-  // ...
-}
+👉 Open the `theme/context.js` file.
+
+You should see this:
+
+```js
+import React from 'react';
+
+export default React.createContext();
 ```
 
-2. Class property initialization
+There isn't much happening here. The important thing is that it is calling `React.createContext()`, and exporting the result. When we want to create a Provider or Consumer, we'll need to use this Context.
 
-This method utilizes a newer feature of JavaScript - class properties - and looks something like this:
+### ThemeProvider
+
+A Provider handles the state management for a Context.
+
+For this exercise, we've already created the Provider. It is named `ThemeProvider`, and it's located at `theme/Provider.js`.
+
+👉 Open the `theme/Provider.js` file.
+
+You should see a component that looks similar to other stateful components. It includes several pieces we've seen in previous exercises.
+
+#### State Initialization
+
+The `ThemeProvider` initializes its state, so that the `theme` is defaulted to `purple`.
 
 ```jsx
-export default class Component extends React.Component {
+export default class ThemeProvider extends React.Component {
   state = {
-    myValue: 0, // or whatever default you want to set it to
+    theme: 'purple',
   };
 
   // ...
 }
 ```
 
-👉 Initialize the state in `friend-detail/FriendFlipper.js` so that the `flipped` property is defaulted to `false`.
+#### Handle State Change
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#initialization).
+The `ThemeProvider` includes a `handleTimeChange()` method, which updates the state of the Context using `setState`.
 
-### Adding An Event Handler
-
-We need to handle the event that a user "flips" the information card.
-
-Recall that we handle an event in a stateful component with a class property assigned to a fat-arrow method that calls `setState`. This looks something like this:
+This handler is swapping the value of `this.state.theme` between `green` and `purple` each time it is called.
 
 ```jsx
-export default class Component extends React.Component {
-  myEventHandler = () => {
-    this.setState({
-      myValue: 1, // or whatever value you want to set it to
-    });
+export default class ThemeProvider extends React.Component {
+  // ...
+
+  handleThemeChange = () => {
+    this.setState(prevState => ({
+      theme: prevState.theme === 'green' ? 'purple' : 'green',
+    }));
   };
+
   // ...
 }
 ```
 
-If we want to update the state based on the current state of the component, we can use the alternate override for `setState`, like this:
+#### render()
+
+The last thing the `ThemeProvider` does is render the current state.
+
+A Context Provider passes the state down to its children via the `value` prop. The `value` prop can contain a single value, or it can contain an object if there are multiple values to pass down.
+
+In this case, we need to pass down the current theme, as well as our handler that toggles the theme from `green` to `purple`. Thus we create an object (`data`), and pass that into the rendered `<ThemeContext.Provider>`, instead of a single value.
 
 ```jsx
-export default class Component extends React.Component {
-  myEventHandler = () => {
-    this.setState(prevProps => {
-      return {
-        myValue: prevProps.myValue + 1, // or whatever value you want to set it to
-      };
-    });
-  };
+export default class ThemeProvider extends React.Component {
   // ...
-}
-```
-
-👉 Add an event handler to `friend-detail/FriendFlipper.js` that updates the `flipped` state property to the opposite of the current value of `flipped`.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#event-handler).
-
-### Conditionally flipping the card based on state
-
-Once our event handler changes the state, we'll need our `render` function to flip the card based on the `flipped` state property.
-
-We can do this by conditionally calling `renderFront()` or `renderBack()` in our `render` function.
-
-👉 Conditionally call `renderFront()` or `renderBack()` in `friend-detail/FriendFlipper.js`, based on the value of `this.state.flipped`.
-
-If `this.state.flipped` is true, `renderBack()` should be called. If `this.state.flipped` is false, `renderFront()` should be called.
-
-You can use ternaries to call the appropriate `render___()` function, or call a function that uses an if/else.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#conditional-render).
-
-### Tying it all together - connecting the buttons to the event handler
-
-We have one last step to hook up our state management. When the buttons on the information card are clicked, they need to call our event handler.
-
-Calling event handlers from a button click looks like this:
-
-```jsx
-class MyComponent extends React.Component {
-  myEventHandler = () => {
-    // ...
-  };
 
   render() {
-    // ...
-    <button type="button" onClick={this.myEventHandler} />;
-    // ...
+    const data = {
+      theme: this.state.theme,
+      onThemeChanged: this.handleThemeChange,
+    };
+
+    return (
+      <ThemeContext.Provider value={data}>
+        {this.props.children}
+      </ThemeContext.Provider>
+    );
   }
 }
 ```
 
-👉 Call the event handler you added above from the `onClick` event of both `<button>` elements in `friend-detail/FriendFlipper.js`.
+Inside the `<ThemeContext.Provider>` is rendered the children passed into the provider. This allows the Provider to wrap a component tree, and pass the state down to all of its children.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#connect-buttons-to-handler).
+### Wrap the app in a `<ThemeProvider>`
+
+Having created a `ThemeProvider`, we need to wrap our component tree within it, so that it may pass the state throughout the app.
+
+👉 Wrap the app in a `<ThemeProvider>` component, within `App.js`.
+
+We want our entire app to have access to the ThemeContext, so we'll wrap the entire app in the `ThemeProvider`.
+
+You'll want to import the `ThemeProvider`, and wrap the rendered `App` component within a `<ThemeProvider>` element.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#app-themeprovider).
+
+### Adding ThemeContext.Consumers
+
+Now that we've wrapped the app in the `ThemeProvider`, we can attach Consumers anywhere down the tree.
+
+Consumers look like this:
+
+```jsx
+import ThemeContext from './theme/context';
+
+export default function MyComponent() {
+  return (
+    <ThemeContext.Consumer>
+      {value => <MyComponent value={value} />}
+    </ThemeContext.Consumer>
+  );
+}
+```
+
+The child of the `<ThemeContext.Consumer>` is a function. It takes an argument that contains the `value` that was passed down by the `ThemeContext.Provider`.
+
+Inside the inner function, your components can do whatever they need with the value passed in.
+
+Remember that in our case, we have two properties on the `value` that we are interested in: the `theme` and an `onThemeChanged` handler. This means we could use object destructuring to write a consumer like this:
+
+```jsx
+import ThemeContext from './theme/context';
+
+export default function MyComponent() {
+  return (
+    <ThemeContext.Consumer>
+      {({theme, onThemeChanged}) => (
+        <MyComponent value={value} />
+      }}
+    </ThemeContext.Consumer>
+  )
+}
+```
+
+### Make the Switcher a Consumer
+
+The `Switcher` component is located at `theme/Switcher.js`. It is the button that toggles the theme from `green` to `purple`. In the context of our ThemeContext, that means it is a Consumer that needs to call the `onThemeChanged` handler.
+
+👉 Wrap the `Switcher` component in `<ThemeContext.Consumer>`
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-themecontext.consumer).
+
+Wrapping in `<ThemeContext.Consumer>` gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes an `onThemeChanged` handler. We need to connect our button to that handler.
+
+👉 Within the `Switcher` component, connect the button `click` event to the `onThemeChanged` handler passed into the rendering function.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-onthemechanged).
+
+### Make the Header a Consumer
+
+We've hooked up the Consumer that modifies the application-level state; now we need to connect the Consumers that read the application-level state. This starts with the `Header` component, located at `Header.js`.
+
+👉 Wrap the `Header` component's `<header>` element in a `<ThemeContext.Consumer>` component.
+
+Wrapping in `<ThemeContext.Consumer>` gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes a `theme` property. We need to connect our header to that property.
+
+Now that we're using the `theme` passed into the rendering function, we no longer need the static theme imported from `./theme/static`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#header-consumer).
 
 ### Test it out
 
-At this stage, you've completed everything necessary to manage state in the `FriendFlipper` component.
+At this point you should see the header color change when you click the button.
 
-When you browse the web app, you should not see any console errors. You should also be able to click on a specific friend to navigate to their detail page. From their detail page, you should be able to click the "Details" button, and see their information card flip over to show some details.
+If you don't, re-read the instructions above thoroughly. If you can't figure out what you missed, ask your neighbor, or raise your hand.
 
-If you are unable to do this, see if you can figure out why. Investigate any console errors, look at the example solutions, ask your neighbor for help, or raise your hand for help.
+### Make the `Page` shared component a `ThemeContext.Consumer`
+
+The `Page` component, located at `shared/Page.js`, needs to also utilize the `theme` property from the ThemeContext.
+
+👉 Modify the `Page` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function.
+
+Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#page-consumer).
+
+### Make the `Card` shared component a `ThemeContext.Consumer`
+
+The `Card` component, located at `shared/Card.js`, needs to also utilize the `theme` property from the ThemeContext.
+
+👉 Modify the `Card` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function.
+
+Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#card-consumer).
+
+### Make the `FriendFlipper` a `ThemeContext.Consumer`
+
+The `FriendFlipper` component, located at `friend-detail/FriendFlipper.js`, needs to also utilize the `theme` property from the ThemeContext.
+
+👉 Modify the `FriendFlipper` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function.
+
+Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
+
+In this component, there is a `renderFront()` and `renderBack()` method. Both of these could individually be made Consumers, or you could make the overall `render()` method a Consumer and pass the `theme` into `renderFront()` and `renderBack()`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-consumer).
+
+### Test it out
+
+At this point your entire app should change from green to purple and vice versa when the "Change Theme" button is clicked.
+
+If this doesn't happen, re-read the instructions above thoroughly. If you can't figure out what you missed, ask your neighbor, or raise your hand.
 
 ### Extra Credit
 
-- Read about ["lifting up state" in React](https://reactjs.org/docs/lifting-state-up.html).
+[Read about React Context vs Redux](https://daveceddia.com/context-api-vs-redux/).

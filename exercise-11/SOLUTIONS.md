@@ -1,65 +1,57 @@
 # Possible Solutions
 
-## FriendDetail Route
-
-```jsx
-import { BrowserRouter, Route } from 'react-router-dom';
-import FriendDetail from './friend-detail/FriendDetail.entry';
-...
-
-function App() {
-  return (
-    <BrowserRouter>
-      <div className={styles.app}>
-        <header className={styles.appHeader}>
-          <h1 className={styles.appTitle}>Exercise 11</h1>
-          <h2 className={styles.subTitle}>React Router</h2>
-        </header>
-        <div className={styles.exercise}>
-          <Route path="/" exact component={Friends} />
-          <Route path="/friends/:id" component={FriendDetail} />
-        </div>
-      </div>
-    </BrowserRouter>
-  );
-}
-
+## Friends: Import API
+```js
+import getFriendsFromApi from './get-friends-from-api';
 ```
 
-## FriendProfile Link
-
+## Friends: Stateful
 ```jsx
-import { Link } from 'react-router-dom';
-...
-
-export default function FriendProfile({ id, name, image }) {
-  return (
-    <Link to={'friends/' + id}>
-      <Card>
-        <div className={styles.friendProfile}>
-          <img src={image} alt={name} />
-          <h3>{name}</h3>
-        </div>
-      </Card>
-    </Link>
-  );
+export default class FriendsEntry extends React.Component {
+  render() {
+    return <Friends friends={myFriends} />
+  }
 }
 ```
 
-## Active friend ID
+## Friends: Initialize
 
 ```jsx
-export default function({ match }) {
-  // the match prop is passed in via react.router
-  const friendId = match.params.id;
-  const friend = friends.find(x => x.id === parseInt(friendId, 10));
+export default class FriendsEntry extends React.Component {
+  state = {
+    friends: []
+  }
 
-  return <FriendDetail friend={friend} />;
+  // ...
 }
 ```
 
-## Home Link
+## Friends: render
+```jsx
+export default class FriendsEntry extends React.Component {
+  // ...
+  
+  render() {
+    return <Friends friends={this.state.friends} />;
+  }
+}
+```
 
+## Friends: componentDidMount
+```jsx
+export default class FriendsEntry extends React.Component {
+  // ...
+
+  async componentDidMount() {
+    const friends = await getFriendsFromApi();
+    this.setState({
+      friends
+    });
+  }
+}
+```
+
+## FriendDetail: Handle empty friend
 ```jsx
 export default function({ friend }) {
   return (
@@ -68,15 +60,44 @@ export default function({ friend }) {
         <div className={styles.toolbar}>
           <Link to="/">&lt; Home</Link>
         </div>
-        <Card>
-          <div className={styles.cardContents}>
-            <h1>{friend.name}</h1>
-            <FriendFlipper friend={friend} />
-            <p>{friend.bio}</p>
-          </div>
-        </Card>
+        <Card>{renderFriend(friend)}</Card>
       </div>
     </Page>
   );
+}
+
+function renderFriend(friend) {
+  if (friend === undefined) {
+    return <h1>Loading...</h1>;
+  }
+
+  return (
+    <div className={styles.cardContents}>
+      <h1>{friend.name}</h1>
+      <FriendFlipper friend={friend} />
+      <p>{friend.bio}</p>
+    </div>
+  );
+}
+```
+
+## FriendDetailEntry
+```jsx
+export default class FriendDetailEntry extends React.Component {
+  state = {
+    friend: undefined,
+  };
+
+  render() {
+    return <FriendDetail friend={this.state.friend} />;
+  }
+
+  async componentDidMount() {
+    // the match prop is passed in via react.router
+    const friend = await getFriendFromApi(this.props.match.params.id);
+    this.setState({
+      friend,
+    });
+  }
 }
 ```

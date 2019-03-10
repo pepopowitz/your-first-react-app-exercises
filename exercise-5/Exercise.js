@@ -1,16 +1,16 @@
 import React from 'react';
 
-const greeting = 'How are you?';
-
-function emphasize(text) {
-  return `${text}!!!!!`;
+export default function Friends() {
+  return <div />;
 }
 
-function determineGreetingClass() {
-  if (new Date() % 2 === 1) {
-    return 'friends-greeting-orange';
-  }
-  return 'friends-greeting-purple';
+function FriendProfile(props) {
+  return (
+    <div className="friend-profile">
+      {props.name}
+      {props.age ? ` (${props.age})` : null}
+    </div>
+  );
 }
 
 const myFriends = [
@@ -29,7 +29,3 @@ const myFriends = [
     name: 'Turtle',
   },
 ];
-
-export default function Friends() {
-  return <div />;
-}

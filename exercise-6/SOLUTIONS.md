@@ -1,64 +1,54 @@
 # Possible Solutions
 
-## React Components
+## Page
 
 ```jsx
-export default function Friends() {
-  return <FriendProfile name={myFriends[0].name} />;
-}
-```
-
-## Wrapping in a div
-
-```jsx
-export default function Friends() {
+function Page({ children }) {
   return (
-    <div>
-      <h1>hello, friends!</h1>
-      <FriendProfile name={myFriends[0].name} />
+    <div className="page">
+      <div className="content">{children}</div>
     </div>
   );
 }
 ```
 
-## Wrapping in a fragment
+## Friends With Page
 
 ```jsx
-export default function Friends() {
+export default function Friends({friends}) {
   return (
-    <React.Fragment>
-      <h1>hello, friends!</h1>
-      <FriendProfile name={myFriends[0].name} />
-    </React.Fragment>
+    <Page>
+      {friends.map(friend => (
+        <FriendProfile
+          key={friend.id}
+          name={friend.name}
+          image={friend.image}
+        />
+      ))}
+    </Page>
   );
 }
 ```
 
-## Arrays
+## Card
 
 ```jsx
-export default function Friends() {
-  return myFriends.map(friend => (
-    <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
-  ));
+function Card({ children }) {
+  return <div className="card">{children}</div>;
 }
 ```
 
-## Strings or numbers
+## FriendProfile With Card
 
 ```jsx
-function FriendProfile(props) {
-  return props.name;
-}
-```
-
-## null
-
-```jsx
-function FriendProfile(props) {
-  if (props.age === undefined) {
-    return null;
-  }
-  return props.name;
+function FriendProfile({ name, image }) {
+  return (
+    <Card>
+      <div className="friend-profile">
+        <img src={image} alt={name} />
+        <h3>{name}</h3>
+      </div>
+    </Card>
+  );
 }
 ```

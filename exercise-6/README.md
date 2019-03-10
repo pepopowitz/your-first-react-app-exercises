@@ -1,138 +1,131 @@
 # Exercise 6
 
-## What can a component render?
+## Composition & props.children
 
-React function components are limited in what they can return. This exercise will introduce you to the 5 most frequently returned kinds of results.
+Every React component receives a special prop named `children`. This prop contains any elements declared inside of the component.
+
+This exercise will give you experience working with the special `children` prop.
 
 👉 Start the app for Exercise 6
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-6`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 6: What can a component render?". If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 6: Composition & props.children", and three adorable kittens. If it doesn't, ask your neighbor for assistance or raise your hand.
 
 👉 Open Exercise.js
 
 All of your work for this exercise will take place in Exercise.js.
 
-The return value of a React function component is what gets rendered to the DOM. Throughout this exercise, we'll use the terms "render" and "return" interchangeably.
+### children Prop
 
-### Elements/React Components
+Given the following component JSX...
 
-Most frequently, a component will render either an HTML element, or another React component.
-
-Currently, the `Friends` component is returning an HTML element - a single `<div>`. Most of the examples we've seen so far have returned HTML elements.
-
-There is a second component in `Exercise.js` - the `FriendProfile` component.
-
-👉 Modify the `Friends` component to return a single `<FriendProfile>` element. Pass the name of the first item in the `myFriends` array as a prop to the `<FriendProfile>`.
-
-Check your browser to see if you succeeded! You should see the name `Potatoes` rendered.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#react-components).
-
-👉 "Inspect element" in your browser, and look for the elements rendered by the `<FriendProfile>` component.
-
-You should see that the component is rendered as a div with text content.
-
-### Fragments
-
-Valid JSX requires a single top-level element (similar to how valid XML requires a single top-level element). To demonstrate this, we're going to break our app.
-
-👉 Modify the `Friends` component to return an `<h1>` element adjacent to the `<FriendProfile>` element.
-
-You should see an error in your browser, similar to this:
-
-```
-./exercise-6/Exercise.js
-  Line 4:  Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?
-
-  2 |
-  3 | export default function Friends() {
-> 4 |   return <h1>hello, friends!</h1><FriendProfile name={myFriends[0].name} />;
-    |                                  ^
-  5 | }
-  6 |
-  7 | function FriendProfile(props) {
+```jsx
+function Friends() {
+  return (
+    <Page>
+      <h1>My Friends!</h1>
+      <h2>Let's meet them.</h2>
+    </Page>
+  );
+}
 ```
 
-As the error indicates, this is invalid syntax.
+the `children` prop passed to the `<Page>` component will be an array of two elements - an `h1` and an `h2`.
 
-We can fix this a couple ways.
+When the `Page` component wants to render its children, it just needs to evaluate the `children` prop as an expression. For example:
 
-#### Wrapping in a `<div>`
+```jsx
+function Page({ children }) {
+  return <div className="page">{children}</div>;
+}
+```
 
-👉 Modify the `Friends` component so that the `<h1>` and `<FriendProfile>` elements are wrapped in a `<div>` element.
+would wrap the children in a `div` with class `page`.
 
-Check your browser to see if you succeeded! You should see your title emitted, along with the name `Potatoes`.
+When the `Friends` component above is rendered to the DOM, it will render the following markup:
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#wrapping-in-a-div).
+```html
+<div class="page">
+  <h1>My Friends!</h1>
+  <h2>Let's meet them.</h2>
+</div>
+```
 
-👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
+Now it's your turn. Let's build some components that wrap their children.
 
-You'll see that your components are wrapped in a `<div>` - the one you used to wrap the `<h1>` and `<FriendProfile>` elements.
+The App.css for this exercise contains all the styles you'll need, if you define the components correctly.
 
-This solves the problem...but it adds elements to the DOM that we don't really need. One element might not seem like a big deal, but in a large React app, we can end up with significant DOM pollution from this practice.
+### `<Page>` Component
 
-React v16 introduced a way to solve this problem - the `Fragment`.
+Let's write a Page component that we will use to wrap the content on our page.
 
-#### Wrapping in a `<Fragment>`
+👉 Add a component named `Page` to `Exercise.js` that wraps its children in `.page` and `.content` `div`s.
 
-The `Fragment` component is basically an empty wrapper. It allows us to provide a single top-level element when we are rendering multiple child elements, but it does not actually render anything to the DOM.
+For example, if a component rendered
 
-You can access the `Fragment` component on the default `React` import (i.e. `React.Fragment`).
+```html
+<Page>
+  <h1>Title</h1>
+</Page>
+```
 
-👉 Replace the wrapping `<div>` element in the `Friends` component with a wrapping `<React.Fragment>` element.
+then the markup emitted should be
 
-Check your browser to see if you succeeded! You should still see all friends listed.
+```html
+<div class="page">
+  <div class="content">
+    <h1>Title</h1>
+  </div>
+</div>
+```
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#wrapping-in-a-fragment).
+You won't notice any changes in your browser, as we're not using the `<Page>` component yet.
 
-👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#page).
 
-You should see that there's no longer an unnecessary div wrapping your output.
+👉 Modify the `Friends` component to wrap the mapped `<FriendProfile>` elements in a `<Page>` element.
 
-### Arrays
+You should notice a difference in the browser this time. If you got everything right, you'll have green gradients down the sides of the page. In addition, our kitten friends will be lined up horizontally instead of vertically.
 
-Sometimes you want to turn an array of data into an array of elements. This can be accomplished with `Array.map`, as we saw in the JSX Fundamentals exercise.
+![](docs/pages.png)
 
-👉 Modify the `Friends` component to return one `<FriendProfile>` element for each item in the `myFriends` array. For each item, pass the `name` and `age` as props to the `<FriendProfile>`.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-with-page).
 
-Don't forget that React wants you to use a `key` prop when you render an array of items!
+### `<Card>` Component
 
-Check your browser to see if you succeeded! You should see each of the friends listed.
+Our kittens look a little close together. Let's wrap them in `<Card>` components, to give them a bit more distinction.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#arrays).
+👉 Add a component named `Card` to `Exercise.js` that wraps its children in a `.card` `div`.
 
-👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
+For example, if a component rendered
 
-You should see a `<div>` for each friend.
+```html
+<Card>
+  <h1>Title</h1>
+</Card>
+```
 
-### Strings/Numbers
+then the markup emitted should be
 
-Sometimes you want a component to render nothing more than a string or number. When a React function component returns a string or number, it gets rendered as a text node in the DOM.
+```html
+<div class="card">
+  <h1>Title</h1>
+</div>
+```
 
-👉 Modify the `FriendProfile` component to return only the `name` prop.
+You won't notice any changes in your browser, as we're not using the `<Card>` component yet.
 
-Check your browser to see if you succeeded! You should see each of the friends listed, abutted against each other.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#card).
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#strings-or-numbers).
+👉 Modify the `FriendProfile` component to wrap the `.friend-profile` div in a `<Card>` element.
 
-👉 "Inspect element" in your browser, and find the elements rendered by the `<Friends>` component.
+You should notice a difference in the browser this time. If you got everything right, each of our kitten friends will have a nice card element separating them from the rest.
 
-You will see that the friend names are rendered as text nodes, all within the same `<div>`.
+![Finished](docs/pages-and-cards.png)
 
-### null
-
-Sometimes we don't want a component to render anything at all. This is usually true when we are using conditional logic to render different results based on inputs.
-
-When the value `null` is returned from a component, nothing gets rendered to the DOM.
-
-👉 Modify the `FriendProfile` component to return `null` if the `age` prop is undefined; otherwise return the value of the `name` prop.
-
-Check your browser to see if you succeeded! You should see two of the friends listed - Potatoes and Flower.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#null).
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-with-card).
 
 ### Extra Credit
 
-- Read the [React docs](https://reactjs.org/docs/hello-world.html)
+Read more about [composition vs. inheritance in React](https://reactjs.org/docs/composition-vs-inheritance.html)

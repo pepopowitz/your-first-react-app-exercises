@@ -1,86 +1,158 @@
 # Exercise 11
 
-## React Router
+## Loading Data
 
-In this exercise, we're going to use React-Router to build a second page into our app. When we're complete, users will be able to navigate from our friends list to a detailed view of each friend.
+This exercise introduces you to the usual method of loading data from an API in a React component.
 
 👉 Start the app for Exercise 11
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-11`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 11: React Router", and our three adorable kitten friends. If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 11: Loading Data", and our three adorable kitten friends. If it doesn't, ask your neighbor for assistance or raise your hand.
 
-### Component Reorganization
+### The `friends` API
 
-In this exercise, we've re-architected our file & folder structure. We've created some folders:
+Prior to this exercise, we were using a static list of friends, imported from the file `data/friends.js`. We're going to instead retrieve our data from a simple API based on the contents of `data/db.json`.
 
-- `/data`: this folder holds the data that drives our app. For now, that's our list of friends.
-- `/friend-detail`: this folder holds components that render a "friend detail" page. This is a new page we'll be building out in this exercise.
-- `/friends`: this folder holds components that render the "friends list" page - the one we've been working with so far.
-- `/shared`: this folder contains components that could be shared across multiple other folders.
+The API is already running. To see it in action, you can navigate to an endpoint in your browser.
 
-### Router Setup
+👉 Browse to the URL `http://localhost:3000/api/friends`.
 
-To set up React-Router, we've already taken a few steps:
+You should see a JSON response that contains our three friends.
 
-- Installed React-Router as a dependency, by running `npm install --save react-router`
-- Wrapped our app in a `<BrowserRouter>` component, in `App.js`
-- Defined a route in `App.js` that matches the path `/` exactly, and renders our `<Friends>` entry component.
+If you change any contents in `data/db.json`, the `friends` endpoint will reflect it. (Though you will have to refresh the page to see the updates.)
 
-### Add a new `<Route>`
+### Lifecycle Events
 
-In the folder `/friend-detail`, we've added a couple components that render a very simple Friend Detail page.
+Several lifecycle events are involved when loading data from an API: initialization, `render`, and `componentDidMount`.
 
-👉 Add a new `<Route>` to `App.js`, which will render the new Friend Detail page.
+#### Initialization
 
-You'll want to import the `<FriendDetail>` component from './friend-detail/FriendDetail.entry'.
+The state to be loaded from an API is initialized to an empty value.
 
-The route should match the path `friends/:id`. The token `:id` indicates that this route will have an `id` parameter submitted in the path.
+For a refresher on how to initialize state, see [exercise 10](../exercise-10/README.md#initializing-state).
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetail-route).
+#### `render`
 
-### Add a link to the new Route
+The state data is rendered in the `render` function of a component. When the component initially loads, it renders with an empty value (`undefined`, or `null`, or an empty array, or whatever you choose).
 
-We need a way to navigate to the route we added.
+After the data is completed loading from the API, the component renders with the updated state.
 
-React-Router includes a `<Link>` component for navigating to a router-friendly URL.
+#### componentDidMount
 
-👉 Wrap the `<Card>` element in `'/friends/FriendProfile.js` in a `<Link>` element.
+The `componentDidMount` lifecycle event fires right after a React component is added to the DOM. From within `componentDidMount`, we'll call the API endpoint.
 
-Remember that you'll need to import the `Link` component from `react-router-dom`, and that the `to` prop is where the link will go when it is clicked.
+When the API call is complete, we can use `setState()` to update the state with the loaded data.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-link).
+Recall that to easily handle asynchronous processing in a component lifecycle event, you can simply mark the method with `async`, and call `await` within it.
 
-### Get friend ID from the URL
+#### An example
 
-When you click on one of our kitten friends, you should navigate to the Friend Detail page!
+Following is a simple example of how the lifecycle events work together to load data into a component.
 
-Unfortunately, regardless of which kitten you click, it always renders the same friend - Turtle.
+```jsx
+export default class MyComponent extends React.Component {
+  // Initialization
+  state = {
+    items: [],
+  };
 
-👉 Open `/friend-detail/FriendDetail.entry.js`, and see if you can identify why we are always rendering Turtle.
+  // Render the state
+  render() {
+    return <ItemList items={this.state.items} />;
+  }
 
-...(come back when you've figured it out, or you give up)...
+  // Load the state from an API
+  async componentDidMount() {
+    const items = await loadItemsFromApi();
+    this.setState({
+      items,
+    });
+  }
+}
+```
 
-As the comment in the component indicates, we aren't getting the active friend ID in this component.
+### Loading the FriendsEntry data from the API
 
-When we use React-Router, our components automatically get access to a prop named `match`. This `match` prop contains a `params` array, which contains all the parameters passed into the current route.
+The first component we'll update to pull from the API is the `FriendsEntry` component, located at `friends/Friends.entry.js`.
 
-👉 Modify `/friend-detail/FriendDetail.entry.js` so that it pulls the active friend ID from the `match` prop.
+#### get-friends-from-api.js
 
-Use `console.log` to inspect the props passed into the component if you need to.
+We've included a function in `friends/get-friends-from-api.js`, which will make the API call to collect all of our friends. It uses the `axios` library to make an HTTP call to the `friends` API endpoint.
 
-You'll want to use `friends.find(...)` to find the friend whose id property matches the ID passed in.
+👉 Import the `getFriendsFromApi` function into `friends/Friends.entry.js`.
 
-One other trick - the `id` parameter in the `match.params` array is a string; the `id` properties in the `friends` array are integers. You could use `parseInt(...)` to convert between the two types.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-import-api).
 
-When you've completed this task, you should be able to navigate to all three kitten friends' detail pages.
+Before we can use our lifecycle events to connect to the API endpoint, we'll need to convert our component to a stateful one.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#active-friend-id).
+TODO: nope.
 
-### Return to Home
+👉 Convert the `FriendsEntry` component from a stateless functional component to a stateful class syntax component.
 
-We can use the browser navigation to go back to the Home page, but it'd be really helpful if we could add a link to the "Home" page on the Friend Detail page.
+For a reminder on how to do this, see [exercise 7](../exercise-7/README.md#the-process).
 
-👉 Add a Link to `/friend-detail/FriendDetail.js` that takes us back to the Home page.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-stateful).
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#home-link).
+#### Initialize the state
+
+Our component renders a list of friends. We'll want to initialize our component state so that it contains an empty friends array.
+
+👉 Initialize the state of the `FriendsEntry` component so that it contains an empty array named `friends`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-initialize).
+
+#### Render the `friends` data from local state
+
+👉 Modify the `render()` function of the `FriendsEntry` component so that it renders the friends from `this.state.friends`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-render).
+
+#### Call the `friends` API to get data
+
+The final step for connecting the `FriendsEntry` component to an API is to load the data from within `componentDidMount()`.
+
+👉 Add a `componentDidMount()` method that (a) calls the API to get friend data, then (b) calls `setState()` to update the state of the component with the friend data.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-componentdidmount).
+
+### Loading FriendDetailEntry data from the API
+
+The `FriendDetailEntry` component, at `friend-detail/FriendDetail.entry.js`, also needs to load data from an API endpoint.
+
+#### Handling an empty friend
+
+In the previous activity, the `FriendsEntry` component worked with an empty array for the default state. In this activity, the `FriendDetailEntry` component will need to account for an `undefined` friend. This situation can happen when the component is still loading data from the API, and if our component can't handle an `undefined` friend, it will err out.
+
+A great place to handle this dichotomy is within the `FriendDetail` component, in `friends/FriendDetail.js`.
+
+👉 Modify the `FriendDetail` component to render an appropriately constructed page when an undefined `friend` is passed in.
+
+If an actual `friend` is passed in, it should continue to render the full `FriendDetail` information.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetail-handle-empty-friend).
+
+👉 Repeat the activity of loading data from an API for the `FriendDetailEntry` component.
+
+Refer to the notes above as a reminder of how to do this. There are a couple details that make this component different than the first:
+
+- You'll only be loading one friend this time.
+- It should default to `undefined`, instead of an empty array.
+- The ID for the current friend will be passed into the `FriendDetailEntry` component via the `match.params.id` prop, thanks to ReactRouter.
+- The function that calls the API is in `friend-detail/get-friend-from-api.js`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetailentry).
+
+### Test it out
+
+You should now have your friends loading from API endpoints throughout the app.
+
+You can verify this by making a change in `data/db.json`, and making sure the change is reflected in the app. You will need to refresh the app to see the change.
+
+### Extra Credit
+
+- Show a "loading" indicator when the friends array has not yet loaded on the Friends list page.
+
+- Read more about [state & lifecycle events](https://reactjs.org/docs/state-and-lifecycle.html).
+
+- Read about another use of React lifecycle events - [integrating with non-React libraries](https://reactjs.org/docs/integrating-with-other-libraries.html).

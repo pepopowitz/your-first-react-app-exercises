@@ -2,6 +2,8 @@ import React from 'react';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import Header from './Header';
+
 import Friends from './friends/Friends.entry';
 import FriendDetail from './friend-detail/FriendDetail.entry';
 
@@ -11,10 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className={styles.app}>
-        <header className={styles.appHeader}>
-          <h1 className={styles.appTitle}>Exercise 12</h1>
-          <h2 className={styles.subTitle}>Managing Component State</h2>
-        </header>
+        <Header />
         <div className={styles.exercise}>
           <Route path="/" exact component={Friends} />
           <Route path="/friends/:id" component={FriendDetail} />
