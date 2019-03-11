@@ -1,5 +1,5 @@
 # Exercise 2
 
-## Thinking In Components
+## Identifying Components
 
 TODO: write me

@@ -22,7 +22,7 @@ A CSS Module is imported into a component using `import styles from '___.module.
 
 ### 2-2
 
-This `styles` object imported from the CSS Module contains properties for every class we define in the `styles.css` file. We use that object to specify which style from the module to use on an element.
+This `styles` object imported from the CSS Module contains properties for every style we define in the `styles.css` file. We use that object to specify which style from the module to use on an element.
 
 For example, if the CSS Module contained a style `.title { ... }`, in the associated component we would use it with `<h1 className={styles.title}>`.
 
