@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './FriendFlipper.module.css';
 
 export default function FriendFlipper(props) {
   return (
     <div className={styles.flipWrapper}>
-      <div className={styles.flipper}>{renderFront(props)}</div>
+      <div className={styles.flipper}>
+        <Front friend={props.friend} />
+      </div>
     </div>
   );
 }
 
-function renderFront(props) {
+function Front(props) {
   const { friend } = props;
   return (
     <div className={styles.front}>
@@ -24,7 +26,7 @@ function renderFront(props) {
   );
 }
 
-function renderBack(props) {
+function Back(props) {
   const { friend } = props;
   return (
     <div className={styles.back}>

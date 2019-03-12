@@ -18,122 +18,75 @@ The `<FriendFlipper>` component will flip an information card for the user. The 
 
 Your responsibility will be to utilize React component state to toggle the visible side of the flipper.
 
-### Initializing State
+### Creating a state variable
 
-The first thing we need to do with a stateful component is initialize the state.
+The first thing we need to do with a stateful component is create a state variable.
 
-In this case, we'll want our initial state to be such that the card is not flipped yet. We will use a boolean state property named `flipped` to manage this.
+We'll use the `useState()` function to do this. The `useState()` function takes a single argument: the default value for our state variable.
 
-Remember that when initializing state, we can do it a couple ways:
+`useState()` returns an array of length 2. The first item is the value of the state variable, and the second item is a function we can call to update the value. We'll use [array destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) to assign these array items to variables with meaningful names.
 
-1. Constructor initialization
-
-This method utilizes the class constructor, and looks something like this:
+The `useState()` function should be called at the top of a component function. An example looks like this:
 
 ```jsx
-export default class Component extends React.Component {
-  constructor(props) {
-    super(props); // This calls the base constructor, with the passed-in props.
+function Counter(props) {
+  const [count, setCount] = useState(123);
 
-    this.state = {
-      // set initial state properties here
-    };
-  }
-  // ...
+  return (
+    // ....what the component renders....
+  )
 }
 ```
 
-2. Class property initialization
+In this example, the value of our state variable will be stored in `count`; we get a function named `setCount` to update the value; and we give the count an initial value of `123`.
 
-This method utilizes a newer feature of JavaScript - class properties - and looks something like this:
+👉 Add a state variable to the `FriendFlipper` component in `friend-detail/FriendFlipper.js`, which will keep track of whether the card is flipped.
 
-```jsx
-export default class Component extends React.Component {
-  state = {
-    myValue: 0, // or whatever default you want to set it to
-  };
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#useState).
 
-  // ...
-}
-```
+### Render the correct side based on state
 
-👉 Initialize the state in `friend-detail/FriendFlipper.js` so that the `flipped` property is defaulted to `false`.
+Currently, the component is always rendering the `<Front>` of the card.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#initialization).
+We'll want our component to render the `<Front>` component when the card is not flipped, and the `<Back>` component when it is flipped.
 
-### Adding An Event Handler
+We can do this by checking the value of the state variable.
 
-We need to handle the event that a user "flips" the information card.
+👉 Conditionally render the `<Front>` component or `<Back>` component, based on the value of the state variable you defined.
 
-Recall that we handle an event in a stateful component with a class property assigned to a fat-arrow method that calls `setState`. This looks something like this:
-
-```jsx
-export default class Component extends React.Component {
-  myEventHandler = () => {
-    this.setState({
-      myValue: 1, // or whatever value you want to set it to
-    });
-  };
-  // ...
-}
-```
-
-If we want to update the state based on the current state of the component, we can use the alternate override for `setState`, like this:
-
-```jsx
-export default class Component extends React.Component {
-  myEventHandler = () => {
-    this.setState(prevProps => {
-      return {
-        myValue: prevProps.myValue + 1, // or whatever value you want to set it to
-      };
-    });
-  };
-  // ...
-}
-```
-
-👉 Add an event handler to `friend-detail/FriendFlipper.js` that updates the `flipped` state property to the opposite of the current value of `flipped`.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#event-handler).
-
-### Conditionally flipping the card based on state
-
-Once our event handler changes the state, we'll need our `render` function to flip the card based on the `flipped` state property.
-
-We can do this by conditionally calling `renderFront()` or `renderBack()` in our `render` function.
-
-👉 Conditionally call `renderFront()` or `renderBack()` in `friend-detail/FriendFlipper.js`, based on the value of `this.state.flipped`.
-
-If `this.state.flipped` is true, `renderBack()` should be called. If `this.state.flipped` is false, `renderFront()` should be called.
-
-You can use ternaries to call the appropriate `render___()` function, or call a function that uses an if/else.
+You can use a ternary statement to render the appropriate side, or call a function that uses an if/else to return the correct side.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#conditional-render).
 
-### Tying it all together - connecting the buttons to the event handler
+### Pass the state modifier into the "side" components
 
-We have one last step to hook up our state management. When the buttons on the information card are clicked, they need to call our event handler.
+To flip the card, we'll need to call our state modifier when the user clicks the button on either the `Front` or `Back` side.
 
-Calling event handlers from a button click looks like this:
+The state modifier is currently available to us in the `FriendFlipper` component, but not in either the `Front` or `Back` component.
 
-```jsx
-class MyComponent extends React.Component {
-  myEventHandler = () => {
-    // ...
-  };
+👉 Pass the state modifier function from the `FriendFlipper` component into the `Front` and `Back` components.
 
-  render() {
-    // ...
-    <button type="button" onClick={this.myEventHandler} />;
-    // ...
-  }
-}
-```
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#pass-state-modifier).
 
-👉 Call the event handler you added above from the `onClick` event of both `<button>` elements in `friend-detail/FriendFlipper.js`.
+### Toggle the state value when buttons are clicked
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#connect-buttons-to-handler).
+Now that our "sides" have the state modifier passed in, we can call the state modifier when we want to toggle the state value.
+
+The state modifier will update the value of the state property to whatever value we pass. For example, if we have a state modifier named `setCount`, and we call `setCount(456)`, the state property will be updated to the value 456.
+
+👉 Call the state modifier when the button is clicked on the `Front` side
+
+The event name you'll want to handle is called `onClick`.
+
+You will want to use a "fat arrow" function to handle the `onClick` event on the button. This function should execute a call to your state modifier, passing in the correct value to flip the card to the opposite side.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#toggle-front-to-back).
+
+👉 Call the state modifier when the button is clicked on the `Back` side
+
+Use the previous step as a guide to toggle the state property in the opposite direction, from the `Back` side.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#toggle-back-to-front).
 
 ### Test it out
 
@@ -145,4 +98,4 @@ If you are unable to do this, see if you can figure out why. Investigate any con
 
 ### Extra Credit
 
-- Read about ["lifting up state" in React](https://reactjs.org/docs/lifting-state-up.html).
+- Read about [`useState`](https://reactjs.org/docs/hooks-state.html).
