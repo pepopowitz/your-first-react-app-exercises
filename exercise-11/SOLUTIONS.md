@@ -1,58 +1,125 @@
 # Possible Solutions
 
-## Friends: Import API
+## FriendsEntry: Import API
+
 ```js
 import getFriendsFromApi from './get-friends-from-api';
 ```
 
-## Friends: Stateful
+## FriendsEntry: State Property
+
 ```jsx
-export default class FriendsEntry extends React.Component {
-  render() {
-    return <Friends friends={myFriends} />
-  }
+import React, { useState } from 'react';
+
+// ...
+
+export default function FriendsEntry() {
+  const [friends, setFriends] = useState([]);
+
+  return <Friends friends={myFriends} />;
 }
 ```
 
-## Friends: Initialize
+## FriendsEntry: Pass State Property
 
 ```jsx
-export default class FriendsEntry extends React.Component {
-  state = {
-    friends: []
-  }
+export default function FriendsEntry() {
+  const [friends, setFriends] = useState([]);
 
-  // ...
+  return <Friends friends={friends} />;
 }
 ```
 
-## Friends: render
+## FriendsEntry: useEffect
+
 ```jsx
-export default class FriendsEntry extends React.Component {
-  // ...
-  
-  render() {
-    return <Friends friends={this.state.friends} />;
-  }
+import React, { useState, useEffect } from 'react';
+
+// ...
+
+export default function FriendsEntry() {
+  const [friends, setFriends] = useState([]);
+  useEffect(() => {
+    setFriends(myFriends);
+  });
+
+  return <Friends friends={friends} />;
 }
 ```
 
-## Friends: componentDidMount
-```jsx
-export default class FriendsEntry extends React.Component {
-  // ...
+## FriendsEntry: Call API
 
-  async componentDidMount() {
+```jsx
+export default function FriendsEntry() {
+  const [friends, setFriends] = useState([]);
+
+  useEffect(async () => {
     const friends = await getFriendsFromApi();
-    this.setState({
-      friends
-    });
-  }
+    setFriends(friends);
+  }, []);
+
+  return <Friends friends={friends} />;
 }
 ```
 
-## FriendDetail: Handle empty friend
+## Friends: Loading State
+
 ```jsx
+export default function Friends(props) {
+  return <Page>{renderFriends(props.friends)}</Page>;
+}
+
+function renderFriends(friends) {
+  if (friends.length === 0) {
+    return <h1>Loading...</h1>;
+  }
+
+  return friends.map(friend => (
+    <FriendProfile
+      key={friend.id}
+      id={friend.id}
+      name={friend.name}
+      image={friend.image}
+    />
+  ));
+}
+```
+
+## FriendDetail
+
+### FriendDetail.entry.js
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+import getFriendFromApi from './get-friend-from-api';
+
+import FriendDetail from './FriendDetail';
+
+export default function(props) {
+  const [friend, setFriend] = useState(undefined);
+
+  useEffect(async () => {
+    const id = props.match.params.id;
+    const friend = await getFriendFromApi(id);
+    setFriend(friend);
+  }, [props.match.id]);
+
+  return <FriendDetail friend={friend} />;
+}
+```
+
+## FriendDetail.js
+
+```jsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Page from '../shared/Page';
+import Card from '../shared/Card';
+import FriendFlipper from './FriendFlipper';
+
+import styles from './FriendDetail.module.css';
+
 export default function({ friend }) {
   return (
     <Page>
@@ -78,26 +145,5 @@ function renderFriend(friend) {
       <p>{friend.bio}</p>
     </div>
   );
-}
-```
-
-## FriendDetailEntry
-```jsx
-export default class FriendDetailEntry extends React.Component {
-  state = {
-    friend: undefined,
-  };
-
-  render() {
-    return <FriendDetail friend={this.state.friend} />;
-  }
-
-  async componentDidMount() {
-    // the match prop is passed in via react.router
-    const friend = await getFriendFromApi(this.props.match.params.id);
-    this.setState({
-      friend,
-    });
-  }
 }
 ```
