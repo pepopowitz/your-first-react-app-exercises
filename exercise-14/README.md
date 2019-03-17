@@ -107,3 +107,9 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-class
 Check your browser to make sure the components are still rendering properly!
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-class).
+
+---
+
+TODO
+
+Extra Credit: https://overreacted.io/how-are-function-components-different-from-classes/

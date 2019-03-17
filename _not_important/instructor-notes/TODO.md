@@ -33,11 +33,11 @@ v16: Legacy Lifecycle Events (new)
 
 ### replace classes with functions
 
--[ ] rewrite ex 9 (and beyond) to useState
+-[x] rewrite ex 9 (and beyond) to useState
 
--[ ] rewrite ex 11 (and beyond) to useEffect
+-[x] rewrite ex 11 (and beyond) to useEffect
 
--[ ] rewrite ex 12 (and beyond) to useContext
+-[x] rewrite ex 12 (and beyond) to useContext
 
 -[ ] rewrite ex 14 to go opposite direction
 
@@ -75,7 +75,7 @@ v16: Legacy Lifecycle Events (new)
 
 -[ ] Explain async stuff better
 
--[ ] Ex 11 - take a look at FriendFlipper in completed/SOLUTIONS. Something might be wrong with it.
+-[x] Ex 11 - take a look at FriendFlipper in completed/SOLUTIONS. Something might be wrong with it.
 
 -[ ] At least one place has the wrong name of prevState/prevProps. Check them!
 

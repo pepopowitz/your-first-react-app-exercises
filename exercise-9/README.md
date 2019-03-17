@@ -18,13 +18,13 @@ The `<FriendFlipper>` component will flip an information card for the user. The 
 
 Your responsibility will be to utilize React component state to toggle the visible side of the flipper.
 
-### Creating a state variable
+### Creating a state property
 
-The first thing we need to do with a stateful component is create a state variable.
+The first thing we need to do with a stateful component is create a state property.
 
-We'll use the `useState()` function to do this. The `useState()` function takes a single argument: the default value for our state variable.
+We'll use the `useState()` function to do this. The `useState()` function takes a single argument: the default value for our state property.
 
-`useState()` returns an array of length 2. The first item is the value of the state variable, and the second item is a function we can call to update the value. We'll use [array destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) to assign these array items to variables with meaningful names.
+`useState()` returns an array of length 2. The first item is the value of the state property, and the second item is a function we can call to update the value. We'll use [array destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) to assign these array items to variables with meaningful names.
 
 The `useState()` function should be called at the top of a component function. An example looks like this:
 
@@ -38,9 +38,9 @@ function Counter(props) {
 }
 ```
 
-In this example, the value of our state variable will be stored in `count`; we get a function named `setCount` to update the value; and we give the count an initial value of `123`.
+In this example, the value of our state property will be stored in `count`; we get a function named `setCount` to update the value; and we give the count an initial value of `123`.
 
-👉 Add a state variable to the `FriendFlipper` component in `friend-detail/FriendFlipper.js`, which will keep track of whether the card is flipped.
+👉 Add a state property to the `FriendFlipper` component in `friend-detail/FriendFlipper.js`, which will keep track of whether the card is flipped.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#useState).
 
@@ -50,9 +50,9 @@ Currently, the component is always rendering the `<Front>` of the card.
 
 We'll want our component to render the `<Front>` component when the card is not flipped, and the `<Back>` component when it is flipped.
 
-We can do this by checking the value of the state variable.
+We can do this by checking the value of the state property.
 
-👉 Conditionally render the `<Front>` component or `<Back>` component, based on the value of the state variable you defined.
+👉 Conditionally render the `<Front>` component or `<Back>` component, based on the value of the state property you defined.
 
 You can use a ternary statement to render the appropriate side, or call a function that uses an if/else to return the correct side.
 
