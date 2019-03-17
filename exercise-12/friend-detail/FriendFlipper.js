@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import classNames from 'classnames';
-import theme from '../theme/static';
+
+import ThemeContext from '../theme/context';
+
 import styles from './FriendFlipper.module.css';
 
 export default function FriendFlipper(props) {
@@ -21,6 +23,8 @@ export default function FriendFlipper(props) {
 
 function Front(props) {
   const { friend, setFlipped } = props;
+  const { theme } = useContext(ThemeContext);
+
   return (
     <div className={styles.front}>
       <div className={styles.frontContents}>
@@ -39,6 +43,7 @@ function Front(props) {
 
 function Back(props) {
   const { friend, setFlipped } = props;
+  const { theme } = useContext(ThemeContext);
   return (
     <div className={styles.back}>
       <div className={classNames(styles.backContents, styles[theme])}>

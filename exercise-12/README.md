@@ -10,13 +10,15 @@ Throughout the workshop, you've seen the app alternate between green and purple 
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-12`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 12: React Context", and our three adorable kitten friends in the purple theme. If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 12: React Context", and our three adorable kitten friends in the purple theme. There is a button in the top right that says "Change Theme", but it doesn't do anything yet.
+
+If you're not seeing this, ask your neighbor for assistance or raise your hand.
 
 ### Static theme
 
-We've modified the CSS Modules coming into this exercise, so that they render based on a static theme. The static theme is defined in `./theme/static/index.js`. If you change the static theme, the UI will reflect it.
+We've modified the CSS Modules coming into this exercise, so that they render based on a static theme. The static theme is defined in `./theme/static.js`. If you change the static theme, the UI will reflect it.
 
-👉 Change the exported value in `./theme/static/index.js` from `green` to `purple`.
+👉 Change the exported value in `./theme/static.js` from `green` to `purple`.
 
 In your browser, you should see the theme change from green to purple.
 
@@ -28,7 +30,11 @@ In `Header.js`, you'll see that we've rendered a new component named `<ThemeSwit
 
 The React Context API involves three players: a Context, a Provider, and many Consumers.
 
-The Context defines that we will use a specific type of context in our app.
+A **Context** is like a "namespace" for state in your React app. You can have multiple Contexts in a tree, each of them associated with its own data.
+
+A **Provider** is associated with a Context. It sits at the top of a sub-tree of components, manages state for the sub-tree, and provides the value to any sub-components that need it.
+
+Multiple **Consumers** exist in a sub-tree, beneath the Provider. Each of those consumers _subscribes_ to a Context, and has access to the state provided by the Provider.
 
 ### ThemeContext
 
@@ -44,11 +50,11 @@ import React from 'react';
 export default React.createContext();
 ```
 
-There isn't much happening here. The important thing is that it is calling `React.createContext()`, and exporting the result. When we want to create a Provider or Consumer, we'll need to use this Context.
+There isn't much happening here. The important thing is that it is calling `React.createContext()`, and exporting the result. When we want to create a Theme Provider or Theme Consumer, we'll need to reference this Theme Context.
 
 ### ThemeProvider
 
-A Provider handles the state management for a Context.
+A Provider handles the state management for a Context, and sits atop a sub-tree of Consumers.
 
 For this exercise, we've already created the Provider. It is named `ThemeProvider`, and it's located at `theme/Provider.js`.
 
@@ -56,68 +62,58 @@ For this exercise, we've already created the Provider. It is named `ThemeProvide
 
 You should see a component that looks similar to other stateful components. It includes several pieces we've seen in previous exercises.
 
-#### State Initialization
+#### A `theme` State Property & `setTheme` State Modifier
 
-The `ThemeProvider` initializes its state, so that the `theme` is defaulted to `purple`.
+The `ThemeProvider` calls `useState` to declare a state property & modifier. It initializes the state property to `purple`.
 
 ```jsx
-export default class ThemeProvider extends React.Component {
-  state = {
-    theme: 'purple',
+export default function ThemeProvider(props) {
+  const [theme, setTheme] = useState('purple');
+
+  // ...
+}
+```
+
+#### An Event Handler For State Change
+
+The `ThemeProvider` includes a `handleThemeChange()` method, which updates the state of the Provider using `setState`.
+
+This handler swaps the `theme` state property between `green` and `purple` each time it is called.
+
+```jsx
+export default function ThemeProvider(props) {
+  // ...
+
+  const handleThemeChange = () => {
+    setTheme(theme === 'green' ? 'purple' : 'green');
   };
 
   // ...
 }
 ```
 
-#### Handle State Change
+#### Passing The State To Its Children
 
-The `ThemeProvider` includes a `handleTimeChange()` method, which updates the state of the Context using `setState`.
+The `ThemeProvider` renders a `<ThemeContext.Provider>` element, with `props.children` inside of it.
 
-This handler is swapping the value of `this.state.theme` between `green` and `purple` each time it is called.
+A Context Provider passes the Context state down to its children via the `value` prop. The `value` prop can contain a single value, or it can contain an object if there are multiple values to pass down. The `value` prop should contain all state & handlers that any Consumers in the sub-tree would need.
+
+In our case, we need to pass down the current theme, as well as our handler that toggles the theme from `green` to `purple`. Thus we create an object (`data`), and pass that into the rendered `<ThemeContext.Provider>`, instead of a single value.
 
 ```jsx
-export default class ThemeProvider extends React.Component {
+export default function ThemeProvider(props) {
   // ...
 
-  handleThemeChange = () => {
-    this.setState(prevState => ({
-      theme: prevState.theme === 'green' ? 'purple' : 'green',
-    }));
+  const data = {
+    theme: theme,
+    onThemeChanged: handleThemeChange,
   };
 
-  // ...
+  return (
+    <ThemeContext.Provider value={data}>{props.children}</ThemeContext.Provider>
+  );
 }
 ```
-
-#### render()
-
-The last thing the `ThemeProvider` does is render the current state.
-
-A Context Provider passes the state down to its children via the `value` prop. The `value` prop can contain a single value, or it can contain an object if there are multiple values to pass down.
-
-In this case, we need to pass down the current theme, as well as our handler that toggles the theme from `green` to `purple`. Thus we create an object (`data`), and pass that into the rendered `<ThemeContext.Provider>`, instead of a single value.
-
-```jsx
-export default class ThemeProvider extends React.Component {
-  // ...
-
-  render() {
-    const data = {
-      theme: this.state.theme,
-      onThemeChanged: this.handleThemeChange,
-    };
-
-    return (
-      <ThemeContext.Provider value={data}>
-        {this.props.children}
-      </ThemeContext.Provider>
-    );
-  }
-}
-```
-
-Inside the `<ThemeContext.Provider>` is rendered the children passed into the provider. This allows the Provider to wrap a component tree, and pass the state down to all of its children.
 
 ### Wrap the app in a `<ThemeProvider>`
 
@@ -131,41 +127,29 @@ You'll want to import the `ThemeProvider`, and wrap the rendered `App` component
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#app-themeprovider).
 
-### Adding ThemeContext.Consumers
+### Adding ThemeContext.Consumers With `useContext`
 
-Now that we've wrapped the app in the `ThemeProvider`, we can attach Consumers anywhere down the tree.
+Context Consumers are all of the components in a sub-tree that need access to the Context state. This might include components that are rendering the state to the DOM, but it might also include components that modify the state. We can put as many Consumers inside a sub-tree as we want. Each one of them has access to the state of the nearest Provider in its ancestry.
 
-Consumers look like this:
+We'll use the `useContext` hook to attach consumers.
 
-```jsx
-import ThemeContext from './theme/context';
+The `useContext` consumer takes a single argument: the Context object it wants to consume.
 
-export default function MyComponent() {
-  return (
-    <ThemeContext.Consumer>
-      {value => <MyComponent value={value} />}
-    </ThemeContext.Consumer>
-  );
-}
-```
+`useContext` returns a single object: the `value` passed down by the nearest Provider in the current component's ancestry.
 
-The child of the `<ThemeContext.Consumer>` is a function. It takes an argument that contains the `value` that was passed down by the `ThemeContext.Provider`.
-
-Inside the inner function, your components can do whatever they need with the value passed in.
-
-Remember that in our case, we have two properties on the `value` that we are interested in: the `theme` and an `onThemeChanged` handler. This means we could use object destructuring to write a consumer like this:
+Remember that in our case, we have two properties on the `value` that we are interested in: the `theme` and an `onThemeChanged` handler. A Consumer for our ThemeContext might look like this:
 
 ```jsx
 import ThemeContext from './theme/context';
 
 export default function MyComponent() {
-  return (
-    <ThemeContext.Consumer>
-      {({theme, onThemeChanged}) => (
-        <MyComponent value={value} />
-      }}
-    </ThemeContext.Consumer>
-  )
+  const value = useContext(ThemeContext);
+
+  // Now we can do whatever we want with the value object.
+  console.log(value.theme); // 'purple'
+  console.log(value.onThemeChanged); // [FUNCTION] - the handler defined in our Provider.
+
+  //...
 }
 ```
 
@@ -173,25 +157,27 @@ export default function MyComponent() {
 
 The `Switcher` component is located at `theme/Switcher.js`. It is the button that toggles the theme from `green` to `purple`. In the context of our ThemeContext, that means it is a Consumer that needs to call the `onThemeChanged` handler.
 
-👉 Wrap the `Switcher` component in `<ThemeContext.Consumer>`
+👉 Modify the `Switcher` component to subscribe to the ThemeContext
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-themecontext.consumer).
+You'll do this by calling `useContext`. Remember that the value returned by calling `useContext` contains all data that the ThemeProvider manages.
 
-Wrapping in `<ThemeContext.Consumer>` gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes an `onThemeChanged` handler. We need to connect our button to that handler.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-useContext).
 
-👉 Within the `Switcher` component, connect the button `click` event to the `onThemeChanged` handler passed into the rendering function.
+Subscribing to the ThemeContext gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes an `onThemeChanged` handler. We need to connect our button to that handler.
+
+👉 Within the `Switcher` component, connect the button `click` event to the `onThemeChanged` handler from the subscribed Context.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-onthemechanged).
 
-### Make the Header a Consumer
+### Make the Header a ThemeContext Consumer
 
-We've hooked up the Consumer that modifies the application-level state; now we need to connect the Consumers that read the application-level state. This starts with the `Header` component, located at `Header.js`.
+We've hooked up the Consumer that _modifies_ the application-level state; now we need to connect the Consumers that _read_ the application-level state. This starts with the `Header` component, located at `Header.js`.
 
-👉 Wrap the `Header` component's `<header>` element in a `<ThemeContext.Consumer>` component.
+👉 Modify the `Header` component to subscribe to the ThemeContext, and utilize the `theme` property
 
-Wrapping in `<ThemeContext.Consumer>` gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes a `theme` property. We need to connect our header to that property.
+The `Header` component uses a static theme, imported from `'./theme/static'`. We'll no longer need that.
 
-Now that we're using the `theme` passed into the rendering function, we no longer need the static theme imported from `./theme/static`.
+Instead, use the theme from the value acquired by subscribing to the ThemeContext.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#header-consumer).
 
@@ -201,35 +187,35 @@ At this point you should see the header color change when you click the button.
 
 If you don't, re-read the instructions above thoroughly. If you can't figure out what you missed, ask your neighbor, or raise your hand.
 
-### Make the `Page` shared component a `ThemeContext.Consumer`
+### Make the `Page` shared component a ThemeContext Consumer
 
 The `Page` component, located at `shared/Page.js`, needs to also utilize the `theme` property from the ThemeContext.
 
-👉 Modify the `Page` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function.
+👉 Modify the `Page` component to subscribe to the ThemeContext, and utilize the `theme` property
 
-Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
+Reference the [Header](#make-the-header-a-themecontext-consumer) instructions if you can't remember how to make this happen.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#page-consumer).
 
-### Make the `Card` shared component a `ThemeContext.Consumer`
+### Make the `Card` shared component a ThemeContext Consumer
 
 The `Card` component, located at `shared/Card.js`, needs to also utilize the `theme` property from the ThemeContext.
 
-👉 Modify the `Card` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function.
+👉 Modify the `Card` component to subscribe to the ThemeContext, and utilize the `theme` property
 
 Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#card-consumer).
 
-### Make the `FriendFlipper` a `ThemeContext.Consumer`
+### Make the `FriendFlipper` a ThemeContext Consumer
 
 The `FriendFlipper` component, located at `friend-detail/FriendFlipper.js`, needs to also utilize the `theme` property from the ThemeContext.
 
-👉 Modify the `FriendFlipper` component to be a `<ThemeContext.Consumer>`, utilizing the `theme` property in its rendering function.
+👉 Modify the `FriendFlipper` component to subscribe to the ThemeContext, and utilize the `theme` property
 
 Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
 
-In this component, there is a `renderFront()` and `renderBack()` method. Both of these could individually be made Consumers, or you could make the overall `render()` method a Consumer and pass the `theme` into `renderFront()` and `renderBack()`.
+This component has two child components - `<Front>` and `<Back>`. Both of these could individually be made Consumers, or you could make the `FriendFlipper` component a Consumer and pass the `theme` into `<Front>` and `<Back>`.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-consumer).
 
@@ -241,4 +227,6 @@ If this doesn't happen, re-read the instructions above thoroughly. If you can't 
 
 ### Extra Credit
 
-[Read about React Context vs Redux](https://daveceddia.com/context-api-vs-redux/).
+[Read about when to use React Context](https://reactjs.org/docs/context.html#when-to-use-context). Note that these docs show a different syntax for subscribing to a React Context than `useContext`. The syntax in the docs is a legacy syntax, which we'll learn about later.
+
+[Read about React Context vs Redux, another option for managing application-level state.](https://daveceddia.com/context-api-vs-redux/). Note that this article also uses the legacy syntax for subscribing to a React Context.

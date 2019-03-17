@@ -9,7 +9,6 @@ import FriendDetail from './friend-detail/FriendDetail.entry';
 
 import styles from './App.module.css';
 
-//finished!
 import ThemeProvider from './theme/Provider';
 
 function App() {

@@ -9,133 +9,101 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <div className={styles.app}>
-          // ...
-        </div>
+        <div className={styles.app}>// ...</div>
       </ThemeProvider>
     </BrowserRouter>
   );
 }
-
 ```
 
-## Switcher: ThemeContext.Consumer
+## Switcher: useContext
 
 ```jsx
-import ThemeContext from './context';
+HERE;
+import React, { useContext } from 'react';
+import ThemeContext from '../theme/context';
+
+// ...
 
 export default function() {
-  return (
-    <ThemeContext.Consumer>
-      {({ theme }) => (
-        <button className={styles.switcher}>
-          Change Theme
-        </button>
-      )}
-    </ThemeContext.Consumer>
-  );
+  const value = useContext(ThemeContext);
+
+  return <button className={styles.switcher}>Change Theme</button>;
 }
 ```
 
 ## Switcher: onThemeChanged
-```jsx
-import ThemeContext from './context';
 
+```jsx
 export default function() {
+  const value = useContext(ThemeContext);
+
   return (
-    <ThemeContext.Consumer>
-      {({ theme, onThemeChanged }) => (
-        <button className={styles.switcher} onClick={onThemeChanged}>
-          Change Theme
-        </button>
-      )}
-    </ThemeContext.Consumer>
+    <button className={styles.switcher} onClick={value.onThemeChanged}>
+      Change Theme
+    </button>
   );
 }
 ```
 
 ## Header: Consumer
+
 ```jsx
+import React, { useContext } from 'react';
 // import theme from './theme/static'; // no longer needed
+// ...
 import ThemeContext from './theme/context';
+// ...
 
 export default function Header() {
+  const {theme} = useContext(ThemeContext);
   return (
-    <ThemeContext.Consumer>
-      {({ theme }) => (
-        <header ... >
-          ...
-        </header
-      )}
-    </ThemeContext.Consumer>
+    // ...
   );
 }
 ```
 
 ## Page: Consumer
-```jsx
-import ThemeContext from '../theme/context';
 
+```jsx
 export default function Page({ children }) {
+  const {theme} = useContext(ThemeContext);
+
   return (
-    <ThemeContext.Consumer>
-      {({ theme }) => (
-        <div className={classNames(styles.page, styles[theme])}>
-          <div className={styles.content}>{children}</div>
-        </div>
-      )}
-    </ThemeContext.Consumer>
+    // ...
   );
 }
 ```
 
 ## Card: Consumer
-```jsx
-import ThemeContext from '../theme/context';
 
+```jsx
 export default function Card({ children }) {
+  const {theme} = useContext(ThemeContext);
   return (
-    <ThemeContext.Consumer>
-      {({theme}) => (
-        <div className={classNames(styles.card, styles[theme])}>{children}</div>
-      )}
-    </ThemeContext.Consumer>
+    // ...
   );
 }
 ```
 
 ## FriendFlipper: Consumer
+
 ```jsx
-import ThemeContext from '../theme/context';
+function Front(props) {
+  const { theme } = useContext(ThemeContext);
+  const { friend, setFlipped } = props;
 
-export default class FriendFlipper extends React.Component {
+  return (
+    // ...
+  );
+}
 
-  // ...
+function Back(props) {
+  const { theme } = useContext(ThemeContext);
+  const { friend, setFlipped } = props;
 
-  renderFront() {
-    const { friend } = this.props;
-    return (
-      <ThemeContext.Consumer>
-        {({ theme }) => (
-          <div className={styles.front}>
-            // ...
-          </div>
-        )}
-      </ThemeContext.Consumer>
-    );
-  }
-
-  renderBack() {
-    const { friend } = this.props;
-    return (
-      <ThemeContext.Consumer>
-        {({ theme }) => (
-          <div className={styles.back}>
-            // ...
-          </div>
-        )}
-      </ThemeContext.Consumer>
-    );
-  }
+  return (
+    // ...
+  );
 }
 ```
