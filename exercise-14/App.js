@@ -1,18 +1,29 @@
 import React from 'react';
-import './App.css';
-import Exercise from './Exercise';
+
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Header from './Header';
+
+import Friends from './friends/Friends.entry';
+import FriendDetail from './friend-detail/FriendDetail.entry';
+
+import styles from './App.module.css';
+
+import ThemeProvider from './theme/Provider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Exercise 14</h1>
-        <h2 className="sub-title">Convert a Component</h2>
-      </header>
-      <div className="exercise">
-        <Exercise />
-      </div>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider>
+        <div className={styles.app}>
+          <Header />
+          <div className={styles.exercise}>
+            <Route path="/" exact component={Friends} />
+            <Route path="/friends/:id" component={FriendDetail} />
+          </div>
+        </div>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

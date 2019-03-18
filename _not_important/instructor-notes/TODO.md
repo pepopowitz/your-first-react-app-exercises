@@ -45,6 +45,10 @@ v16: Legacy Lifecycle Events (new)
 
 -[ ] write ex 16 (legacy lifecycle)
 
+-[ ] verify ex 17 (testing render)
+
+-[ ] verify ex 18 (testing interactions)
+
 ### Instructor-led/no instrux
 
 -[ ] write instrux for ex 1: modernjs: modules
