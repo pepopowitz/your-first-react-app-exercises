@@ -52,7 +52,7 @@ Slides: 09/Components + React + JSX
 20m
 Ex: 06/render() Results
 20m
-Ex: 07/Convert a component
+Ex: 07/Converting components
 10m
 
 ---

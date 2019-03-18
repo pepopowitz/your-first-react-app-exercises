@@ -1,78 +1,74 @@
 # Exercise 14
 
-## Convert A Component
+## Converting Components
 
-Components that don't maintain their own state or use React methods other than `render()` can be converted from class syntax components to stateless functional components. This reduces code boilerplate.
+In older versions of React, components that maintained state or performed side-effects were required to be written with ES2015's Class Syntax.
 
-In this exercise, you'll convert a component from a function to a class. This is an activity that, until React version 16.8, happened quite often during development.
+With state & side-effect hooks available as of v16.8, functional components are generally preferred to class components. You'll probably come across components written with classes, though, so you should become accustomed to working with them.
+
+In this exercise, you'll convert components from functions to classes. Until React version 16.8, this activity happened quite often during development, when components were changed from stateless to stateful.
 
 👉 Start the app for Exercise 14
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-14`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 14: Convert a Component". If it doesn't, ask your neighbor for assistance or raise your hand.
-
-👉 Open Exercise.js
-
-All of your work for this exercise will take place in Exercise.js.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 14: Converting Components". If it doesn't, ask your neighbor for assistance or raise your hand.
 
 ### Background
 
-In this exercise, we have two components in `Exercise.js` - `Friends` and `FriendProfile`. Neither of these components needs state, and neither needs any React methods other than `render()`. We can convert them both!
+In this exercise, we'll be converting two components from functional components to class components: `friends/Friends.js` and `friends/FriendProfile.js`. Then we'll convert them back to functional components, for practice.
+
+Class components use ES2015's Class Syntax. A class component must extend `React.Component`, and it must implement a `render()` method, which returns the JSX to render to the DOM.
 
 ### The Process
 
-When converting to a stateless functional component, there are three things that need to be done:
+When converting from a functional component to a class component, there are three things that need to be done:
 
-#### 1. Convert the class to a function of the same name
+#### 1. Convert the function to a class that extends React.Component
 
 For example,
 
 ```jsx
-class FriendProfile extends React.Component {
-  // render()...
+function FriendProfile(props) {
+  // ...
 }
 ```
 
 becomes
 
 ```jsx
-function FriendProfile(props) {
-  // render()...
+class FriendProfile extends React.Component {
+  // ...
 }
 ```
 
-#### 2. Remove the render() method
+#### 2. Add a `render()` method
+
+The `render()` method returns the JSX that the component wants to render, just like the return value of a functional component.
 
 For example,
 
 ```jsx
 function FriendProfile(props) {
+  return <div>Hello!</div>;
+}
+```
+
+becomes
+
+```jsx
+class FriendProfile extends React.Component {
   render() {
-    // ...what gets rendered
+    return <div>Hello!</div>;
   }
 }
 ```
 
-becomes
+#### 3. Convert `props` references to `this.props`.
 
-```jsx
-function FriendProfile(props) {
-  // ...what gets rendered
-}
-```
-
-#### 3. Convert `this.props` references to `props`.
+While a functional component has props passed in as an argument, a class component accesses them as a `props` object on the instance of the class - `this.props`.
 
 For example,
-
-```jsx
-{
-  this.props.name;
-}
-```
-
-becomes
 
 ```jsx
 {
@@ -80,36 +76,44 @@ becomes
 }
 ```
 
-That's all it takes to convert from a class syntax component to a stateless functional one!
+becomes
 
-👉 Convert the `Friends` component to a stateless functional component
+```jsx
+{
+  this.props.name;
+}
+```
 
-Check your browser to make sure the components are still rendering properly!
+That's all it takes to convert from a class component to a stateless functional one!
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-stateless).
-
-👉 Convert the `FriendProfile` component to a stateless functional component
-
-Check your browser to make sure the components are still rendering properly!
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-stateless).
-
-Sometimes, we need to convert the other direction - from stateless functional component to class syntax component.
-
-👉 Convert the `Friends` component back to a class syntax component
-
-Check your browser to make sure the components are still rendering properly!
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-class).
-
-👉 Convert the `FriendProfile` component back to a class syntax component
+👉 Convert the `FriendProfile` component from a stateless functional component to a class component
 
 Check your browser to make sure the components are still rendering properly!
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-class).
 
----
+👉 Convert the `Friends` component from a stateless functional component to a class component
 
-TODO
+The functional `Friends` component calls a function named `renderFriends()`. You could leave this as a standalone function, or you could make it another method on the `Friends` class. If you choose to make it another method, remember that you'll need to specify `this.` when you call it.
 
-Extra Credit: https://overreacted.io/how-are-function-components-different-from-classes/
+Check your browser to make sure the components are still rendering properly!
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-class).
+
+Let's also practice converting in the other direction - from class component to functional component.
+
+👉 Convert the `FriendProfile` component back to a functional component
+
+Check your browser to make sure the components are still rendering properly!
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-functional).
+
+👉 Convert the `Friends` component back to a functional component
+
+Check your browser to make sure the components are still rendering properly!
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-functional).
+
+### Extra Credit
+
+[Read about how function components are different from classes](https://overreacted.io/how-are-function-components-different-from-classes/).

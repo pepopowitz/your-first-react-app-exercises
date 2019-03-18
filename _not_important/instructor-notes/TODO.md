@@ -11,7 +11,7 @@ t9: Managing Component State (was 12)
 v11: Loading Data (was 14)
 t12: React Context (was 15)
 13: Modern JavaScript: Class Syntax (was 3)
-v14: Convert A Component (was 7)
+v14: Converting Components (was 7)
 t15: Legacy State Management (new)
 v16: Legacy Lifecycle Events (new)
 17: Testing Component Render

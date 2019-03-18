@@ -1,25 +1,23 @@
 # Possible Solutions
 
-## Friends to stateless
+## FriendProfile to class
 
 ```jsx
-export default function Friends(props) {
-  return myFriends.map(friend => (
-    <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
-  ));
-}
-```
+export default class FriendProfile extends React.Component {
+  render() {
+    const { id, name, image } = this.props;
 
-## FriendProfile to stateless
-
-```jsx
-function FriendProfile(props) {
-  return (
-    <div className="friend-profile">
-      {props.name}
-      {props.age ? ` (${props.age})` : null}
-    </div>
-  );
+    return (
+      <Link to={'friends/' + id}>
+        <Card>
+          <div className={styles.friendProfile}>
+            <img src={image} alt={name} />
+            <h3>{name}</h3>
+          </div>
+        </Card>
+      </Link>
+    );
+  }
 }
 ```
 
@@ -28,24 +26,63 @@ function FriendProfile(props) {
 ```jsx
 export default class Friends extends React.Component {
   render() {
-    return myFriends.map(friend => (
-      <FriendProfile key={friend.id} name={friend.name} age={friend.age} />
+    return <Page>{this.renderFriends()}</Page>;
+  }
+
+  renderFriends() {
+    const { friends } = this.props;
+    if (friends.length === 0) {
+      return <h1>Loading...</h1>;
+    }
+
+    return friends.map(friend => (
+      <FriendProfile
+        key={friend.id}
+        id={friend.id}
+        name={friend.name}
+        image={friend.image}
+      />
     ));
   }
 }
 ```
 
-## FriendProfile to class
+## FriendProfile to functional
 
 ```jsx
-class FriendProfile extends React.Component {
-  render() {
-    return (
-      <div className="friend-profile">
-        {this.props.name}
-        {this.props.age ? ` (${this.props.age})` : null}
-      </div>
-    );
+export default function FriendProfile({ id, name, image }) {
+  return (
+    <Link to={'friends/' + id}>
+      <Card>
+        <div className={styles.friendProfile}>
+          <img src={image} alt={name} />
+          <h3>{name}</h3>
+        </div>
+      </Card>
+    </Link>
+  );
+}
+```
+
+## Friends to functional
+
+```jsx
+export default function Friends(props) {
+  return <Page>{renderFriends(props.friends)}</Page>;
+}
+
+function renderFriends(friends) {
+  if (friends.length === 0) {
+    return <h1>Loading...</h1>;
   }
+
+  return friends.map(friend => (
+    <FriendProfile
+      key={friend.id}
+      id={friend.id}
+      name={friend.name}
+      image={friend.image}
+    />
+  ));
 }
 ```
