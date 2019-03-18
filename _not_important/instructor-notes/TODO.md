@@ -39,12 +39,16 @@ v16: Legacy Lifecycle Events (new)
 
 -[x] rewrite ex 12 (and beyond) to useContext
 
--[ ] rewrite ex 14 to go opposite direction
+-[x] rewrite ex 14 to go opposite direction
 
 -[ ] write ex 15 (legacy state mgmt)
+  convert provider (referencing this.state.theme)
+    mention functional updater of setState as a more async-safe way
 
 -[ ] write ex 16 (legacy lifecycle)
-
+  convert Friends.entry.js
+  convert FriendDetail.entry.js
+  
 -[ ] verify ex 17 (testing render)
 
 -[ ] verify ex 18 (testing interactions)
