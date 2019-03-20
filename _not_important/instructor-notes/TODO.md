@@ -41,7 +41,7 @@ v16: Legacy Side Effects (new)
 
 -[x] rewrite ex 14 to go opposite direction
 
--[ ] write ex 15 (legacy state mgmt)
+-[x] write ex 15 (legacy state mgmt)
 convert provider (referencing this.state.theme)
 mention functional updater of setState as a more async-safe way
 
@@ -49,9 +49,9 @@ mention functional updater of setState as a more async-safe way
 convert Friends.entry.js
 convert FriendDetail.entry.js
 
--[ ] verify ex 17 (testing render)
+-[x] verify ex 17 (testing render)
 
--[ ] verify ex 18 (testing interactions)
+-[x] verify ex 18 (testing interactions)
 
 ### Instructor-led/no instrux
 

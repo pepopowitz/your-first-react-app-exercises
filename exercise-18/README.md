@@ -1,11 +1,12 @@
 # Exercise 18
+
 ## Testing Component Interactions
 
 In this exercise, we're going to write tests to verify that the `FriendFlipper` component is functioning properly with user interaction.
 
 ### Setup
 
-👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-17`.
+👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-18`.
 
 You should see the following output:
 
@@ -27,25 +28,25 @@ If you do see this output, you're in good shape. The output will change as we mo
 
 ### `FriendFlipper` Functionality
 
-We built the `FriendFlipper` a few exercises ago. Recall that it has a front and a back. When the button is clicked on either side, the opposite side renders. 
+We built the `FriendFlipper` a few exercises ago. Recall that it has a front and a back. When the button is clicked on either side, the opposite side renders.
 
 We want to write tests that verify that (1) the front side is present when the component initially renders, and (2) the back side is present when the button on the front is clicked.
 
 ### Adding Test IDs to the FriendFlipper
 
-When we render our FriendFlipper, we'll want to identify the front and back sides. 
+When we render our FriendFlipper, we'll want to identify the front and back sides.
 
-Currently, we could identify them by CSS classes, but that isn't a great practice. Identifying elements by CSS classes is brittle, leading to easily-broken tests. Developers might rename the CSS classes, and not realize they're going to break our tests. 
+Currently, we could identify them by CSS classes, but that isn't a great practice. Identifying elements by CSS classes is brittle, leading to easily-broken tests. Developers might rename the CSS classes, and not realize they're going to break our tests.
 
 It'd be better to specify an identifier explicitly on the element - so that when a developer saw it, they would know not to remove it, because a test was depending on it.
 
 We'll do this with the attribute `data-testid`.
 
-👉 Add a `data-testid="front"` prop to the front side of the `FriendFlipper` component. 
+👉 Add a `data-testid="front"` prop to the front side of the `FriendFlipper` component.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-front).
 
-👉 Add a `data-testid="back"` prop to the back side of the `FriendFlipper` component. 
+👉 Add a `data-testid="back"` prop to the back side of the `FriendFlipper` component.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-back).
 
@@ -65,7 +66,6 @@ To facilitate writing tests against the `FriendDetail` component, we've imported
 4. `fireEvent`: this is an object from `react-testing-library` that allows us to fire DOM events. We'll use it to simulate the clicking of a button in our tests.
 5. `FriendFlipper`: this is the component under test.
 
-
 ### Write a test verifying that the front is present by default, but not the back
 
 We've stubbed out some placeholders for your tests, again.
@@ -82,10 +82,10 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#front-arrange).
 
 👉 In the 'front side' test, render a `<FriendFlipper>` component.
 
-* Use the `render()` function from react-testing-library.
-* Store the result in a variable named `context`.
-* Pass the `friend` variable as a prop named `friend`.
-* Recall that we'll need to wrap the `<FriendFlipper>` component in `<MemoryRouter>` and `<ThemeProvider>` elements, because components down the tree depend on them.
+- Use the `render()` function from react-testing-library.
+- Store the result in a variable named `context`.
+- Pass the `friend` variable as a prop named `friend`.
+- Recall that we'll need to wrap the `<FriendFlipper>` component in `<MemoryRouter>` and `<ThemeProvider>` elements, because components down the tree depend on them.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#front-act).
 
@@ -99,10 +99,10 @@ If an element is found with that test ID, it is returned. If no matching element
 
 👉 In the 'front side' test, assert that the proper side is showing in the rendered output.
 
-* Verify that the `front` testId is present.
-* Verify that the `back` testId is **not** present.
-* Use `context.queryByTestId()` to find the elements.
-* Use the `.toBeNull()` and `.not.toBeNull()` matchers to assert the presence/non-presence of the test IDs.
+- Verify that the `front` testId is present.
+- Verify that the `back` testId is **not** present.
+- Use `context.queryByTestId()` to find the elements.
+- Use the `.toBeNull()` and `.not.toBeNull()` matchers to assert the presence/non-presence of the test IDs.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#front-assert).
 
@@ -128,10 +128,10 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#back-arrange).
 
 👉 In the second test, render a `<FriendFlipper>` component.
 
-* Use the `render()` function from react-testing-library.
-* Store the result in a variable named `context`.
-* Pass the `friend` variable as a prop named `friend`.
-* Recall that we'll need to wrap the `<FriendFlipper>` component in `<MemoryRouter>` and `<ThemeProvider>` elements, because components down the tree depend on them.
+- Use the `render()` function from react-testing-library.
+- Store the result in a variable named `context`.
+- Pass the `friend` variable as a prop named `friend`.
+- Recall that we'll need to wrap the `<FriendFlipper>` component in `<MemoryRouter>` and `<ThemeProvider>` elements, because components down the tree depend on them.
 
 ##### Find the `Details >` button.
 
@@ -139,11 +139,11 @@ Once we've rendered the component, we need to grab the rendered `Details >` butt
 
 👉 In the second test, get the rendered `Details >` button, by text, from the context.
 
-* Use the `context.getByText()` method to find the element.
+- Use the `context.getByText()` method to find the element.
 
 ##### Fire a click event.
 
-With a reference to the button, we can use `fireEvent` to simulate a click event of our button. 
+With a reference to the button, we can use `fireEvent` to simulate a click event of our button.
 
 To simulate a click with `fireEvent` on a button with text `button text`, we would do this:
 
@@ -163,10 +163,10 @@ At this stage, if the component were rendered to the browser, we should see the 
 
 👉 In the second test, assert that the proper side is showing in the rendered output.
 
-* Verify that the `back` testId is present.
-* Verify that the `front` testId is **not** present.
-* Use `context.queryByTestId()` to find the elements.
-* Use the `.toBeNull()` and `.not.toBeNull()` matchers to assert the presence/non-presence of the test IDs.
+- Verify that the `back` testId is present.
+- Verify that the `front` testId is **not** present.
+- Use `context.queryByTestId()` to find the elements.
+- Use the `.toBeNull()` and `.not.toBeNull()` matchers to assert the presence/non-presence of the test IDs.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#back-assert).
 
@@ -178,6 +178,8 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#back-assert).
 
 ### Extra Credit
 
-* Read about [the guiding principles behind react-testing-library](https://github.com/kentcdodds/react-testing-library#guiding-principles).
+- Read about [the guiding principles behind react-testing-library](https://github.com/kentcdodds/react-testing-library#guiding-principles).
 
-* Read [an article I wrote](https://medium.com/@pepopowitz/chekhovs-gun-and-better-unit-tests-96fb439e6d0e), about what we can learn about testing from a long-dead Russian playwright.
+- Read [an article I wrote](https://medium.com/@pepopowitz/chekhovs-gun-and-better-unit-tests-96fb439e6d0e), about what we can learn about testing from a long-dead Russian playwright.
+
+- Read about [how to wait for an async event to complete while testing interactions](https://testing-library.com/docs/api-async#wait).
