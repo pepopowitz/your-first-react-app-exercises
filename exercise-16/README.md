@@ -4,120 +4,118 @@
 
 ---
 
-TODO
+Prior to the "hooks" release of React (v16.8), writing a stateful component required using classes. To run side-effects with these components, there were a few lifecycle events that every class component offered.
 
-In older versions of React, components that maintained state or performed side-effects were required to be written with ES2015's Class Syntax.
+When building React components, it's preferable to use functional components & `useEffect` to run side-effects. You'll probably come across class components that use lifecycle events in existing apps, though, so you should be familiar with them.
 
-With state & side-effect hooks available as of v16.8, functional components are generally preferred to class components. You'll probably come across components written with classes, though, so you should become accustomed to working with them.
+In this exercise, you'll compare a functional component that uses `useState` and `useEffect` to a class component that uses `setState` and lifecycle events.
 
-In this exercise, you'll convert components from functions to classes. Until React version 16.8, this activity happened quite often during development, when components were changed from stateless to stateful.
+👉 Open files for Exercise 16
 
-👉 Start the app for Exercise 14
+In your text editor, pull up the `modern/Friends.entry.js` and `legacy/Friends.entry.js` files. You will want to view them side by side, or diff them.
 
-In a console window, pointed at the root of this project, run `npm run start-exercise-14`.
+These two components function equivalently. You could substitute either into our app, with no noticeable differences. Let's look at the differences in how they're written.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 14: Converting Components". If it doesn't, ask your neighbor for assistance or raise your hand.
+### State Management
 
-### Background
+Not all components that perform side-effects also maintain state, but many do. Ours is an example of one that does: the side-effect is performed to gather data from an API, which is then stored in component state.
 
-In this exercise, we'll be converting two components from functional components to class components: `friends/Friends.js` and `friends/FriendProfile.js`. Then we'll convert them back to functional components, for practice.
+#### `modern/Friends.entry.js`
 
-Class components use ES2015's Class Syntax. A class component must extend `React.Component`, and it must implement a `render()` method, which returns the JSX to render to the DOM.
-
-### The Process
-
-When converting from a functional component to a class component, there are three things that need to be done:
-
-#### 1. Convert the function to a class that extends React.Component
-
-For example,
+In our modern component, you can see us using `useState` to manage an array of friends.
 
 ```jsx
-function FriendProfile(props) {
-  // ...
-}
+const [friends, setFriends] = useState([]);
 ```
 
-becomes
+See [Exercise 9](../exercise-9/README.md) for a refresher on `useState`.
+
+#### `legacy/Friends.entry.js`
+
+In the legacy component, we are using a class property named `state` to manage an array of friends.
 
 ```jsx
-class FriendProfile extends React.Component {
-  // ...
-}
+state = {
+  friends: [],
+};
 ```
 
-#### 2. Add a `render()` method
+View [Exercise 15](../exercise-15/README.md) for a refresher on legacy state management.
 
-The `render()` method returns the JSX that the component wants to render, just like the return value of a functional component.
+### Side Effects
 
-For example,
+The side effect we need to run in this component calls out to an API to retrieve a list of friends, then updates the state of the component with the results.
+
+#### `modern/Friends.entry.js`
+
+In our modern component, we are using `useEffect` to perform this side-effect. It calls out to `getFriendsFromApi` to get the list of friends, then calls the state modifier `setFriends` with the result.
 
 ```jsx
-function FriendProfile(props) {
-  return <div>Hello!</div>;
-}
+useEffect(async () => {
+  const friends = await getFriendsFromApi();
+  setFriends(friends);
+}, []);
 ```
 
-becomes
+See [Exercise 11](../exercise-11/README.md) for a refresher on `useEffect`.
+
+#### `legacy/Friends.entry.js`
+
+Our legacy component defines a class method named `componentDidMount`. This is a standard React method, and it executes as soon as a component is mounted to the DOM. This effectively means "as soon as React realizes it needs to render this component for the first time."
 
 ```jsx
-class FriendProfile extends React.Component {
-  render() {
-    return <div>Hello!</div>;
+  async componentDidMount() {
+    // ...
   }
-}
 ```
 
-#### 3. Convert `props` references to `this.props`.
+The body of our `componentDidMount` method is pretty similar to the body of the modern component's `useEffect` function. It calls out to an API, and with the results calls a state modifier.
 
-While a functional component has props passed in as an argument, a class component accesses them as a `props` object on the instance of the class - `this.props`.
-
-For example,
+In a stateful class component, there is only one state modifier available to the entire component. It is named `this.setState`. The object passed to `this.setState` contains only the changes that need to be made to the state. In this case, that's the `friends` we got back from the API.
 
 ```jsx
-{
-  props.name;
-}
+  async componentDidMount() {
+    const friends = await getFriendsFromApi();
+    this.setState({
+      friends,
+    });
+  }
 ```
 
-becomes
+Modern state management, in contrast, uses one state modifier for each piece of state that you want to manage.
 
-```jsx
-{
-  this.props.name;
-}
-```
+### Legacy Lifecycle Events
 
-That's all it takes to convert from a class component to a stateless functional one!
+There are several events that are available to a class-based React component.
 
-👉 Convert the `FriendProfile` component from a stateless functional component to a class component
+#### `componentDidMount`
 
-Check your browser to make sure the components are still rendering properly!
+[The `componentDidMount` event](https://reactjs.org/docs/react-component.html#componentdidmount) fires when a component is mounted to the DOM - this is before the very first time it is rendered.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-class).
+In a class component, this event was used when a component needed to load data from an API. It was also used to integrate with non-React APIs, like charting or websocket libraries.
 
-👉 Convert the `Friends` component from a stateless functional component to a class component
+The `useEffect` hook now accomplishes what `componentDidMount` did, the first time the hook executes.
 
-The functional `Friends` component calls a function named `renderFriends()`. You could leave this as a standalone function, or you could make it another method on the `Friends` class. If you choose to make it another method, remember that you'll need to specify `this.` when you call it.
+#### `componentWillUnmount`
 
-Check your browser to make sure the components are still rendering properly!
+[The `componentWillUnmount` event](https://reactjs.org/docs/react-component.html#componentwillunmount) fires when a component is about to be unmounted from the DOM.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-class).
+This event was used to clean up integrations with non-React APIs. In practice, when you had a `componentWillUnmount` handler, it was almost always cleaning up work that happened in a `componentDidMount` handler.
 
-Let's also practice converting in the other direction - from class component to functional component.
+The `useEffect` hook now accomplishes what `componentWillUnmount` did. A `useEffect` hook is composed of two functions - one that executes when the effect needs to be run, and optionally one that is run when a previous effect needs to clean up. This second clean-up function effectively replaces `componentWillUnmount`.
 
-👉 Convert the `FriendProfile` component back to a functional component
+#### `componentDidUpdate`
 
-Check your browser to make sure the components are still rendering properly!
+[The `componentDidUpdate` event](https://reactjs.org/docs/react-component.html#componentdidupdate) fires when a component is updated with new props or state.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-functional).
+This event was used when a component needed to react to changes that `render()` couldn't handle. In practice, this usually meant when a side-effect needed to be re-run.
 
-👉 Convert the `Friends` component back to a functional component
+The `useEffect` hook now accomplishes what `componentDidUpdate` did. A `useEffect` hook is composed of two functions - one that executes when the effect needs to be run, and optionally one that is run when a previous effect needs to clean up. The combination of these two functions has effectively replaced everything that `componentDidUpdate` was used for.
 
-Check your browser to make sure the components are still rendering properly!
+#### Others
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-to-functional).
+[There are several other legacy lifecycle events, but they are infrequently used.](https://reactjs.org/docs/react-component.html#rarely-used-lifecycle-methods)
 
 ### Extra Credit
 
-[Read about how function components are different from classes](https://overreacted.io/how-are-function-components-different-from-classes/).
+[Check out a diagram of the lifecycle methods available in a React class component.](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)

@@ -45,7 +45,7 @@ v16: Legacy Side Effects (new)
 convert provider (referencing this.state.theme)
 mention functional updater of setState as a more async-safe way
 
--[ ] write ex 16 (legacy side effects)
+-[x] write ex 16 (legacy side effects)
 convert Friends.entry.js
 convert FriendDetail.entry.js
 
