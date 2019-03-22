@@ -28,7 +28,7 @@ If you do see this output, you're in good shape. The output will change as we mo
 
 ### Automated Tests
 
-If you're unfamiliar with writing automated tests, or you're unfamiliar with Jest as a test framework, read [this short guide](./TESTING.md).
+If you're unfamiliar with writing automated tests, or you're unfamiliar with Jest as a test framework, read [this short guide](../junk-drawer/TESTING.md).
 
 We're going to write tests against our `friend-detail/FriendDetail.js` component. We've created a test file at `friend-detail/FriendDetail.spec.js` - our tests will go there.
 
