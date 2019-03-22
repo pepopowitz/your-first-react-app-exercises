@@ -55,9 +55,9 @@ convert FriendDetail.entry.js
 
 ### Instructor-led/no instrux
 
--[ ] write instrux for ex 1: modernjs: modules
+-[x] write instrux for ex 1: modernjs: modules
 
--[ ] write instrux for ex 2: identifying components
+-[x] write instrux for ex 2: identifying components
 
 -[ ] write instrux for ex 3: working with vars
 
@@ -67,9 +67,9 @@ convert FriendDetail.entry.js
 
 ### ModernJS tweaks
 
--[ ] All Modern JS exercises need to change. More instructions, so they can see the answers for what i'm doing? Let them do it on their own? Find a way to make it more hands-on for them, easier for them to get to the answers, and still not take a lot of time.
+-[x] All Modern JS exercises need to change. More instructions, so they can see the answers for what i'm doing? Let them do it on their own? Find a way to make it more hands-on for them, easier for them to get to the answers, and still not take a lot of time.
 
--[ ] In instructor notes for import/export, make sure I talk more about named vs default more!
+-[x] In instructor notes for import/export, make sure I talk more about named vs default more!
 
 -[ ] Modern JS #4 (async/await) is way too fast. Slow down, talk more about what you're doing.
 

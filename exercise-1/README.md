@@ -4,11 +4,17 @@
 
 This exercise introduces you to the module import & export features utilized in modern JavaScript applications.
 
-The instructor will lead you through some code examples. Follow along!
+We're going to write some simple unit tests to illustrate JavaScript modules.
 
-### Setup
+### Prerequisites
 
-This exercise utilizes unit tests for demonstration purposes. You don't need to know much about unit tests coming in.
+- If you're unfamiliar with the `let` and `const` keywords for declaring variables, [read about them](../junk-drawer/DECLARATION.md).
+
+- If you're unfamiliar with "fat-arrow" syntax (`(args) => {}`) for defining anonymous functions, [read about them](../junk-drawer/ANONYMOUS-FUNCTIONS.md).
+
+- If you're unfamiliar with writing unit tests in JavaScript, or the Jest test framework, [read about them](../junk-drawer/TESTING.md).
+
+### Get Started
 
 👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-1`.
 
@@ -31,19 +37,11 @@ If you don't see this output, try to investigate the message you see, ask your n
 
 If you do see this output, you're in good shape. The output will change as we modify our code.
 
-### Prerequisites
-
-- If you're unfamiliar with the `let` and `const` keywords for declaring variables, [read about them](../junk-drawer/DECLARATION.md).
-
-- If you're unfamiliar with "fat-arrow" syntax for defining anonymous functions, [read about them](../junk-drawer/ANONYMOUS-FUNCTIONS.md).
-
-- If you're unfamiliar with writing unit tests in JavaScript, or the Jest test framework, [read about them](../junk-drawer/TESTING.md).
-
 ### Modules
 
 Modules are a way to share reusable code in a JavaScript app. Many other languages support features similar to modules - they might also call them packages.
 
-If you've used the `require()` keyword in a JavaScript app, you've used modules.
+If you've used the `require()` keyword in a JavaScript app, you've used modules, though a different version than what we're going to use in this course.
 
 Modern JavaScript allows modules to be exported from a file in one of two ways: as a named dependency, or as a default dependency.
 
@@ -51,7 +49,7 @@ Modern JavaScript allows modules to be exported from a file in one of two ways: 
 
 A named dependency in JavaScript is an object (usually a function) that is exported with a specific name attached to it. When it is imported into another file, it must be referenced by that specific name.
 
-Let's write and test a named dependency. In the `exercise-2` folder, we have a commented-out test named `it('adds two numbers')` in `add.spec.js`. We'll use it to test a function named `add` in `add.js`.
+Let's write and test a named dependency. In the `exercise-1` folder, we have a commented-out test named `it('adds two numbers')` in `add.spec.js`. We'll use it to test a function named `add` in `add.js`.
 
 👉 Open the `add.spec.js` and `add.js` files side-by-side.
 
@@ -121,7 +119,7 @@ Every module in JavaScript (for now, a module is basically a file) has the abili
 
 Only one `default` dependency may be specified in a module. If you attempt to define more than one, you'll get an error.
 
-Let's write and test a default dependency! In the `exercise-2` folder, we have a commented-out test named `it('adds 3 to something')` in `add.spec.js`. We'll use it to test a function named `addThree` in `add.js`.
+Let's write and test a default dependency! In the `exercise-1` folder, we have a commented-out test named `it('adds 3 to something')` in `add.spec.js`. We'll use it to test a function named `addThree` in `add.js`.
 
 👉 Uncomment the second test in `add.spec.js`, named `it('adds 3 to something')`
 
@@ -172,6 +170,30 @@ export default function doStuff() { ... }
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#export-default).
 
 Your test should now be passing! You've exported a default function from `add.js`, imported it into `add.spec.js` as `addThree`, and verified that it works correctly! #doubleHighFive
+
+### Installed Dependencies
+
+We've looked at importing dependencies from code that we've written - but one of the greatest parts about modern JavaScript applications is the availability of libraries on NPM.
+
+We install an NPM dependency with the terminal - `npm install <packageName>`. To import a dependency that was installed from NPM, there's a subtle difference from importing a module in our codebase - the path to the dependency.
+
+When we imported from our `add.js` file, our import statement looked like this:
+
+```js
+import addThree, { add } from './add.js';
+```
+
+Remember how we had to specify `./` at the beginning of our file path?
+
+If we'd left that out, and imported `from 'add.js'`, our app would have complained about not finding an NPM dependency named `add.js`.
+
+That's how we tell our app that it should import something that we installed with NPM - the path to import from is the name of the package. For instance, to import the React library, we'd do this:
+
+```js
+import React from 'react';
+```
+
+This is a subtle difference, but important.
 
 ### Extra Credit
 
