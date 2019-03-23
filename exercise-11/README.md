@@ -4,6 +4,10 @@
 
 This exercise introduces you to a method of loading data from an API in a React component.
 
+### Prerequisites
+
+- If you're unfamiliar with the `async`/`await` syntax for writing asynchronous code, [read about it](../junk-drawer/ASYNC-AWAIT.md).
+
 👉 Start the app for Exercise 11
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-11`.
