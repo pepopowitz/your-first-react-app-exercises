@@ -1,14 +1,14 @@
-# Exercise 16
+# Exercise 15
 
 ## React Hooks
 
 This exercise will give you hands-on experience converting code to use the upcoming React hooks API. Hooks will simplify how we use several React features that we've already seen.
 
-👉 Start the app for Exercise 16
+👉 Start the app for Exercise 15
 
-In a console window, pointed at the root of this project, run `npm run start-exercise-16`.
+In a console window, pointed at the root of this project, run `npm run start-exercise-15`.
 
-This will open a browser window pointed at localhost:3000, showing a web app titled "Exercise 16: Hooks", our three adorable kitten friends, and a theme switcher that toggles between purple and green themes. If it doesn't, ask your neighbor for assistance or raise your hand.
+This will open a browser window pointed at localhost:3000, showing a web app titled "Exercise 15: Hooks", our three adorable kitten friends, and a theme switcher that toggles between purple and green themes. If it doesn't, ask your neighbor for assistance or raise your hand.
 
 ### New Components: FriendFlipperBack and FriendFlipperFront
 

@@ -10,7 +10,7 @@
       "name": "Launch Program",
       "program": "${workspaceFolder}/_not_important/scripts/start.js",
       "env": {
-        "APP_EXERCISE": "exercise-17"
+        "APP_EXERCISE": "exercise-16"
       }
     }
   ]

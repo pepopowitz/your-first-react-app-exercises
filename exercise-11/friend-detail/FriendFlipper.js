@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
+import theme from '../theme/static';
 
 import styles from './FriendFlipper.module.css';
 
@@ -20,13 +22,14 @@ export default function FriendFlipper(props) {
 
 function Front(props) {
   const { friend, setFlipped } = props;
+
   return (
     <div className={styles.front}>
       <div className={styles.frontContents}>
         <img src={friend.image} alt={friend.name} />
         <button
           type="button"
-          className={styles.flipperNav}
+          className={classNames(styles.flipperNav, styles[theme])}
           onClick={() => setFlipped(true)}
         >
           Details &gt;
@@ -40,7 +43,7 @@ function Back(props) {
   const { friend, setFlipped } = props;
   return (
     <div className={styles.back}>
-      <div className={styles.backContents}>
+      <div className={classNames(styles.backContents, styles[theme])}>
         <img src={friend.image} alt={friend.image} />
         <div className={styles.backDetails}>
           <h3>
@@ -56,7 +59,7 @@ function Back(props) {
         </div>
         <button
           type="button"
-          className={styles.flipperNav}
+          className={classNames(styles.flipperNav, styles[theme])}
           onClick={() => setFlipped(false)}
         >
           &lt; Back

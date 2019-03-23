@@ -1,134 +1,184 @@
 # Possible Solutions
 
-## Loading: Arrange
-```jsx
-  it('renders loading if in a loading state', () => {
-    // arrange
-    const friend = undefined;
+## FriendFlipper: Front
 
-    // ...
-  });
+```jsx
+function Front(props) {
+  const { friend, setFlipped } = props;
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <div className={styles.front} data-testid="front">
+      // ...
+    </div>
+  );
+}
 ```
 
-## Loading: Act
-```jsx
-  it('renders loading if in a loading state', () => {
-    // ...
-    
-    // act
-    const context = render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <FriendDetail friend={friend} />
-        </ThemeProvider>
-      </MemoryRouter>
-    );
+## FriendFlipper: Back
 
-    // ...
-  });
+```jsx
+function Back(props) {
+  const { friend, setFlipped } = props;
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <div className={styles.back} data-testid="back">
+      // ...
+    </div>
+  );
+}
 ```
 
-## Loading: Assert
+## Front: Arrange
 
 ```jsx
-  it('renders loading if in a loading state', () => {
-    const friend = undefined;
-    
-    const context = render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <FriendDetail friend={friend} />
-        </ThemeProvider>
-      </MemoryRouter>
-    );
+it('defaults to the front side', () => {
+  const friend = {
+    name: 'Mr. Smidgens',
+    colors: ['brown'],
+    bio:
+      "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
+  };
 
-    expect(context.getByText('Loading...')).not.toBeNull();
-  });
+  // ...
+});
 ```
 
-## Loading: Complete Test
-```jsx
-  it('renders loading if in a loading state', () => {
-    const friend = undefined;
-    
-    const context = render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <FriendDetail friend={friend} />
-        </ThemeProvider>
-      </MemoryRouter>
-    );
+## Front: Act
 
-    expect(context.getByText('Loading...')).not.toBeNull();
-  });
+```jsx
+it('defaults to the front side', () => {
+  // ...
+
+  const context = render(
+    <MemoryRouter>
+      <ThemeProvider>
+        <FriendFlipper friend={friend} />
+      </ThemeProvider>
+    </MemoryRouter>
+  );
+
+  // ...
+});
 ```
 
-
-## Hydrated: Arrange
+## Front: Assert
 
 ```jsx
-  it('renders a friend if friend is loaded', () => {
-    const friend = {
-      name: 'Mr. Smidgens',
-      colors: ['brown'],
-      bio:
-        "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
-    };
+it('defaults to the front side', () => {
+  // ...
 
-    // ...
-  });
+  // things from the front side SHOULD be there
+  expect(context.queryByTestId('front')).not.toBeNull();
+
+  // things from the back side SHOULD NOT be there
+  expect(context.queryByTestId('back')).toBeNull();
+});
 ```
 
-## Hydrated: Act
+## Front: Complete Test
 
 ```jsx
-  it('renders a friend if friend is loaded', () => {
-    // ...
+it('defaults to the front side', () => {
+  const friend = {
+    name: 'Mr. Smidgens',
+    colors: ['brown'],
+    bio:
+      "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
+  };
 
-    const context = render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <FriendDetail friend={friend} />
-        </ThemeProvider>
-      </MemoryRouter>
-    );
+  const context = render(
+    <MemoryRouter>
+      <ThemeProvider>
+        <FriendFlipper friend={friend} />
+      </ThemeProvider>
+    </MemoryRouter>
+  );
 
-    // ...
-  });
+  // things from the front side SHOULD be there
+  expect(context.queryByTestId('front')).not.toBeNull();
+
+  // things from the back side SHOULD NOT be there
+  expect(context.queryByTestId('back')).toBeNull();
+});
 ```
 
-## Hydrated: Assert
+## Back: Arrange
 
 ```jsx
-  it('renders a friend if friend is loaded', () => {
-    // ...
+it('flips to the back side after a button click', () => {
+  const friend = {
+    name: 'Mr. Smidgens',
+    colors: ['brown'],
+    bio:
+      "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
+  };
 
-    expect(context.getByText('Mr. Smidgens')).not.toBeNull();
-    expect(context.getByText('This little guy likes a bowl of milk at bedtime. Scratch his belly and he\'ll be your best friend.')).not.toBeNull();
-
-  });
+  // ...
+});
 ```
 
-## Hydrated: Complete Test
+## Back: Act
+
 ```jsx
-  it('renders a friend if friend is loaded', () => {
-    const friend = {
-      name: 'Mr. Smidgens',
-      colors: ['brown'],
-      bio:
-        "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
-    };
+it('flips to the back side after a button click', () => {
+  // ...
 
-    const context = render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <FriendDetail friend={friend} />
-        </ThemeProvider>
-      </MemoryRouter>
-    );
+  const context = render(
+    <MemoryRouter>
+      <ThemeProvider>
+        <FriendFlipper friend={friend} />
+      </ThemeProvider>
+    </MemoryRouter>
+  );
 
-    expect(context.getByText('Mr. Smidgens')).not.toBeNull();
-    expect(context.getByText('This little guy likes a bowl of milk at bedtime. Scratch his belly and he\'ll be your best friend.')).not.toBeNull();
+  const button = context.getByText('Details >');
+  fireEvent.click(button);
 
-  });
+  // ...
+});
+```
+
+## Back: Assert
+
+```jsx
+it('flips to the back side after a button click', () => {
+  // ...
+
+  // things from the front side SHOULD NOT be there
+  expect(context.queryByTestId('front')).toBeNull();
+
+  // things from the back side SHOULD be there
+  expect(context.queryByTestId('back')).not.toBeNull();
+});
+```
+
+## Back: Complete Test
+
+```jsx
+it('flips to the back side after a button click', () => {
+  const friend = {
+    name: 'Mr. Smidgens',
+    colors: ['brown'],
+    bio:
+      "This little guy likes a bowl of milk at bedtime. Scratch his belly and he'll be your best friend.",
+  };
+
+  const context = render(
+    <MemoryRouter>
+      <ThemeProvider>
+        <FriendFlipper friend={friend} />
+      </ThemeProvider>
+    </MemoryRouter>
+  );
+
+  fireEvent.click(context.getByText('Details >'));
+
+  // things from the front side SHOULD NOT be there
+  expect(context.queryByTestId('front')).toBeNull();
+
+  // things from the back side SHOULD be there
+  expect(context.queryByTestId('back')).not.toBeNull();
+});
 ```

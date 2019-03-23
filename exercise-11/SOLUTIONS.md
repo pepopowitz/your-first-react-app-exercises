@@ -1,149 +1,109 @@
 # Possible Solutions
 
-## FriendsEntry: Import API
-
-```js
-import getFriendsFromApi from './get-friends-from-api';
-```
-
-## FriendsEntry: State Property
+## App: ThemeProvider
 
 ```jsx
-import React, { useState } from 'react';
+import ThemeProvider from './theme/Provider';
 
-// ...
-
-export default function FriendsEntry() {
-  const [friends, setFriends] = useState([]);
-
-  return <Friends friends={myFriends} />;
-}
-```
-
-## FriendsEntry: Pass State Property
-
-```jsx
-export default function FriendsEntry() {
-  const [friends, setFriends] = useState([]);
-
-  return <Friends friends={friends} />;
-}
-```
-
-## FriendsEntry: useEffect
-
-```jsx
-import React, { useState, useEffect } from 'react';
-
-// ...
-
-export default function FriendsEntry() {
-  const [friends, setFriends] = useState([]);
-  useEffect(() => {
-    setFriends(myFriends);
-  });
-
-  return <Friends friends={friends} />;
-}
-```
-
-## FriendsEntry: Call API
-
-```jsx
-export default function FriendsEntry() {
-  const [friends, setFriends] = useState([]);
-
-  useEffect(async () => {
-    const friends = await getFriendsFromApi();
-    setFriends(friends);
-  }, []);
-
-  return <Friends friends={friends} />;
-}
-```
-
-## Friends: Loading State
-
-```jsx
-export default function Friends(props) {
-  return <Page>{renderFriends(props.friends)}</Page>;
-}
-
-function renderFriends(friends) {
-  if (friends.length === 0) {
-    return <h1>Loading...</h1>;
-  }
-
-  return friends.map(friend => (
-    <FriendProfile
-      key={friend.id}
-      id={friend.id}
-      name={friend.name}
-      image={friend.image}
-    />
-  ));
-}
-```
-
-## FriendDetail
-
-### FriendDetail.entry.js
-
-```jsx
-import React, { useState, useEffect } from 'react';
-
-import getFriendFromApi from './get-friend-from-api';
-
-import FriendDetail from './FriendDetail';
-
-export default function(props) {
-  const [friend, setFriend] = useState(undefined);
-
-  useEffect(async () => {
-    const id = props.match.params.id;
-    const friend = await getFriendFromApi(id);
-    setFriend(friend);
-  }, [props.match.id]);
-
-  return <FriendDetail friend={friend} />;
-}
-```
-
-## FriendDetail.js
-
-```jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Page from '../shared/Page';
-import Card from '../shared/Card';
-import FriendFlipper from './FriendFlipper';
-
-import styles from './FriendDetail.module.css';
-
-export default function({ friend }) {
+function App() {
   return (
-    <Page>
-      <div className={styles.friendDetail}>
-        <div className={styles.toolbar}>
-          <Link to="/">&lt; Home</Link>
-        </div>
-        <Card>{renderFriend(friend)}</Card>
-      </div>
-    </Page>
+    <BrowserRouter>
+      <ThemeProvider>
+        <div className={styles.app}>// ...</div>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
+}
+```
+
+## Switcher: useContext
+
+```jsx
+HERE;
+import React, { useContext } from 'react';
+import ThemeContext from '../theme/context';
+
+// ...
+
+export default function() {
+  const value = useContext(ThemeContext);
+
+  return <button className={styles.switcher}>Change Theme</button>;
+}
+```
+
+## Switcher: onThemeChanged
+
+```jsx
+export default function() {
+  const value = useContext(ThemeContext);
+
+  return (
+    <button className={styles.switcher} onClick={value.onThemeChanged}>
+      Change Theme
+    </button>
+  );
+}
+```
+
+## Header: Consumer
+
+```jsx
+import React, { useContext } from 'react';
+// import theme from './theme/static'; // no longer needed
+// ...
+import ThemeContext from './theme/context';
+// ...
+
+export default function Header() {
+  const {theme} = useContext(ThemeContext);
+  return (
+    // ...
+  );
+}
+```
+
+## Page: Consumer
+
+```jsx
+export default function Page({ children }) {
+  const {theme} = useContext(ThemeContext);
+
+  return (
+    // ...
+  );
+}
+```
+
+## Card: Consumer
+
+```jsx
+export default function Card({ children }) {
+  const {theme} = useContext(ThemeContext);
+  return (
+    // ...
+  );
+}
+```
+
+## FriendFlipper: Consumer
+
+```jsx
+function Front(props) {
+  const { theme } = useContext(ThemeContext);
+  const { friend, setFlipped } = props;
+
+  return (
+    // ...
   );
 }
 
-function renderFriend(friend) {
-  if (friend === undefined) {
-    return <h1>Loading...</h1>;
-  }
+function Back(props) {
+  const { theme } = useContext(ThemeContext);
+  const { friend, setFlipped } = props;
 
   return (
-    <div className={styles.cardContents}>
-      <h1>{friend.name}</h1>
-      <FriendFlipper friend={friend} />
-      <p>{friend.bio}</p>
-    </div>
+    // ...
   );
 }
 ```

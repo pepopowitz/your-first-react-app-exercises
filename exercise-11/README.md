@@ -1,168 +1,232 @@
 # Exercise 11
 
-## Loading Data
+## React Context
 
-This exercise introduces you to a method of loading data from an API in a React component.
+In this exercise, we'll use React Context to manage application-level state. That is, state that applies to the entire application, instead of a single component (or a few closely-related components).
 
-### Prerequisites
-
-- If you're unfamiliar with the `async`/`await` syntax for writing asynchronous code, [read about it](../junk-drawer/ASYNC-AWAIT.md).
+Throughout the workshop, you've seen the app alternate between green and purple themes. We're going to automate that, with a "theme switcher" button.
 
 👉 Start the app for Exercise 11
 
 In a console window, pointed at the root of this project, run `npm run start-exercise-11`.
 
-This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 11: Loading Data", and our three adorable kitten friends. If it doesn't, ask your neighbor for assistance or raise your hand.
+This should open a browser window pointed at localhost:3000, showing a web app titled "Exercise 11: React Context", and our three adorable kitten friends in the purple theme. There is a button in the top right that says "Change Theme", but it doesn't do anything yet.
 
-### The `friends` API
+If you're not seeing this, ask your neighbor for assistance or raise your hand.
 
-Prior to this exercise, we were using a static list of friends, imported from the file `data/friends.js`. We're going to instead retrieve our data from a simple API based on the contents of `data/db.json`.
+### Static theme
 
-The API is already running. To see it in action, you can navigate to an endpoint in your browser.
+We've modified the CSS Modules coming into this exercise, so that they render based on a static theme. The static theme is defined in `./theme/static.js`. If you change the static theme, the UI will reflect it.
 
-👉 Browse to the URL `http://localhost:3000/api/friends`.
+👉 Change the exported value in `./theme/static.js` from `green` to `purple`.
 
-You should see a JSON response that contains our three friends.
+In your browser, you should see the theme change from green to purple.
 
-If you change any contents in `data/db.json`, the `friends` endpoint will reflect it. (Though you will have to refresh the page to see the updates.)
+### ThemeSwitcher
 
-### Foundation
+In `Header.js`, you'll see that we've rendered a new component named `<ThemeSwitcher>`. This shows up in the UI as a button that says "Change Theme". We're going to hook theme-toggling up to this `ThemeSwitcher` component, using React Context.
 
-In the previous exercise, we used the `useState` hook to store component state. When rendering a component based on data from an API, you'll want to maintain state for the loaded data. You'll see the `useState` hook again in this exercise.
+### React Context
 
-We'll also need to be concerned about multiple possible states, now that we're using an actual API to get our data. When a component initially renders, the state property will be empty. After the API call completes, the state property will not be empty. We will need to address this dichotomy in our components in this exercise.
+The React Context API involves three players: a Context, a Provider, and many Consumers.
 
-#### The `useEffect` hook
+A **Context** is like a "namespace" for state in your React app. You can have multiple Contexts in a tree, each of them associated with its own data.
 
-Another hook, `useEffect`, lets you perform side effects when your component renders. We'll use it to call the API, and set the component's state property with the result of the API call.
+A **Provider** is associated with a Context. It sits at the top of a sub-tree of components, manages state for the sub-tree, and provides the value to any sub-components that need it.
 
-Here is an example of a component using an effect hook:
+Multiple **Consumers** exist in a sub-tree, beneath the Provider. Each of those consumers _subscribes_ to a Context, and has access to the state provided by the Provider.
+
+### ThemeContext
+
+For this exercise, we've already created the Context. It is named `ThemeContext`, and is located at `theme/context.js`.
+
+👉 Open the `theme/context.js` file.
+
+You should see this:
+
+```js
+import React from 'react';
+
+export default React.createContext();
+```
+
+There isn't much happening here. The important thing is that it is calling `React.createContext()`, and exporting the result. When we want to create a Theme Provider or Theme Consumer, we'll need to reference this Theme Context.
+
+### ThemeProvider
+
+A Provider handles the state management for a Context, and sits atop a sub-tree of Consumers.
+
+For this exercise, we've already created the Provider. It is named `ThemeProvider`, and it's located at `theme/Provider.js`.
+
+👉 Open the `theme/Provider.js` file.
+
+You should see a component that looks similar to other stateful components. It includes several pieces we've seen in previous exercises.
+
+#### A `theme` State Property & `setTheme` State Modifier
+
+The `ThemeProvider` calls `useState` to declare a state property & modifier. It initializes the state property to `purple`.
 
 ```jsx
-import React, { useEffect } from 'react';
+export default function ThemeProvider(props) {
+  const [theme, setTheme] = useState('purple');
 
-function Chat(props) {
-
-  useEffect(() => {
-    // This will run whenever the component mounts or `props.friendId` has changed
-    socket.emit('join', { id: props.friendId });
-
-    return () => {
-      // This will run whenever the component unmounts or `props.friendId` is going to change
-      socket.emit('leave', { id: props.friendId });
-    }
-
-    // This indicates that the effect should re-run whenever `props.friendId` changes
-  }, [ props.friendId ])
-
-  return ( ... )
+  // ...
 }
 ```
 
-The first argument to `useEffect` is a function that should execute when the component mounts, or when props change that require the effect to re-run. In the example above, this function joins a socket based on `props.friendId`.
+#### An Event Handler For State Change
 
-Not all effects require "cleanup" code - but if they do, this is accomplished by the first argument function returning another anonymous function. This returned function will execute when the component unmounts, or when props change that require the effect to re-run. In our example above, this "cleanup" function will leave a socket based on the friendId.
+The `ThemeProvider` includes a `handleThemeChange()` method, which updates the state of the Provider using `setState`.
 
-The second argument to `useEffect` is an array. This array will contain all props which, when their value changes, would require the effect to re-run. In the example above, we pass `[ props.friendId ]` - this means that the effect will re-run whenever the value of the `friendId` prop changes.
+This handler swaps the `theme` state property between `green` and `purple` each time it is called.
 
-In some cases you won't have any reason to re-run an effect - for instance, if the component needs to load data from an API when it mounts, but never again. In this case, you'll usually want to pass an empty array (`[]`) as the second argument.
+```jsx
+export default function ThemeProvider(props) {
+  // ...
 
-### A. Loading the Friends data from the API
+  const handleThemeChange = () => {
+    setTheme(theme === 'green' ? 'purple' : 'green');
+  };
 
-The first component we'll update to pull from the API is the `FriendsEntry` component, located at `friends/Friends.entry.js`.
+  // ...
+}
+```
 
-#### 1. Import the API client
+#### Passing The State To Its Children
 
-We've included a function in `friends/get-friends-from-api.js`, which will make the API call to collect all of our friends. It uses the `axios` library to make an HTTP call to the `friends` API endpoint. Our `Friends.entry` component will use this function to load friends.
+The `ThemeProvider` renders a `<ThemeContext.Provider>` element, with `props.children` inside of it.
 
-👉 Import the `getFriendsFromApi` function into `friends/Friends.entry.js`.
+A Context Provider passes the Context state down to its children via the `value` prop. The `value` prop can contain a single value, or it can contain an object if there are multiple values to pass down. The `value` prop should contain all state & handlers that any Consumers in the sub-tree would need.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendsentry-import-api).
+In our case, we need to pass down the current theme, as well as our handler that toggles the theme from `green` to `purple`. Thus we create an object (`data`), and pass that into the rendered `<ThemeContext.Provider>`, instead of a single value.
 
-#### 2. Create a state property
+```jsx
+export default function ThemeProvider(props) {
+  // ...
 
-👉 Add a state property to `friends/Friends.entry.js` to maintain the list of friends.
+  const data = {
+    theme: theme,
+    onThemeChanged: handleThemeChange,
+  };
 
-See [Exercise 9](../exercise-9/README.md#creating-a-state-property) for a reminder of how to create a state property.
+  return (
+    <ThemeContext.Provider value={data}>{props.children}</ThemeContext.Provider>
+  );
+}
+```
 
-The default value for this state property should be an empty array.
+### Wrap the app in a `<ThemeProvider>`
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendsentry-state-property).
+Having created a `ThemeProvider`, we need to wrap our component tree within it, so that it may pass the state throughout the app.
 
-#### 3. Point the `<Friends>` component at the state property
+👉 Wrap the app in a `<ThemeProvider>` component, within `App.js`.
 
-The `FriendsEntry` component is still rendering static data directly, rather than using our new state property. Let's change that!
+We want our entire app to have access to the ThemeContext, so we'll wrap the entire app in the `ThemeProvider`.
 
-👉 Pass the state property from step 2 above into the `<Friends>` component
+You'll want to import the `ThemeProvider`, and wrap the rendered `App` component within a `<ThemeProvider>` element.
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendsentry-pass-state-property).
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#app-themeprovider).
 
-Once you make this change, you will see no friends in your web app. (Don't worry, I'm still your friend!)
+### Adding ThemeContext.Consumers With `useContext`
 
-This is because we haven't hydrated the state property with friends yet.
+Context Consumers are all of the components in a sub-tree that need access to the Context state. This might include components that are rendering the state to the DOM, but it might also include components that modify the state. We can put as many Consumers inside a sub-tree as we want. Each one of them has access to the state of the nearest Provider in its ancestry.
 
-#### 4. Add an effect hook to load Friends data
+We'll use the `useContext` hook to attach consumers.
 
-👉 Add a `useEffect` hook to `friends/Friends.entry.js` to load static data
+The `useContext` consumer takes a single argument: the Context object it wants to consume.
 
-See [above](#the-useeffect-hook) for details on how to create a `useEffect` hook.
+`useContext` returns a single object: the `value` passed down by the nearest Provider in the current component's ancestry.
 
-This effect hook should call `setFriends` (or whatever you named your state modifier) with the static data that comes from the imported `myFriends` data source. We're regressing to using static data, but better positioning ourselves for dynamic data in a future step.
+Remember that in our case, we have two properties on the `value` that we are interested in: the `theme` and an `onThemeChanged` handler. A Consumer for our ThemeContext might look like this:
 
-This effect hook does not require any cleanup code to execute. It also does not need to re-run when props change.
+```jsx
+import ThemeContext from './theme/context';
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendsentry-useEffect).
+export default function MyComponent() {
+  const value = useContext(ThemeContext);
 
-#### 5. Get the list of friends from the API
+  // Now we can do whatever we want with the value object.
+  console.log(value.theme); // 'purple'
+  console.log(value.onThemeChanged); // [FUNCTION] - the handler defined in our Provider.
 
-We're finally ready to load friends dynamically.
+  //...
+}
+```
 
-👉 Update the `useEffect` hook to call the API and update the state property with the result.
+### Make the Switcher a Consumer
 
-You'll be using `async`/`await` keywords.
+The `Switcher` component is located at `theme/Switcher.js`. It is the button that toggles the theme from `green` to `purple`. In the context of our ThemeContext, that means it is a Consumer that needs to call the `onThemeChanged` handler.
 
-1. `await` the result of an asynchronous call to the `getFriendsFromApi()` API client
-2. call `setFriends()` (or whatever you named your state modifier in step 2) to update the state of the component with the friend data
+👉 Modify the `Switcher` component to subscribe to the ThemeContext
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendsentry-call-api).
+You'll do this by calling `useContext`. Remember that the value returned by calling `useContext` contains all data that the ThemeProvider manages.
 
-#### 6. Handle the "loading" state
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-useContext).
 
-At this point, you should notice a slight delay when the page loads, before the friends appear. This is because our API takes a bit of time to respond. The blank view you're seeing is what our component renders before the friends have been loaded from the API.
+Subscribing to the ThemeContext gets us access to the `value` passed down from the `ThemeContext.Provider` - which includes an `onThemeChanged` handler. We need to connect our button to that handler.
 
-We should give the user an idea that the page is loading during this time. A great place to do this would be in the `Friends.js` component.
+👉 Within the `Switcher` component, connect the button `click` event to the `onThemeChanged` handler from the subscribed Context.
 
-👉 Modify the `Friends.js` component to render an appropriately constructed page when an empty array of friends is passed in.
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#switcher-onthemechanged).
 
-If the `friends` passed in contain more than one item, the `Friends.js` component should continue to render the full `Friends` list.
+### Make the Header a ThemeContext Consumer
 
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#friends-loading-state).
+We've hooked up the Consumer that _modifies_ the application-level state; now we need to connect the Consumers that _read_ the application-level state. This starts with the `Header` component, located at `Header.js`.
 
-#### 7. Test it out!
+👉 Modify the `Header` component to subscribe to the ThemeContext, and utilize the `theme` property
 
-At this point, you should be loading the friends from an API. When the page first loads, you'll see a "Loading" message for about half a second. After that, you should see your friends.
+The `Header` component uses a static theme, imported from `'./theme/static'`. We'll no longer need that.
 
-### B. Loading the FriendDetails data from the API
+Instead, use the theme from the value acquired by subscribing to the ThemeContext.
 
-The `FriendDetailEntry` component, located at `friend-detail/FriendDetail.entry.js`, also needs to load data from an API endpoint.
-
-👉 Repeat the activity of loading data from an API for the `FriendDetailEntry` component.
-
-Refer to your code and the notes above as a reminder of how to do this. There are a couple details that make this component different than the first:
-
-- You'll only be loading one friend this time.
-- The state property should default to `undefined`, instead of an empty array, since there is only one friend.
-- The ID for the current friend will be passed into the `FriendDetailEntry` component via the `match.params.id` prop, thanks to ReactRouter.
-- The function that calls the API is in `friend-detail/get-friend-from-api.js`.
-
-If you get stuck, [see a possible solution here](./SOLUTIONS.md#frienddetail).
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#header-consumer).
 
 ### Test it out
 
-You should now have your friends loading from API endpoints throughout the app.
+At this point you should see the header color change when you click the button.
 
-You can verify this by making a change in `data/db.json`, and making sure the change is reflected in the app. You will need to refresh the app to see the change.
+If you don't, re-read the instructions above thoroughly. If you can't figure out what you missed, ask your neighbor, or raise your hand.
+
+### Make the `Page` shared component a ThemeContext Consumer
+
+The `Page` component, located at `shared/Page.js`, needs to also utilize the `theme` property from the ThemeContext.
+
+👉 Modify the `Page` component to subscribe to the ThemeContext, and utilize the `theme` property
+
+Reference the [Header](#make-the-header-a-themecontext-consumer) instructions if you can't remember how to make this happen.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#page-consumer).
+
+### Make the `Card` shared component a ThemeContext Consumer
+
+The `Card` component, located at `shared/Card.js`, needs to also utilize the `theme` property from the ThemeContext.
+
+👉 Modify the `Card` component to subscribe to the ThemeContext, and utilize the `theme` property
+
+Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#card-consumer).
+
+### Make the `FriendFlipper` a ThemeContext Consumer
+
+The `FriendFlipper` component, located at `friend-detail/FriendFlipper.js`, needs to also utilize the `theme` property from the ThemeContext.
+
+👉 Modify the `FriendFlipper` component to subscribe to the ThemeContext, and utilize the `theme` property
+
+Reference the [Header](#make-the-header-a-consumer) instructions if you can't remember how to make this happen.
+
+This component has two child components - `<Front>` and `<Back>`. Both of these could individually be made Consumers, or you could make the `FriendFlipper` component a Consumer and pass the `theme` into `<Front>` and `<Back>`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendflipper-consumer).
+
+### Test it out
+
+At this point your entire app should change from green to purple and vice versa when the "Change Theme" button is clicked.
+
+If this doesn't happen, re-read the instructions above thoroughly. If you can't figure out what you missed, ask your neighbor, or raise your hand.
 
 ### Extra Credit
 
-- Read more about [the `useEffect` hook](https://overreacted.io/a-complete-guide-to-useeffect/).
+[Read about when to use React Context](https://reactjs.org/docs/context.html#when-to-use-context). Note that these docs show a different syntax for subscribing to a React Context than `useContext`. The syntax in the docs is a legacy syntax, which we'll learn about later.
+
+[Read about React Context vs Redux, another option for managing application-level state.](https://daveceddia.com/context-api-vs-redux/). Note that this article also uses the legacy syntax for subscribing to a React Context.

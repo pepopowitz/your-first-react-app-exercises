@@ -1,121 +1,189 @@
 # Exercise 16
 
-## Legacy Side Effects
+## Testing Component Render
 
----
+In this exercise we'll look at testing our React components, and verifying that they are rendering properly.
 
-Prior to the "hooks" release of React (v16.8), writing a stateful component required using classes. To run side-effects with these components, there were a few lifecycle events that every class component offered.
+### Setup
 
-When building React components, it's preferable to use functional components & `useEffect` to run side-effects. You'll probably come across class components that use lifecycle events in existing apps, though, so you should be familiar with them.
+👉 Start your test suite. Open a new command window at the root of this project, and enter `npm run test-exercise-16`.
 
-In this exercise, you'll compare a functional component that uses `useState` and `useEffect` to a class component that uses `setState` and lifecycle events.
+You should see the following output:
 
-👉 Open files for Exercise 16
+```
+No tests found related to files changed since last commit.
+Press `a` to run all tests, or run Jest with `--watchAll`.
 
-In your text editor, pull up the `modern/Friends.entry.js` and `legacy/Friends.entry.js` files. You will want to view them side by side, or diff them.
-
-These two components function equivalently. You could substitute either into our app, with no noticeable differences. Let's look at the differences in how they're written.
-
-### State Management
-
-Not all components that perform side-effects also maintain state, but many do. Ours is an example of one that does: the side-effect is performed to gather data from an API, which is then stored in component state.
-
-#### `modern/Friends.entry.js`
-
-In our modern component, you can see us using `useState` to manage an array of friends.
-
-```jsx
-const [friends, setFriends] = useState([]);
+Watch Usage
+ › Press a to run all tests.
+ › Press p to filter by a filename regex pattern.
+ › Press t to filter by a test name regex pattern.
+ › Press q to quit watch mode.
+ › Press Enter to trigger a test run.
 ```
 
-See [Exercise 9](../exercise-9/README.md) for a refresher on `useState`.
+If you don't see this output, try to investigate the message you see, ask your neighbor, or raise your hand for assistance.
 
-#### `legacy/Friends.entry.js`
+If you do see this output, you're in good shape. The output will change as we modify our code.
 
-In the legacy component, we are using a class property named `state` to manage an array of friends.
+### Automated Tests
+
+If you're unfamiliar with writing automated tests, or you're unfamiliar with Jest as a test framework, read [this short guide](../junk-drawer/TESTING.md).
+
+We're going to write tests against our `friend-detail/FriendDetail.js` component. We've created a test file at `friend-detail/FriendDetail.spec.js` - our tests will go there.
+
+👉 Open the `friend-detail/FriendDetail.spec.js` file.
+
+### Importing Testing Dependencies
+
+To facilitate writing tests against the `FriendDetail` component, we've imported several interesting dependencies into the spec file:
+
+1. import { MemoryRouter } from 'react-router-dom';
+
+In our running application, we use a `BrowserRouter` from React Router to handle routing. Any time we render a `<Link>` component in our app, it depends on being placed inside of a router.
+
+When we're writing tests, we don't have a `BrowserRouter` wrapping our component tree. It depends on being run in actual browser, and we don't have that while running our tests. They run in Node, and get rendered to a fake DOM that simulates a browser.
+
+Instead, we use a `MemoryRouter` to render our component tree. This serves the purpose of wrapping the tree in a router, so `<Link>` elements are happy, without requiring an actual browser.
+
+2. import ThemeProvider from '../theme/Provider';
+
+Similarly, when our application is running, the entire component tree is wrapped in a `<ThemeProvider>` element. We built this in a previous exercise.
+
+When we render our component, we're going to need to wrap it in a `<ThemeProvider>` element, so that the ThemeContext consumers don't fail.
+
+3. import { render } from 'react-testing-library';
+
+We'll use `react-testing-library` to render our components into a fake DOM, and then make assertions against them. The main helper function is called [`render`](https://github.com/kentcdodds/react-testing-library#render).
+
+4. import FriendDetail from './FriendDetail';
+
+This is the component we're testing. Sometimes people refer to this as the "system under test". We need to import it, so that we can render it in our tests.
+
+### Writing a test to verify the "Loading" state
+
+We've stubbed out some placeholders for writing your tests.
+
+The first test you'll write is named 'it renders loading if friend isn`t loaded yet'.
+
+#### Arrange: Set up an empty friend
+
+👉 In the first test, define a `friend` variable. Set it to `undefined`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#loading-arrange).
+
+#### Act: Render the `<FriendDetail>` component.
+
+The [`render()` function](https://github.com/kentcdodds/react-testing-library#render) from react-testing-library takes one argument - a JSX element for the component you wish to render.
+
+The return value from `render()` is an object that contains methods which can be used to inspect the rendered output.
+
+👉 In the first test, render a `<FriendDetail>` component.
+
+- Use the `render()` function from react-testing-library.
+- Store the result in a variable named `context`.
+- Pass the `friend` variable as a prop named `friend`.
+- Recall that we'll need to wrap the `<FriendDetail>` component in `<MemoryRouter>` and `<ThemeProvider>` elements, because components down the tree depend on them.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#loading-act).
+
+#### Assert: Verify that the context contains the text `Loading...`.
+
+##### `queryByText()`
+
+One of the methods on the `context` object returned by a call to `render()` is named `queryByText()`. This method looks for an element in the rendered output that matches exactly the text passed in. If it finds one, that element is returned. If it doesn't, the value `null` is returned.
+
+For example, if the following output was rendered by a component:
 
 ```jsx
-state = {
-  friends: [],
-};
+<div>
+  <h1>Hello!</h1>
+</div>
 ```
 
-View [Exercise 15](../exercise-15/README.md) for a refresher on legacy state management.
-
-### Side Effects
-
-The side effect we need to run in this component calls out to an API to retrieve a list of friends, then updates the state of the component with the results.
-
-#### `modern/Friends.entry.js`
-
-In our modern component, we are using `useEffect` to perform this side-effect. It calls out to `getFriendsFromApi` to get the list of friends, then calls the state modifier `setFriends` with the result.
+Calling `queryByText()` against it would give the following results:
 
 ```jsx
-useEffect(async () => {
-  const friends = await getFriendsFromApi();
-  setFriends(friends);
-}, []);
+context.queryByText('Hello!'); // returns the <h1> element
+context.queryByText('Hello'); // returns null
+context.queryByText('asdfadsfd'); // returns null
 ```
 
-See [Exercise 11](../exercise-11/README.md) for a refresher on `useEffect`.
+👉 In the first test, assert that the `Loading...` text is appearing in the rendered output.
 
-#### `legacy/Friends.entry.js`
+- Use `context.queryByText()` to find the element.
+- Use the `expect()` function to compare the result of `context.queryByText()`.
+- The matcher for asserting that an item is not null is `.not.toBeNull()`.
 
-Our legacy component defines a class method named `componentDidMount`. This is a standard React method, and it executes as soon as a component is mounted to the DOM. This effectively means "as soon as React realizes it needs to render this component for the first time."
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#loading-assert).
 
-```jsx
-  async componentDidMount() {
-    // ...
-  }
+### Verify that your test is passing.
+
+👉 Check your console. You should see output that indicates your test is passing:
+
+```
+ PASS  exercise-16/friend-detail/FriendDetail.spec.js
+ PASS  exercise-16/complete/friend-detail/FriendDetail.spec.js
+
+Test Suites: 2 passed, 2 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        1.783s, estimated 2s
+Ran all test suites.
+
+Watch Usage: Press w to show more.
 ```
 
-The body of our `componentDidMount` method is pretty similar to the body of the modern component's `useEffect` function. It calls out to an API, and with the results calls a state modifier.
+[The complete test can be seen here.](./SOLUTIONS.md#loading-complete-test)
 
-In a stateful class component, there is only one state modifier available to the entire component. It is named `this.setState`. The object passed to `this.setState` contains only the changes that need to be made to the state. In this case, that's the `friends` we got back from the API.
+### Write a test verifying that the hydrated state gets rendered
 
-```jsx
-  async componentDidMount() {
-    const friends = await getFriendsFromApi();
-    this.setState({
-      friends,
-    });
-  }
+The second test you'll write is a test that "it renders the friend details once it's loaded".
+
+#### Arrange: Set up a hydrated friend
+
+👉 In the second test, define a `friend` variable. Assign to it an object containing a `name`, an array of `colors`, and a `bio`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-arrange).
+
+#### Act: Render the `<FriendDetail>` component.
+
+👉 In the second test, render a `<FriendDetail>` component.
+
+- Use the `render()` function from react-testing-library.
+- Store the result in a variable named `context`.
+- Pass the `friend` variable as a prop named `friend`.
+- Recall that we'll need to wrap the `<FriendDetail>` component in `<MemoryRouter>` and `<ThemeProvider>` elements, because components down the tree depend on them.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-act).
+
+#### Assert: Verify that the context contains text matching the rendered friend.
+
+👉 In the second test, assert that text from the hydrated friend appears in the rendered output.
+
+- Verify that the friend's name is present.
+- Verify that the friend's bio is present.
+- Use `context.queryByText()` to find the text elements.
+- Use the `expect()` function to compare the results of `context.queryByText()`.
+- The matcher for asserting that an item is not null is `.not.toBeNull()`.
+
+If you get stuck, [see a possible solution here](./SOLUTIONS.md#hydrated-assert).
+
+### Verify that your test is passing.
+
+👉 Check your console. You should see output that indicates your test is passing:
+
+```
+ PASS  exercise-16/friend-detail/FriendDetail.spec.js
+ PASS  exercise-16/complete/friend-detail/FriendDetail.spec.js
+
+Test Suites: 2 passed, 2 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        1.76s, estimated 2s
+Ran all test suites.
+
+Watch Usage: Press w to show more.
 ```
 
-Modern state management, in contrast, uses one state modifier for each piece of state that you want to manage.
-
-### Legacy Lifecycle Events
-
-There are several events that are available to a class-based React component.
-
-#### `componentDidMount`
-
-[The `componentDidMount` event](https://reactjs.org/docs/react-component.html#componentdidmount) fires when a component is mounted to the DOM - this is before the very first time it is rendered.
-
-In a class component, this event was used when a component needed to load data from an API. It was also used to integrate with non-React APIs, like charting or websocket libraries.
-
-The `useEffect` hook now accomplishes what `componentDidMount` did, the first time the hook executes.
-
-#### `componentWillUnmount`
-
-[The `componentWillUnmount` event](https://reactjs.org/docs/react-component.html#componentwillunmount) fires when a component is about to be unmounted from the DOM.
-
-This event was used to clean up integrations with non-React APIs. In practice, when you had a `componentWillUnmount` handler, it was almost always cleaning up work that happened in a `componentDidMount` handler.
-
-The `useEffect` hook now accomplishes what `componentWillUnmount` did. A `useEffect` hook is composed of two functions - one that executes when the effect needs to be run, and optionally one that is run when a previous effect needs to clean up. This second clean-up function effectively replaces `componentWillUnmount`.
-
-#### `componentDidUpdate`
-
-[The `componentDidUpdate` event](https://reactjs.org/docs/react-component.html#componentdidupdate) fires when a component is updated with new props or state.
-
-This event was used when a component needed to react to changes that `render()` couldn't handle. In practice, this usually meant when a side-effect needed to be re-run.
-
-The `useEffect` hook now accomplishes what `componentDidUpdate` did. A `useEffect` hook is composed of two functions - one that executes when the effect needs to be run, and optionally one that is run when a previous effect needs to clean up. The combination of these two functions has effectively replaced everything that `componentDidUpdate` was used for.
-
-#### Others
-
-[There are several other legacy lifecycle events, but they are infrequently used.](https://reactjs.org/docs/react-component.html#rarely-used-lifecycle-methods)
-
-### Extra Credit
-
-[Check out a diagram of the lifecycle methods available in a React class component.](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+[The complete test can be seen here.](./SOLUTIONS.md#hydrated-complete-test)

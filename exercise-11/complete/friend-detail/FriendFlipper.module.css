@@ -31,7 +31,12 @@
   color: white;
   text-decoration: underline;
   cursor: pointer;
-  background: var(--brand-dark);
+}
+.flipperNav.green {
+  background: teal;
+}
+.flipperNav.purple {
+  background: blueviolet;
 }
 .flipperNav:focus {
   opacity: 0.8;
@@ -48,7 +53,12 @@
   text-align: left;
   height: calc(100% - 10px);
   padding: 5px;
-  background: var(--brand-dark);
+}
+.backContents.green {
+  background: teal;
+}
+.backContents.purple {
+  background: blueviolet;
 }
 .backContents .flipperNav {
   position: absolute;
