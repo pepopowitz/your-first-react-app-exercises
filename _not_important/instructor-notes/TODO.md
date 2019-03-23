@@ -59,7 +59,7 @@ convert FriendDetail.entry.js
 
 -[x] write instrux for ex 2: identifying components
 
--[ ] write instrux for ex 3: working with vars
+-[x] write instrux for ex 3: working with vars
 
 -[ ] write instrux for ex 10: async/await
 

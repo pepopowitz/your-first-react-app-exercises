@@ -3,62 +3,51 @@ import {
   choosePartingWord,
   choosePartingWordFromObject,
   mapPartingWords,
+  identifyLanguages,
 } from './greetings';
 
-// 1: Uncomment the next 6 lines for test 1.
-// //  Calling a function that is using string template literals.
-// it('builds a greeting', () => {
-//   const greeting = buildGreeting('Matt');
+// 1. Template Strings
+it('builds a greeting', () => {
+  const greeting = buildGreeting('Potatoes');
 
-//   expect(greeting).toEqual('Hello, Matt! How are you?');
-// });
+  expect(greeting).toEqual('Hello, Potatoes! How are you?');
+});
 
+// 2. Ternary Expressions
+it('chooses a parting word', () => {
+  expect(choosePartingWord('Spanish')).toEqual('Adios!');
 
+  expect(choosePartingWord('English')).toEqual('Goodbye!');
+});
 
-// 2: Uncomment the next 6 lines for test 2.
-// //  Calling a function that is making a decision with a ternary expression.
-// it('chooses a parting word', () => {
-//   expect(choosePartingWord('Spanish')).toEqual('Adios!');
+// 3. Object Destructuring
+it('chooses a parting word from an object', () => {
+  const context = {
+    name: 'Potatoes',
+    language: 'English',
+    age: 8,
+  };
 
-//   expect(choosePartingWord('English')).toEqual('Goodbye!');
-// });
+  expect(choosePartingWordFromObject(context)).toEqual('Goodbye, Potatoes!');
 
+  context.language = 'Spanish';
+  expect(choosePartingWordFromObject(context)).toEqual('Adios, Potatoes!');
+});
 
+// 4. Array Destructuring
+it('identifies my primary and secondary language', () => {
+  const languages = ['English', 'Spanish'];
 
+  expect(identifyLanguages(languages)).toEqual(
+    'Your primary language is English. Your secondary language is Spanish.'
+  );
+});
 
-// 3: Uncomment the next 11 lines for test 3.
-// //  We're calling a function that is destructuring an object we pass in.
-// //  Object destructuring is useful when you're passing JS objects as arguments to functions.
-// it('chooses a parting word from an object', () => {
-//   const context = {
-//     name: 'Steve',
-//     language: 'English',
-//     age: 41,
-//   };
+// 4: Array Mapping
+it('maps to parting words', () => {
+  const languages = ['Spanish', 'English', 'English', 'Spanish'];
 
-//   expect(choosePartingWordFromObject(context)).toEqual('Goodbye, Steve!');
-// });
+  const partingWords = mapPartingWords(languages);
 
-
-
-// 4: Uncomment the next 19 lines for test 4.
-// //  We're calling a function that takes an array, and returns a new array with each value modified.
-// //  (This is called "mapping" an array)
-// it('maps to parting words', () => {
-//   const languages = [
-//     'Spanish', 
-//     'English',
-//     'English',
-//     'Spanish'
-//   ];
-
-//   const partingWords = mapPartingWords(languages);
-
-//   expect(partingWords).toEqual([
-//     'Adios!',
-//     'Goodbye!',
-//     'Goodbye!',
-//     'Adios!',
-//   ])
-// });
-
+  expect(partingWords).toEqual(['Adios!', 'Goodbye!', 'Goodbye!', 'Adios!']);
+});
