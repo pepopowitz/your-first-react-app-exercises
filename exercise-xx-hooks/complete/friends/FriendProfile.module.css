@@ -1,9 +1,0 @@
-.friendProfile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.friendProfile h3 {
-  margin-bottom: 0;
-}
