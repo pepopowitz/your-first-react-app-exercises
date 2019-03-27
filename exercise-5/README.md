@@ -79,9 +79,15 @@ React v16 introduced a way to solve this problem - the `Fragment`.
 
 The `Fragment` component is basically an empty wrapper. It allows us to provide a single top-level element when we are rendering multiple child elements, but it does not actually render anything to the DOM.
 
-You can access the `Fragment` component on the default `React` import (i.e. `React.Fragment`).
+There are three ways to render a `Fragment`:
 
-👉 Replace the wrapping `<div>` element in the `Friends` component with a wrapping `<React.Fragment>` element.
+- Access the `Fragment` component on the default `React` import (`React.Fragment`)
+
+- Import the `Fragment` component as a named import from the `react` module
+
+- Render an "empty" tag (`<>...</>`)
+
+👉 Replace the wrapping `<div>` element in the `Friends` component with a wrapping `Fragment`.
 
 Check your browser to see if you succeeded! You should still see all friends listed.
 
