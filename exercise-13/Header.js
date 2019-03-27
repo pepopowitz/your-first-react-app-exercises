@@ -10,8 +10,8 @@ export default function Header() {
   const { theme } = useContext(ThemeContext);
   return (
     <header className={classNames(styles.appHeader, styles[theme])}>
-      <h1 className="App-title">Exercise 13</h1>
-      <h2 className="sub-title">Converting Components</h2>
+      <h1 className={styles.appTitle}>Exercise 13</h1>
+      <h2 className={styles.subTitle}>Converting Components</h2>
       <div className={styles.switcherWrapper}>
         <ThemeSwitcher />
       </div>
