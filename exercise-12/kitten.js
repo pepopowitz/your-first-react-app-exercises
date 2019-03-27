@@ -4,10 +4,8 @@
 //   For now, know that this thing will mostly act like you'd expect
 //   an OOP class to act in your code.
 
-export class ThingOne {
-
+export class Mammal {
+  hasHair = true;
 }
 
-export class ThingTwo {
-  
-}
+export class Kitten {}

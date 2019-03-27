@@ -61,9 +61,9 @@ convert FriendDetail.entry.js
 
 -[x] write instrux for ex 3: working with vars
 
--[ ] write instrux for ex 10: async/await
+-[x] write instrux for ex 10: async/await
 
--[ ] write instrux for ex 13: class syntax
+-[x] write instrux for ex 13: class syntax
 
 ### ModernJS tweaks
 
@@ -71,9 +71,9 @@ convert FriendDetail.entry.js
 
 -[x] In instructor notes for import/export, make sure I talk more about named vs default more!
 
--[ ] Modern JS #4 (async/await) is way too fast. Slow down, talk more about what you're doing.
+-[x] Modern JS #4 (async/await) is way too fast. Slow down, talk more about what you're doing.
 
--[ ] Many modern JS features can be removed from "big up-front" exercises! Object destructuring, array destructuring, implicit return can all be held back until they see code without them - and sprinkle them in when they come up (just mention them)! There are probably other features that could do the same!
+-[x] Many modern JS features can be removed from "big up-front" exercises! Object destructuring, array destructuring, implicit return can all be held back until they see code without them - and sprinkle them in when they come up (just mention them)! There are probably other features that could do the same!
 
 ## Quality
 
@@ -81,7 +81,7 @@ convert FriendDetail.entry.js
 
 -[ ] Inconsistent names of functions - make sure I **always** name functions in examples/solutions!
 
--[ ] Explain async stuff better
+-[x] Explain async stuff better
 
 -[x] Ex 11 - take a look at FriendFlipper in completed/SOLUTIONS. Something might be wrong with it.
 
