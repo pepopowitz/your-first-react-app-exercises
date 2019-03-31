@@ -84,15 +84,15 @@ becomes
 }
 ```
 
-That's all it takes to convert from a class component to a stateless functional one!
+That's all it takes to convert from a class component to a functional one!
 
-👉 Convert the `FriendProfile` component from a stateless functional component to a class component
+👉 Convert the `FriendProfile` component from a functional component to a class component
 
 Check your browser to make sure the components are still rendering properly!
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendprofile-to-class).
 
-👉 Convert the `Friends` component from a stateless functional component to a class component
+👉 Convert the `Friends` component from a functional component to a class component
 
 The functional `Friends` component calls a function named `renderFriends()`. You could leave this as a standalone function, or you could make it another method on the `Friends` class. If you choose to make it another method, remember that you'll need to specify `this.` when you call it.
 
