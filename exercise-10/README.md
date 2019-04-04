@@ -117,12 +117,49 @@ If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendsentry-use
 
 We're finally ready to load friends dynamically.
 
+##### Calling an `async` function within `useEffect`
+
+This effect is going to do some asynchronous work. There is a bit of strangeness with how we use the `async` & `await` keywords within `useEffect`.
+
+A synchronous call to `useEffect` looks like this:
+
+```js
+useEffect(() => {
+  /* the effect body */
+}, []);
+```
+
+That first argument, the effect body, is a function. Knowing that we're going to be doing asynchronous work, it would be tempting to mark the function argument as `async`, and `await` asynchronous work within it, like this:
+
+```js
+useEffect(async () => {
+  const result = await doSomethingAsynchronous();
+  setState(result);
+}, []);
+```
+
+Unfortunately, this doesn't work. React expects `useEffect` to return either nothing, or another function (for cleanup). Marking the function `async` indicates that the function returns an implicit Promise - which is not an allowed return type for `useEffect`.
+
+Instead, we must create an async function within the function argument, and then call the async function _without_ the `await` keyword at the end of the function argument. Like this:
+
+```js
+useEffect(() => {
+  async function load() {
+    const result = await doSomethingAsynchronous();
+    setState(result);
+  }
+
+  load(); // Usually we'd expect to `await` this call, but within `useEffect`, we don't need to.
+}, []);
+```
+
 👉 Update the `useEffect` hook to call the API and update the state property with the result.
 
-You'll be using `async`/`await` keywords.
-
-1. `await` the result of an asynchronous call to the `getFriendsFromApi()` API client
-2. call `setFriends()` (or whatever you named your state modifier in step 2) to update the state of the component with the friend data
+1. Create an `async` function named `load` within the first function argument to `useEffect`.
+2. Within the `load` function,
+   a. `await` the result of an asynchronous call to the `getFriendsFromApi()` API client.
+   b. Call `setFriends()` (or whatever you named your state modifier in step 2) to update the state of the component with the friend data.
+3. Call the `load` function within the first function argument to `useEffect`. You don't need to use the `await` keyword in this call.
 
 If you get stuck, [see a possible solution here](./SOLUTIONS.md#friendsentry-call-api).
 
