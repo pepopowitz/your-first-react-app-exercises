@@ -7,9 +7,12 @@ import Friends from './Friends';
 export default function FriendsEntry() {
   const [friends, setFriends] = useState([]);
 
-  useEffect(async () => {
-    const friends = await getFriendsFromApi();
-    setFriends(friends);
+  useEffect(() => {
+    async function load() {
+      const friends = await getFriendsFromApi();
+      setFriends(friends);
+    }
+    load();
   }, []);
 
   return <Friends friends={friends} />;

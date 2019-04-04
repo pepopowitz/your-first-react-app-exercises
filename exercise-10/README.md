@@ -166,3 +166,5 @@ You can verify this by making a change in `data/db.json`, and making sure the ch
 ### Extra Credit
 
 - Read more about [the `useEffect` hook](https://overreacted.io/a-complete-guide-to-useeffect/).
+
+- Read (a lot!) about [loading data with `useEffect`](https://www.robinwieruch.de/react-hooks-fetch-data/).

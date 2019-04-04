@@ -51,9 +51,12 @@ The side effect we need to run in this component calls out to an API to retrieve
 In our modern component, we are using `useEffect` to perform this side-effect. It calls out to `getFriendsFromApi` to get the list of friends, then calls the state modifier `setFriends` with the result.
 
 ```jsx
-useEffect(async () => {
-  const friends = await getFriendsFromApi();
-  setFriends(friends);
+useEffect(() => {
+  async function load() {
+    const friends = await getFriendsFromApi();
+    setFriends(friends);
+  }
+  load();
 }, []);
 ```
 
