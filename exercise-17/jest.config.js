@@ -4,7 +4,7 @@ module.exports = {
   rootDir: '../',
   collectCoverageFrom: [`<rootDir>/${exercise}/**/*.{js,jsx,mjs}`],
   setupFiles: ['react-app-polyfill/jsdom'],
-  setupTestFrameworkScriptFile: `<rootDir>/${exercise}/config/setupTests.js`,
+  setupFilesAfterEnv: [`<rootDir>/${exercise}/config/setupTests.js`],
   testMatch: [
     `<rootDir>/${exercise}/**/__tests__/**/*.{js,jsx,mjs}`,
     `<rootDir>/${exercise}/**/?(*.)(spec|test).{js,jsx,mjs}`,
