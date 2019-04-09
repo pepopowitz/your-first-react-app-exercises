@@ -71,7 +71,8 @@ export default function({ friend }) {
         <Card>
           <div className={styles.cardContents}>
             <h1>{friend.name}</h1>
-            <FriendFlipper friend={friend} />
+            <h2>ID: {friend.id}</h2>
+            <img src={friend.image} />
             <p>{friend.bio}</p>
           </div>
         </Card>
