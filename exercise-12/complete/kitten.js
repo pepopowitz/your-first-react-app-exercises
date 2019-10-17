@@ -4,14 +4,18 @@
 //   For now, know that this thing will mostly act like you'd expect
 //   an OOP class to act in your code.
 
-export class ThingOne {
-  thingOneProperty = 1;
+export class Mammal {
+  hasHair = true;
 }
 
-export class ThingTwo extends ThingOne {
-  thingTwoProperty = 2;
+export class Kitten extends Mammal {
+  hasWhiskers = true;
 
-  addItUp = () => {
-    return this.thingTwoProperty + this.thingOneProperty;
+  hasHairAndWhiskers() {
+    return this.hasWhiskers && this.hasHair;
+  }
+
+  meow = () => {
+    return 'meow';
   };
 }

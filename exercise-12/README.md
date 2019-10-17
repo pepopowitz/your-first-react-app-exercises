@@ -68,7 +68,7 @@ Given a class, we can create instances of it with the `new` keyword.
 Save `kitten.spec.js`, and you should get a passing test in your terminal:
 
 ```
- PASS  exercise-12/things.spec.js
+ PASS  exercise-12/kitten.spec.js
   ✓ is a thing (4ms)
 
 Test Suites: 1 passed, 1 total
