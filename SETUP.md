@@ -137,3 +137,13 @@ Watch Usage: Press w to show more.
 You can hit "q" to exit this interactive test output.
 
 If you don't see this output, ask your neighbor or the instructor for help, or create an issue in this repository describing the problem. Include your operating system and version, a detailed error message, and any other context you think might be helpful.
+
+## Common issues
+
+### `fsevents`/`watchman` error on Mac
+
+If you see an error referencing `fsevents` or `watchman`, and you are on a Mac, you might need to manually install watchman. Do this with homebrew (brew install watchman).
+
+Even after installing, sometimes it seems to fail at linking. You might need to do this manually, too (`brew link watchman`).
+
+A possibly related issue is here - https://github.com/expo/expo/issues/854.
