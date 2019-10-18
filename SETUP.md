@@ -18,9 +18,9 @@ There are 2 reasons you'll need git -
 1. To clone this repository.
 2. Jest, the framework we'll use to write tests, depends on git to identify changes you've recently made.
 
-If you already have a git client installed, you're covered for #1. 
+If you already have a git client installed, you're covered for reason 1. 
 
-For #2, you'll need to make sure you can access git from a terminal/command line. 
+For reason 2, you'll need to make sure you can access git from a terminal/command line. 
 
 👉 To verify this, open a terminal window. Run the following command:
 
@@ -42,7 +42,7 @@ This probably means git wasn't added to your path/environment variables, so your
 
 👉 2. Add git to your path/environment variables.
 
-Option 2 is a little more complicated. If you don't know how to do it already, you'll likely need to search the internet to find out how.
+If option 2 describes you, [here is a stackOverflow question with lots of answers for adding git to your path on Windows](https://stackoverflow.com/questions/26620312/installing-git-in-path-with-github-client-for-windows), and [here is a similar question for adding git to your path on MacOS](https://stackoverflow.com/questions/1835837/git-command-not-found-on-os-x-10-5).
 
 ### 2. NodeJS
 
@@ -60,7 +60,7 @@ You should see a version number, and the version number should be at least 8.9.0
 
 There's a chance that things could be fine, but you might want to upgrade your version of Node just to be safe. 
 
-👉 If you're using a Node version manager, you probably know how to upgrade your version of Node. It's probably a matter of installing a newer version via a command like `nvm install v8.9.4`. 
+👉 If you're using a Node version manager, you probably know how to upgrade your version of Node. It's likely a matter of installing a newer version via a command like `nvm install v8.9.4`. 
 
 👉 If you aren't using a Node version manager, you'll want to grab the LTS installer from [NodeJS.org](https://nodejs.org/en/). If it asks you to also install NPM, say yes!
 
@@ -118,4 +118,4 @@ I've included a simple test to make sure everything seems to be installed correc
 
 If you see the message `You're all set!`, then the dependencies installed correctly!
 
-If you see the message `Something's not right`, or you get an error, then raise your hand if you are in-person, or create an issue in this repository describing the problem.
+If you see the message `Something's not right`, or you get an error, then raise your hand if you are in-person, or create an issue in this repository describing the problem, and include your operating system and version and any other context you think might be helpful.
