@@ -67,9 +67,9 @@
     "workbox-webpack-plugin": "4.1.1"
   },
   "scripts": {
-    "verify": "node ./verify",
-    "test-exercise-1": "jest --config ./exercise-1/jest.config.js --watch",
-    "test-exercise-3": "jest --config ./exercise-3/jest.config.js --watch",
+    "verify": "node ./_setup/verify.js && jest --watch -i --config ./_setup/jest.config.js",
+    "test-exercise-1": "jest --config ./exercise-1/jest.config.js --watch -i",
+    "test-exercise-3": "jest --config ./exercise-3/jest.config.js --watch -i",
     "start-exercise-4": "cross-env APP_EXERCISE=exercise-4 node ./_not_important/scripts/start.js",
     "start-exercise-5": "cross-env APP_EXERCISE=exercise-5 node ./_not_important/scripts/start.js",
     "start-exercise-6": "cross-env APP_EXERCISE=exercise-6 node ./_not_important/scripts/start.js",
@@ -82,7 +82,7 @@
     "start-exercise-11": "concurrently \"npm run start-exercise-11-server\" \"npm run start-exercise-11-client\" -n SERVER,CLIENT -c bgBlue,bgGreen",
     "start-exercise-11-server": "json-server --watch exercise-11/data/db.json --port 2999 --delay 500",
     "start-exercise-11-client": "cross-env APP_EXERCISE=exercise-11 node ./_not_important/scripts/start.js",
-    "test-exercise-12": "jest --config ./exercise-12/jest.config.js --watch",
+    "test-exercise-12": "jest --config ./exercise-12/jest.config.js --watch -i",
     "start-exercise-13": "concurrently \"npm run start-exercise-13-server\" \"npm run start-exercise-13-client\" -n SERVER,CLIENT -c bgBlue,bgGreen",
     "start-exercise-13-server": "json-server --watch exercise-13/data/db.json --port 2999 --delay 500",
     "start-exercise-13-client": "cross-env APP_EXERCISE=exercise-13 node ./_not_important/scripts/start.js",

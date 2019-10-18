@@ -13,14 +13,14 @@ You'll need 4 things for this workshop:
 
 ### 1. git
 
-There are 2 reasons you'll need git - 
+There are 2 reasons you'll need git -
 
 1. To clone this repository.
 2. Jest, the framework we'll use to write tests, depends on git to identify changes you've recently made.
 
-If you already have a git client installed, you're covered for reason 1. 
+If you already have a git client installed, you're covered for reason 1.
 
-For reason 2, you'll need to make sure you can access git from a terminal/command line. 
+For reason 2, you'll need to make sure you can access git from a terminal/command line.
 
 👉 To verify this, open a terminal window. Run the following command:
 
@@ -46,11 +46,11 @@ If option 2 describes you, [here is a stackOverflow question with lots of answer
 
 ### 2. NodeJS
 
-👉 From your terminal/command line, run the following command: 
+👉 From your terminal/command line, run the following command:
 
 `node -v`
 
-You should see a version number, and the version number should be at least 8.9.0. 
+You should see a version number, and the version number should be at least 8.9.0.
 
 #### I see a version number, and it is at least 8.9.0!
 
@@ -58,13 +58,13 @@ You should see a version number, and the version number should be at least 8.9.0
 
 #### I see a version number, but it is less than 8.9.0.
 
-There's a chance that things could be fine, but you might want to upgrade your version of Node just to be safe. 
+There's a chance that things could be fine, but you might want to upgrade your version of Node just to be safe.
 
-👉 If you're using a Node version manager, you probably know how to upgrade your version of Node. It's likely a matter of installing a newer version via a command like `nvm install v8.9.4`. 
+👉 If you're using a Node version manager, you probably know how to upgrade your version of Node. It's likely a matter of installing a newer version via a command like `nvm install v8.9.4`.
 
 👉 If you aren't using a Node version manager, you'll want to grab the LTS installer from [NodeJS.org](https://nodejs.org/en/). If it asks you to also install NPM, say yes!
 
-#### I don't see a version number. 
+#### I don't see a version number.
 
 👉 You need to install NodeJS.
 
@@ -84,7 +84,7 @@ You should see a version number, and the version number should be at least 5.5.1
 
 👉 Congratulations! You're ready to [clone this repository](#clone-this-repository)!
 
-#### I see a version number, but it is less than 5.5.1. 
+#### I see a version number, but it is less than 5.5.1.
 
 👉 You need to upgrade NVM. You can read about it [here](https://docs.npmjs.com/getting-started/installing-node#install-npm--manage-npm-versions).
 
@@ -104,7 +104,7 @@ This will clone the repository into your current working directory.
 
 ## Install Dependencies
 
-👉 Once the repository is cloned, enter that directory in your terminal, and run 
+👉 Once the repository is cloned, enter that directory in your terminal, and run
 
 `npm install`
 
@@ -112,10 +112,28 @@ This will clone the repository into your current working directory.
 
 I've included a simple test to make sure everything seems to be installed correctly.
 
-👉 From your terminal, run 
+👉 From your terminal, run
 
 `npm run verify`.
 
-If you see the message `You're all set!`, then the dependencies installed correctly!
+You should see output similar to below. If you do, you're ready to go!
 
-If you see the message `Something's not right`, or you get an error, then raise your hand if you are in-person, or create an issue in this repository describing the problem, and include your operating system and version and any other context you think might be helpful.
+```
+Dependencies are set up!
+ PASS  _setup/verify.spec.jsx
+  Verifying your setup
+    ✓ should run a test (1ms)
+    ✓ can render a component (3ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        0.408s, estimated 1s
+Ran all test suites related to changed files.
+
+Watch Usage: Press w to show more.
+```
+
+You can hit "q" to exit this interactive test output.
+
+If you don't see this output, ask your neighbor or the instructor for help, or create an issue in this repository describing the problem. Include your operating system and version, a detailed error message, and any other context you think might be helpful.
