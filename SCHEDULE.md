@@ -1,147 +1,131 @@
-# Agenda:
+# Agenda
 
-## Morning
+# Introduction (15m)
 
-(15m)
-Slides: 01/Title
-Slides: 02/Setup
-Slides: 03/About
+## Setup
 
----
+## About this workshop
 
-(5m)
-Slides: 04/History
+# What is React? (15m)
 
----
+- 8:30
 
-(15m)
-Slides: 05/React
+# JavaScript
 
----
+## Slides (5m)
 
-(20m)
-Slides: 06/JavaScript
-5m
-Ex: 01/Modern JS
-15m
+## Exercise: Modern JavaScript: Modules (15m)
 
----
+- 8:50
 
-(15m)
-Slides: 07/Components
-10m
-Ex: 02/Identifying Components
-5m
+# Components
 
----
+## Slides (10m)
 
-(45m)
-Slides: 08/Components + React
-5m
-Ex: 03/Class Syntax
-10m
-Ex: 04/Modern JavaScript: Working With Objects
-10m
-Ex: 05/JSX Fundamentals
-20m
+## Exercise: Identifying Components (5m)
 
----
+- 9:05
 
-(50m)
-Slides: 09/Components + React + JSX
-20m
-Ex: 06/render() Results
-20m
-Ex: 07/Converting components
-10m
+# Components + React
 
----
+## Slides (15m)
 
-(20m)
-Slides: 10/Props
-10m
-Ex: 08/Composition/props.children
-10m
-Ex: 09/prop types
-On your own time!
+- 9:20
 
----
+## Exercise: Modern JavaScript: Working With Variables (15m)
 
-(30m)
-Slides: 11/CSS
-10m
-Ex: 10/CSS
-20m
+- 9:35 (have break by now!)
 
----
+## Exercise: JSX Fundamentals (20m)
 
-## Lunch!
+- 10:05
 
----
+# Components + React + JSX
 
-## After lunch:
+## Slides (10m)
 
-Starting at 1:00
+## Exercise: What can a component render? (15m)
 
-Ex: 10/CSS???
+- 10:30
 
----
+# Props
 
-(20m)
-Slides: 12/Routing
-5m
-Ex 11: React Router
-15m
+## Slides (10m)
 
----
+## Exercise: Composition/props.children (10m)
 
-(30m)
-Slides: 13/State
-10m
-Ex 12: Managing Component State
-20m
+- 10:50 (another break)
 
----
+# CSS
 
-(15m)
-Slides: 14/Events
-5m
-Ex 13: Async/Await
-10m
+## Slides (10m)
 
----
+## Exercise: CSS (20m)
 
-(25m)
-Slides: 15/Lifecycle
-5m
-Ex 14: Loading Data
-20m
+- 11:30
 
----
+# Routing
 
-(20m)
-Slides: 16/App State
-Ex 15: React Context
-20m
+## Slides (10m)
 
----
+## Exercise: React Router (15m)
 
-(30m)
-Slides: 17/Hooks
-10m
-Ex 16: Hooks
-20m
+- 12:00
 
----
+# Lunch?
 
-(45m)
-Slides: 18/Testing
-10m
-Ex 17: Testing Render
-15m
-Ex 18: Testing Interactions
-20m
+- 1:00
 
-(20m)
+# State Management (30m)
 
-### Good Practices/Questions
+## Slides (10m)
+
+## Exercise: Managing Component State (20m)
+
+- 1:30
+
+# Side Effects (30m)
+
+## Slides (10m)
+
+## Exercise: Loading Data (20m)
+
+- 2:00
+
+# Application State (30m)
+
+## Slides (10m)
+
+## Exercise: React Context (20m)
+
+- 2:30
+
+# Legacy Components (40m)
+
+## Exercise: Modern JavaScript: Class Syntax (15m)
+
+## Slides (5m)
+
+## Exercise: Converting Components (10m)
+
+## Exercises: Legacy State Mgmt & Side Effects (20m)
+
+- 3:10
+
+# Testing (30m-50m)
+
+## Slides (10m)
+
+## Exercise: Testing Render (20m)
+
+## Exercise: Testing Interactions (20m)
+
+- 4:00
+
+# Wrapping Up (10m-20m)
+
+## Good Practices (5m)
+
+## Questions (15m)
+
+- 4:20
