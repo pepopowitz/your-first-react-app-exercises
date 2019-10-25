@@ -86,7 +86,7 @@ You should see a version number, and the version number should be at least 5.5.1
 
 #### I see a version number, but it is less than 5.5.1.
 
-👉 You need to upgrade NVM. You can read about it [here](https://docs.npmjs.com/getting-started/installing-node#install-npm--manage-npm-versions).
+👉 You need to upgrade NPM. You can read about it [here](https://docs.npmjs.com/getting-started/installing-node#install-npm--manage-npm-versions).
 
 #### I don't see a version number.
 
