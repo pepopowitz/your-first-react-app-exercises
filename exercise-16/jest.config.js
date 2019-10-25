@@ -7,7 +7,7 @@ module.exports = {
   setupFilesAfterEnv: [`<rootDir>/${exercise}/config/setupTests.js`],
   testMatch: [
     `<rootDir>/${exercise}/**/__tests__/**/*.{js,jsx,mjs}`,
-    `<rootDir>/${exercise}/**/?(*.)(spec|test).{js,jsx,mjs}`,
+    `<rootDir>/${exercise}/**/*.(spec|test).{js,jsx,mjs}`,
   ],
   testEnvironment: 'jsdom',
   testURL: 'http://localhost',
